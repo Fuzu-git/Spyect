@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerBehaviour : NetworkBehaviour
 {
     public static PlayerBehaviour local;
-
+    
+    
+    //[SyncVar]
     public static bool canMove = true;
 
     private IEnumerator Start()
@@ -24,7 +26,5 @@ public class PlayerBehaviour : NetworkBehaviour
             yield return new WaitForSeconds(5);
             canMove = true; 
         }
-        
     }
-
 }

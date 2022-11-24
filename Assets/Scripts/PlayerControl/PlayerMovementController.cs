@@ -1,8 +1,7 @@
-using System;
 using Mirror;
 using UnityEngine;
 
-namespace Lobby
+namespace PlayerControl
 {
     public class PlayerMovementController : NetworkBehaviour
     {
