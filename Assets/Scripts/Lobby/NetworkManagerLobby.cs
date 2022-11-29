@@ -9,7 +9,7 @@ namespace Lobby
 {
     public class NetworkManagerLobby : NetworkManager
     {
-        [SerializeField] private int minPlayers = 4;
+        [SerializeField] private int minPlayers = 2;
         [Scene] [SerializeField] private string menuScene = string.Empty;
         
         [Header("Room")]

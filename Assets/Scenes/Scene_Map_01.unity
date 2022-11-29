@@ -543,7 +543,6 @@ GameObject:
   m_Component:
   - component: {fileID: 454807952}
   - component: {fileID: 454807951}
-  - component: {fileID: 454807953}
   - component: {fileID: 454807954}
   m_Layer: 0
   m_Name: GameManager
@@ -580,33 +579,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &454807953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454807950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b37f6c3a6b1894bb625feb49439906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  lastSyncTime: 0
-  <netIdentity>k__BackingField: {fileID: 0}
-  <ComponentIndex>k__BackingField: 0
-  <syncVarDirtyBits>k__BackingField: 0
-  syncObjectDirtyBits: 0
-  syncVarHookGuard: 0
-  skinList:
-  - {fileID: -9095717837082945937, guid: ed474b67166fc1d4296694bdba12430d, type: 3}
-  - {fileID: -2413806693520163455, guid: af621b0bf76f644419583abc5bd932a0, type: 3}
-  - {fileID: 7482667652216324306, guid: 968c5c5edcc784d458203e37b5abac17, type: 3}
-  - {fileID: 2747690628134850419, guid: 0ef219f2f02fb9443a895b2d0892181a, type: 3}
-  memberList: []
-  _spriteComponent: {fileID: 0}
 --- !u!114 &454807954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,13 +1008,14 @@ GameObject:
   - component: {fileID: 691224800}
   - component: {fileID: 691224802}
   - component: {fileID: 691224801}
+  - component: {fileID: 691224803}
   m_Layer: 5
   m_Name: SendVote_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &691224800
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1104,6 +1077,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691224799}
   m_CullTransparentMesh: 1
+--- !u!114 &691224803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691224799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00b4742daaef6e4980910f64044e904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerContent: {fileID: 2134849662}
+  playerInGameName: {fileID: 473549438}
+  suspectedButton: {fileID: 1281487174}
+  playerInGameImage: {fileID: 1783675507}
 --- !u!1 &752717334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,7 +2009,7 @@ GameObject:
   - component: {fileID: 1281487175}
   - component: {fileID: 1281487174}
   m_Layer: 5
-  m_Name: Ejection_Button
+  m_Name: Suspected_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2408,7 +2397,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -91, y: 240}
-  m_SizeDelta: {x: 855, y: 115}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642936046
 MonoBehaviour:
@@ -2934,7 +2923,6 @@ GameObject:
   - component: {fileID: 2134849663}
   - component: {fileID: 2134849665}
   - component: {fileID: 2134849664}
-  - component: {fileID: 2134849666}
   m_Layer: 5
   m_Name: PlayerContent
   m_TagString: Untagged
@@ -2960,10 +2948,10 @@ RectTransform:
   m_Father: {fileID: 1642936045}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 430, y: -47.5}
-  m_SizeDelta: {x: 200, y: 75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134849664
 MonoBehaviour:
@@ -3003,24 +2991,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134849662}
   m_CullTransparentMesh: 1
---- !u!114 &2134849666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134849662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4221f6565961441a51e0b380d57994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAvatar: {fileID: 0}
-  PlayerName: {fileID: 0}
-  rootButton: {fileID: 0}
-  cancelButton: {fileID: 0}
-  acceptButton: {fileID: 0}
-  sectLeaderPanel: {fileID: 0}
 --- !u!1001 &6810103054761139928
 PrefabInstance:
   m_ObjectHideFlags: 0

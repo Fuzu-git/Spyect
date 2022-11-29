@@ -4,7 +4,7 @@ using Lobby;
 using Mirror;
 using UnityEngine;
 
-namespace PlayerSpawn
+namespace Player.SpawnPlayer
 {
     public class PlayerSpawnSystem : NetworkBehaviour
     {

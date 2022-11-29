@@ -2,7 +2,7 @@ using Cinemachine;
 using Mirror;
 using UnityEngine;
 
-namespace PlayerControl
+namespace Player.ControlPlayer
 {
     public class CameraController : NetworkBehaviour
     {

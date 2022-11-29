@@ -1,7 +1,6 @@
-using Lobby;
 using UnityEngine;
 
-namespace PlayerSpawn
+namespace Player.SpawnPlayer
 {
     public class PlayerSpawnPoint : MonoBehaviour
     {
