@@ -23,13 +23,10 @@ namespace UI
         private void OnGameStart()
         {
             PlayerBehaviour player = PlayerBehaviour.local;
-        
-            int i = 0;
-
+            
             foreach (GameObject element in GameManager.playerList)
             {
-                roleText.text = "There is your new identity... " + player.name + ".";
-                i++; 
+                    roleText.text = "There is your new identity... " + player.name + ".";
             }
             StartCoroutine(DoFade());
         }

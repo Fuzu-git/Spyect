@@ -543,6 +543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 454807952}
   - component: {fileID: 454807951}
+  - component: {fileID: 454807955}
   - component: {fileID: 454807954}
   m_Layer: 0
   m_Name: GameManager
@@ -564,6 +565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  memberData: []
+  playerOwnName: 
+  playerOwnImage: {fileID: 0}
 --- !u!4 &454807952
 Transform:
   m_ObjectHideFlags: 0
@@ -596,6 +600,60 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &454807955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454807950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd33a59ec431174d85a996a0c84ef3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInGameName:
+  - Kate
+  - Jane
+  - David
+  - Sarah
+  - Thomas
+  - Elisabeth
+  - Arthur
+  - Lucy
+  - Leon
+  - Astrid
+  - Victor
+  - Harry
+  - Maria
+  - Nico
+  - Diane
+  - Cesar
+  - Ivy
+  - Paul
+  - Olivia
+  - Ruben
+  playerInGameImage:
+  - {fileID: 21300000, guid: fd0d2466054f00948847c478d81c049f, type: 3}
+  - {fileID: 21300000, guid: c78ac547c91f76248b5be75e43194695, type: 3}
+  - {fileID: 21300000, guid: cbea0ee9e19b95c4cbd3093fdc0d4f82, type: 3}
+  - {fileID: 21300000, guid: aa75443273f8f4842b00bc64baa40416, type: 3}
+  - {fileID: 21300000, guid: 2356105bb3219534391c615b2c8a857e, type: 3}
+  - {fileID: 21300000, guid: b66f21093ff3a6a4aa2dea2ede1d4eab, type: 3}
+  - {fileID: 21300000, guid: 597f0eae4d6f471478e16cc9b5d2c006, type: 3}
+  - {fileID: 21300000, guid: 7e5ad62d667a8954780fcda784548602, type: 3}
+  - {fileID: 21300000, guid: d51dc213fa017db4da7d9b1a3e294b9b, type: 3}
+  - {fileID: 21300000, guid: 8b527ab7ffffb634d8defab1795a7d38, type: 3}
+  - {fileID: 21300000, guid: e5da2aaf235477f45b34598e9f919be2, type: 3}
+  - {fileID: 21300000, guid: da8f50bdd41817748aa3d0b5e630b10b, type: 3}
+  - {fileID: 21300000, guid: 1fa19d8d7399cc04aad99edeb1c14d37, type: 3}
+  - {fileID: 21300000, guid: f7f78fbdf9b5def409cbf3aa6de0320f, type: 3}
+  - {fileID: 21300000, guid: f2e1961603d6cf34898fc0d9518f0bc4, type: 3}
+  - {fileID: 21300000, guid: d42a45150abd12044aac18e8568d7206, type: 3}
+  - {fileID: 21300000, guid: 4aed85fd19b7b9740bf8d5e72a3768a2, type: 3}
+  - {fileID: 21300000, guid: 70a26189a6c7858489379db420a044fa, type: 3}
+  - {fileID: 21300000, guid: 2acac54ee47d7b64784045b74bb0fa5b, type: 3}
+  - {fileID: 21300000, guid: e6a772e601067694ca1d85b41f0f3de4, type: 3}
 --- !u!1 &465392461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1066,6 @@ GameObject:
   - component: {fileID: 691224800}
   - component: {fileID: 691224802}
   - component: {fileID: 691224801}
-  - component: {fileID: 691224803}
   m_Layer: 5
   m_Name: SendVote_UI
   m_TagString: Untagged
@@ -1077,22 +1134,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691224799}
   m_CullTransparentMesh: 1
---- !u!114 &691224803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691224799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00b4742daaef6e4980910f64044e904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerContent: {fileID: 2134849662}
-  playerInGameName: {fileID: 473549438}
-  suspectedButton: {fileID: 1281487174}
-  playerInGameImage: {fileID: 1783675507}
 --- !u!1 &752717334
 GameObject:
   m_ObjectHideFlags: 0

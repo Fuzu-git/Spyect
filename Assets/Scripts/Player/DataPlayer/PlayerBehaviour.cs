@@ -7,8 +7,7 @@ namespace Player.DataPlayer
     public class PlayerBehaviour : NetworkBehaviour
     {
         public static PlayerBehaviour local;
-    
-    
+        
         //[SyncVar]
         public static bool canMove = true;
 

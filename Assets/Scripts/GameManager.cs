@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Player.DataPlayer;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,17 +10,19 @@ public struct  StartGameMessage : NetworkMessage{}
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static Action onGameStarted;
+     
+     public static readonly List<GameObject> playerList = new List<GameObject>();
+     
+     [SerializeField] private List<GameObject> players = new List<GameObject>(); //gotta check what use is this...
+
+     public static GameManager instance;
+
     public void Awake()
     {
         instance = this; 
     }
-    
-    public static Action onGameStarted;
-    
-    public static readonly List<GameObject> playerList = new List<GameObject>();
-    [SerializeField] private List<GameObject> players = new List<GameObject>();
-    
+
     IEnumerator Start()
     {
         NetworkClient.RegisterHandler<StartGameMessage>(OnStartGameReceived);
