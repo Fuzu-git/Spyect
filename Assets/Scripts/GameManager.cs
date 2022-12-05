@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
-using Player.DataPlayer;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public struct  StartGameMessage : NetworkMessage{}
 
@@ -14,7 +12,7 @@ public class GameManager : MonoBehaviour
      
      public static readonly List<GameObject> playerList = new List<GameObject>();
      
-     [SerializeField] private List<GameObject> players = new List<GameObject>(); //gotta check what use is this...
+     //[SerializeField] private List<GameObject> players = new List<GameObject>(); //gotta check what use is this...
 
      public static GameManager instance;
 
@@ -38,10 +36,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(GameObject player)
+    /*public void AddPlayer(GameObject player) //goes with List<GameObject> players
     {
         players.Add(player);
-    }
+    }*/
     
 
     private void OnStartGameReceived(StartGameMessage msg)

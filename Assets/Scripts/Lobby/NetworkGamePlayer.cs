@@ -40,7 +40,5 @@ namespace Lobby
         {
             this.displayName = displayName;
         }
-
-        
     }
 }
