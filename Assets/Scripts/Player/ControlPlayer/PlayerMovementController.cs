@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using Player.DataPlayer;
 using UnityEngine;
@@ -7,7 +8,9 @@ namespace Player.ControlPlayer
     public class PlayerMovementController : NetworkBehaviour
     {
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private CharacterController controller; 
+        [SerializeField] private CharacterController controller;
+
+        private PlayerBehaviour _instance;
         
         //[SerializeField] private Animator _animator;
         
@@ -26,6 +29,11 @@ namespace Player.ControlPlayer
             }
         }
 
+        private void Awake()
+        {
+            _instance = PlayerBehaviour.local;
+        }
+
         public override void OnStartAuthority()
         {
             enabled = true;
@@ -42,7 +50,7 @@ namespace Player.ControlPlayer
         [ClientCallback]
         private void Update()
         {
-            if (PlayerBehaviour.canMove)
+            if (_instance.canMove)
             {
                 Move(); 
             }

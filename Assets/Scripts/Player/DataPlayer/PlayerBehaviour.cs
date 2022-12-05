@@ -8,8 +8,8 @@ namespace Player.DataPlayer
     {
         public static PlayerBehaviour local;
         
-        //[SyncVar]
-        public static bool canMove = true;
+        //[SyncVar] not required -> GameManager.instance called. 
+        public bool canMove = true;
 
         private IEnumerator Start()
         {
@@ -22,7 +22,7 @@ namespace Player.DataPlayer
 
             if (GameManager.instance)
             {
-                GameManager.instance.AddPlayer(this.gameObject);
+                //GameManager.instance.AddPlayer(this.gameObject);
                 canMove = false;
                 yield return new WaitForSeconds(5);
                 canMove = true; 
