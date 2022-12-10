@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Char 13
   m_EditorClassIdentifier: 
   playerInGameName: Maria
-  playerInGameImage: {fileID: 0}
+  playerInGameImage: {fileID: 21300000, guid: 1fa19d8d7399cc04aad99edeb1c14d37, type: 3}

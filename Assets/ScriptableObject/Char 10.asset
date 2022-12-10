@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Char 10
   m_EditorClassIdentifier: 
   playerInGameName: Astrid
-  playerInGameImage: {fileID: 0}
+  playerInGameImage: {fileID: 21300000, guid: 8b527ab7ffffb634d8defab1795a7d38, type: 3}
