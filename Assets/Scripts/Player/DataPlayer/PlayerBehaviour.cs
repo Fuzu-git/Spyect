@@ -1,6 +1,7 @@
 using System.Collections;
 using Mirror;
 using UnityEngine;
+using TMPro;
 
 namespace Player.DataPlayer
 {
@@ -11,6 +12,9 @@ namespace Player.DataPlayer
         //[SyncVar] not required -> GameManager.instance called. 
         public bool canMove = true;
 
+        
+        public TMP_Text playerName_Text;
+        
         private IEnumerator Start()
         {
             if (isLocalPlayer)
@@ -25,7 +29,7 @@ namespace Player.DataPlayer
                 //GameManager.instance.AddPlayer(this.gameObject);
                 canMove = false;
                 yield return new WaitForSeconds(5);
-                canMove = true; 
+                canMove = true;
             }
         }
     }

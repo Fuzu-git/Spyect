@@ -50,7 +50,7 @@ namespace Player.ControlPlayer
         [ClientCallback]
         private void Update()
         {
-            if (_instance.canMove)
+            if (_instance &&_instance.canMove)
             {
                 Move(); 
             }
