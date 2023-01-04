@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mirror;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using static Player.DataPlayer.ProfileFiller;
 
 namespace Player.DataPlayer
 {
@@ -9,11 +11,9 @@ namespace Player.DataPlayer
     {
         public static PlayerBehaviour local;
         
-        //[SyncVar] not required -> GameManager.instance called. 
-        public bool canMove = true;
-
+        //[SyncVar]
+        public static bool canMove = true;
         
-        public TMP_Text playerName_Text;
         
         private IEnumerator Start()
         {
@@ -26,11 +26,52 @@ namespace Player.DataPlayer
 
             if (GameManager.instance)
             {
-                //GameManager.instance.AddPlayer(this.gameObject);
+                GameManager.instance.AddPlayer(this.gameObject);
                 canMove = false;
                 yield return new WaitForSeconds(5);
-                canMove = true;
+                canMove = true; 
+            }
+            SelectRandomProfile();
+        }
+        
+        private int _profileIndex;
+        private readonly SyncList<int> playerIndex = new SyncList<int>();
+        public List<PlayerData> profilSo;
+        public TMP_Text playerNameText;
+        private string _playerInGameName;
+        
+        void SelectRandomProfile()
+        {
+            foreach (GameObject player in GameManager.playerList)
+            {
+                _profileIndex = playerIndex[Random.Range(0, playerIndex.Count)];
+            
+                NetworkIdentity playerIdentity = player.GetComponent<NetworkIdentity>();
+                playerIndex.RemoveAt(_profileIndex);
+                
+                Reveil(playerIdentity.netId);
             }
         }
+        
+        void Reveil(uint playerID)
+        {
+            GameObject myPlayer = NetworkHelper.GetGameObjectFromNetIdValue(playerID, false);
+            playerNameText = myPlayer.GetComponent<TMP_Text>();
+            
+            
+            PlayerData currentSo = profilSo[_profileIndex];
+            _playerInGameName = currentSo.playerInGameName;
+            playerNameText.text = _playerInGameName;
+            AssignDataToPlayer();
+        }
+
+        [ClientRpc]
+        void AssignDataToPlayer()
+        {
+            PlayerData currentSo = profilSo[_profileIndex];
+            _playerInGameName = currentSo.playerInGameName;
+            playerNameText.text = _playerInGameName;
+        }
+
     }
 }
