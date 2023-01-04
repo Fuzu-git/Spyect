@@ -151,15 +151,6 @@ namespace Lobby
             base.ServerChangeScene(newSceneName);
         }
 
-        public override void OnServerSceneChanged(string sceneName)
-        {
-            if (sceneName.StartsWith("Scene_Map_"))
-            {
-                GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
-                NetworkServer.Spawn(playerSpawnSystemInstance);
-            }
-        }
-        
         public override void OnServerReady(NetworkConnectionToClient conn)
         {
             base.OnServerReady(conn);

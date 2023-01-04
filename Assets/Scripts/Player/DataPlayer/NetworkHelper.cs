@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-namespace Lobby
+namespace Player.DataPlayer
 {
     public static class NetworkHelper
     {
@@ -26,7 +26,6 @@ namespace Lobby
             {
                 return identity.gameObject;
             }
-
             return null;
         }
     }
