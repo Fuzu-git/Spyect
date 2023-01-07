@@ -21,7 +21,10 @@ namespace Player.SpawnPlayer
 
         public static void RemoveSpawnPoint(Transform transform) => _spawnPoints.Remove(transform);
 
-        public override void OnStartServer() => NetworkManagerLobby.OnServerReadied += SpawnPlayer;
+        public override void OnStartServer()
+        {
+            NetworkManagerLobby.OnServerReadied += SpawnPlayer;
+        }
 
         [ServerCallback]
         private void OnDestroy() => NetworkManagerLobby.OnServerReadied -= SpawnPlayer;
@@ -37,9 +40,7 @@ namespace Player.SpawnPlayer
                 return; 
             }
 
-            GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[_nextIndex].position,
-                _spawnPoints[_nextIndex].rotation);
-            
+            GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[_nextIndex].position, _spawnPoints[_nextIndex].rotation);
             NetworkServer.Spawn(playerInstance, conn);
 
             _nextIndex++;

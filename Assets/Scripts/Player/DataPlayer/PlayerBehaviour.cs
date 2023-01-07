@@ -14,6 +14,7 @@ namespace Player.DataPlayer
         //[SyncVar]
         public static bool canMove = true;
         
+        public GameObject profileFiller; 
         
         private IEnumerator Start()
         {
@@ -21,9 +22,10 @@ namespace Player.DataPlayer
             {
                 local = this; 
             
-                GameManager.playerList.Add(gameObject);
+                //GameManager.playerList.Add(gameObject);
             }
 
+            
             if (GameManager.instance)
             {
                 GameManager.instance.AddPlayer(this.gameObject);
@@ -31,47 +33,50 @@ namespace Player.DataPlayer
                 yield return new WaitForSeconds(5);
                 canMove = true; 
             }
-            SelectRandomProfile();
+
+            if (isServer && hasAuthority)
+            {
+                Debug.Log("isLocalPlayer Entry");
+                InstantiateProfileFiller();
+            }
+            StartCoroutine(SelectRandomProfile());
         }
         
         private int _profileIndex;
-        private readonly SyncList<int> playerIndex = new SyncList<int>();
-        public List<PlayerData> profilSo;
         public TMP_Text playerNameText;
         private string _playerInGameName;
-        
-        void SelectRandomProfile()
+
+        IEnumerator SelectRandomProfile()
         {
-            foreach (GameObject player in GameManager.playerList)
+            while (profileFiller == null)
             {
-                _profileIndex = playerIndex[Random.Range(0, playerIndex.Count)];
-            
-                NetworkIdentity playerIdentity = player.GetComponent<NetworkIdentity>();
-                playerIndex.RemoveAt(_profileIndex);
-                
-                Reveil(playerIdentity.netId);
+                yield return new WaitForSeconds(0.1f); 
+                profileFiller = GameObject.FindWithTag("profileFiller");
             }
-        }
-        
-        void Reveil(uint playerID)
-        {
-            GameObject myPlayer = NetworkHelper.GetGameObjectFromNetIdValue(playerID, false);
-            playerNameText = myPlayer.GetComponent<TMP_Text>();
             
+            Debug.Log(connectionToClient.connectionId);
             
-            PlayerData currentSo = profilSo[_profileIndex];
+            ProfileFiller profileFillerComponent = profileFiller.GetComponent<ProfileFiller>();
+            
+            Debug.Log(profileFillerComponent.profiles.Count);
+            Debug.Log(profileFillerComponent.playerIndex[connectionToClient.connectionId]);
+            
+            _profileIndex = profileFillerComponent.playerIndex[connectionToClient.connectionId];
+
+            
+            PlayerData currentSo = profileFillerComponent.profiles[_profileIndex];
             _playerInGameName = currentSo.playerInGameName;
             playerNameText.text = _playerInGameName;
-            AssignDataToPlayer();
+            
         }
 
-        [ClientRpc]
-        void AssignDataToPlayer()
+
+        [Server]
+        void InstantiateProfileFiller()
         {
-            PlayerData currentSo = profilSo[_profileIndex];
-            _playerInGameName = currentSo.playerInGameName;
-            playerNameText.text = _playerInGameName;
+            Debug.Log("Entry instantiate");
+            GameObject instantiatedProfileFiller = Instantiate(profileFiller);
+            NetworkServer.Spawn(instantiatedProfileFiller);
         }
-
     }
 }

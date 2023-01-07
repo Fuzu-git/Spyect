@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
      public static GameManager instance;
 
-     public GameObject profileFiller; 
      
     public void Awake()
     {
@@ -30,11 +29,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => NetworkServer.active);
         yield return new WaitUntil(() => NetworkClient.active);
 
-//   If there's a problem, It's here.    // 
-        Instantiate(profileFiller);
-        NetworkServer.Spawn(profileFiller);
-///////////////////////////////////////////
-        
         NetworkServer.SendToReady(new StartGameMessage());
         
         if (NetworkClient.active)

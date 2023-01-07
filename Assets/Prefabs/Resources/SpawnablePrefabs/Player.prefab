@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  profileFiller: {fileID: 208054162306632727, guid: 4f7038b6c7d125e45a1a129d64c2c173, type: 3}
   profilSo: []
   playerNameText: {fileID: 6676791487969277931}
 --- !u!1 &3608770204236439733

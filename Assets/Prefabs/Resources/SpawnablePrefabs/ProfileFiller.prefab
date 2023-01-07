@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 208054162306632726}
   m_Layer: 0
   m_Name: ProfileFiller
-  m_TagString: Untagged
+  m_TagString: profileFiller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 
+  m_AssetId: 4f7038b6c7d125e45a1a129d64c2c173
   hasSpawned: 0
 --- !u!114 &208054162306632726
 MonoBehaviour:
