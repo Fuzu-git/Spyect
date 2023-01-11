@@ -10,20 +10,16 @@ namespace Player.DataPlayer
     {
         public List<PlayerData> profiles = new List<PlayerData>();
 
-        public SyncList<int> playerIndex = new SyncList<int>();
+        public readonly SyncList<int> playerIndex = new SyncList<int>();
 
         [Server]
         private void Awake()
         {
-            if (isServer && hasAuthority)
-            {
-                for (int i = 0; i < profiles.Count; i++)
+            for (int i = 0; i < profiles.Count; i++)
                 {
                     playerIndex.Add(i);
                 }
-
-                Shuffle(playerIndex);
-            }
+            Shuffle(playerIndex);
         }
 
         public void Shuffle(SyncList<int> list)

@@ -57,8 +57,13 @@ namespace Player.DataPlayer
             Debug.Log(connectionToClient.connectionId);
             
             ProfileFiller profileFillerComponent = profileFiller.GetComponent<ProfileFiller>();
-            
-            Debug.Log(profileFillerComponent.profiles.Count);
+
+            while (profileFillerComponent.playerIndex.Count == 0)
+            {
+                yield return new WaitForSeconds(0.1f);
+                Debug.Log("YOUHOUUUUUUUU");
+            }
+            Debug.Log(profileFillerComponent.playerIndex.Count);
             Debug.Log(profileFillerComponent.playerIndex[connectionToClient.connectionId]);
             
             _profileIndex = profileFillerComponent.playerIndex[connectionToClient.connectionId];
