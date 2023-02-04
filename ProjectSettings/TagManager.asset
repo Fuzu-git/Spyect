@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - profileFiller
+  - CanvasUI
+  - SendVoteUI
+  - PlayerCounter
+  - GameManager
   layers:
   - Default
   - TransparentFX

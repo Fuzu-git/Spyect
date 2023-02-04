@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
-using System; 
-using System.Linq; 
+using System;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
@@ -11,13 +11,11 @@ namespace Lobby
     {
         [SerializeField] private int minPlayers = 2;
         [Scene] [SerializeField] private string menuScene = string.Empty;
-        
-        [Header("Room")]
-        [SerializeField] private NetworkRoomPlayer roomPlayerPrefab;
-        
-        [Header("Game")]
-        [SerializeField] private NetworkGamePlayer gamePlayerPrefab;
-        [SerializeField] private GameObject playerSpawnSystem = null; 
+
+        [Header("Room")] [SerializeField] private NetworkRoomPlayer roomPlayerPrefab;
+
+        [Header("Game")] [SerializeField] private NetworkGamePlayer gamePlayerPrefab;
+        [SerializeField] private GameObject playerSpawnSystem = null;
 
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
@@ -26,10 +24,23 @@ namespace Lobby
         public List<NetworkRoomPlayer> RoomPlayers { get; } = new();
         public List<NetworkGamePlayer> GamePlayers { get; } = new();
 
+        public GameObject PlayerNumberCounterPrefab;
+        public PlayerNumberCounter PlayerNumberCounter;
+
         public override void OnStartServer()
         {
             var spawnPrefabs = Resources.LoadAll<GameObject>("LobbyPrefabs").ToList();
+            InstantiatePlayerNumberCounter();
         }
+
+        //[Server]
+        void InstantiatePlayerNumberCounter()
+        {
+            GameObject instantiated = Instantiate(PlayerNumberCounterPrefab);
+            PlayerNumberCounter = instantiated.GetComponent<PlayerNumberCounter>();
+            NetworkServer.Spawn(instantiated);
+        }
+
         public override void OnStartClient()
         {
             var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
@@ -72,7 +83,7 @@ namespace Lobby
             if (SceneManager.GetActiveScene().path == menuScene)
             {
                 bool isHost = RoomPlayers.Count == 0;
-                
+
                 NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
                 roomPlayerInstance.IsHost = isHost;
                 NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
@@ -88,6 +99,7 @@ namespace Lobby
 
                 NotifyPlayersReady();
             }
+
             base.OnServerDisconnect(conn);
         }
 
@@ -108,17 +120,18 @@ namespace Lobby
         {
             if (numPlayers < minPlayers)
             {
-                return false; 
+                return false;
             }
 
             foreach (var player in RoomPlayers)
             {
                 if (!player.isReady)
                 {
-                    return false; 
+                    return false;
                 }
             }
-            return true; 
+
+            return true;
         }
 
         public void StartGame()
@@ -127,9 +140,10 @@ namespace Lobby
             {
                 if (!IsReadyToStart())
                 {
-                    return; 
+                    return;
                 }
-                ServerChangeScene("Scene_Map_01"); 
+
+                ServerChangeScene("Scene_Map_01");
             }
         }
 
@@ -142,19 +156,26 @@ namespace Lobby
                     var conn = RoomPlayers[i].connectionToClient;
                     var gameplayerInstance = Instantiate(gamePlayerPrefab);
                     gameplayerInstance.SetDisplayName(RoomPlayers[i].displayName);
-                    
+
                     NetworkServer.Destroy(conn.identity.gameObject);
 
                     NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);
                 }
             }
+            PlayerNumberCounter.CountPlayer(numPlayers);
             base.ServerChangeScene(newSceneName);
         }
-
+        
         public override void OnServerReady(NetworkConnectionToClient conn)
         {
             base.OnServerReady(conn);
             OnServerReadied?.Invoke(conn);
+        }
+
+        [ContextMenu("SHOW NUM PLAYERS")]
+        public void ShowNumPlayer()
+        {
+            Debug.Log(numPlayers);
         }
     }
 }

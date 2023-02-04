@@ -17,13 +17,28 @@ namespace Player.DataPlayer
         public GameObject profileFillerPrefab;
         public GameObject instantiatedProfileFiller;
 
-        private ProfileFiller _profileFillerComponent; 
+        private ProfileFiller _profileFillerComponent;
+
+        public GameObject sendVoteUIPrefab;
+        [SerializeField] private GameObject instantiatedSendVoteUI;
+
+        public GameObject receiveVoteUIPrefab;
+        [SerializeField] private GameObject instantiatedReceiveVoteUI;
+        
         private IEnumerator Start()
         {
-            if (isLocalPlayer)
+            Debug.Log("START");
+            if (isServer)
             {
-                local = this; 
-            
+                local = this;
+                gameObject.name = "SERVER";
+                Debug.Log("LOCAL SERVER");
+            }
+            else if (hasAuthority)
+            {
+                local = this;
+                gameObject.name = "CLIENT";
+                Debug.Log("LOCAL CLIENT");
             }
             
             if (isServer)
@@ -31,6 +46,9 @@ namespace Player.DataPlayer
                 if(hasAuthority)
                 { 
                     InstantiateProfileFiller();
+                    
+                    InstantiateGridVote();
+                    InstantiateReceiveVote();
                 }
                 StartCoroutine(SelectRandomProfile());
             }
@@ -42,8 +60,6 @@ namespace Player.DataPlayer
                 yield return new WaitForSeconds(5);
                 canMove = true; 
             }
-
-            
         }
 
         private int _profileIndex = -1;
@@ -54,8 +70,8 @@ namespace Player.DataPlayer
         {
             while (instantiatedProfileFiller == null)
             {
-                yield return new WaitForSeconds(0.1f); 
                 instantiatedProfileFiller = GameObject.FindGameObjectWithTag("profileFiller");
+                yield return new WaitForSeconds(0.1f); 
             }
 
             ProfileFiller profileFillerComponent = instantiatedProfileFiller.GetComponent<ProfileFiller>();
@@ -88,6 +104,35 @@ namespace Player.DataPlayer
         {
             GameObject instantiatedProfileFiller = Instantiate(profileFillerPrefab);
             NetworkServer.Spawn(instantiatedProfileFiller);
+        }
+        
+        [Server]
+        private void InstantiateGridVote()
+        {
+            instantiatedSendVoteUI = Instantiate(sendVoteUIPrefab);
+            NetworkServer.Spawn(instantiatedSendVoteUI);
+        }
+
+        [Server]
+        private void InstantiateReceiveVote()
+        {
+            instantiatedReceiveVoteUI = Instantiate(receiveVoteUIPrefab);
+            NetworkServer.Spawn(instantiatedReceiveVoteUI);
+            instantiatedReceiveVoteUI.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+        }
+        
+        [Command]
+        public void CmdAssignNetworkAuthority(NetworkIdentity uiAuthorityId)
+        {
+            //If -> cube has a owner && owner isn't the actual owner
+            if (uiAuthorityId.hasAuthority == false)
+            {
+                // Remove authority
+                uiAuthorityId.RemoveClientAuthority();
+            }
+
+            // Add client as owner
+            uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }
     }
 }

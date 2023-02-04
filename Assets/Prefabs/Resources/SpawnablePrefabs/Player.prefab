@@ -201,7 +201,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   profileFillerPrefab: {fileID: 208054162306632727, guid: 4f7038b6c7d125e45a1a129d64c2c173, type: 3}
-  instantiatedProfileFIller: {fileID: 0}
+  instantiatedProfileFiller: {fileID: 0}
+  sendVoteUIPrefab: {fileID: 3205678455355668909, guid: 3c50910d1e6bf9e4ebcf54992cc6bdb7, type: 3}
+  instantiatedSendVoteUI: {fileID: 0}
+  receiveVoteUIPrefab: {fileID: 1900001054303654362, guid: c65da49cfd187a04ab69ed08e22a5b63, type: 3}
+  instantiatedReceiveVoteUI: {fileID: 0}
   playerNameText: {fileID: 6676791487969277931}
 --- !u!1 &3608770204236439733
 GameObject:

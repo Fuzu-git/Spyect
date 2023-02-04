@@ -131,7 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5022048523250997066}
   - component: {fileID: 5022048523250997172}
-  - component: {fileID: 5804726530956278963}
   - component: {fileID: 5022048523250997173}
   - component: {fileID: 4992579878161054327}
   m_Layer: 5
@@ -172,23 +171,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5022048523250997067}
   m_CullTransparentMesh: 1
---- !u!114 &5804726530956278963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5022048523250997067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 8d4a0f97f282302419f478afae1ca481
-  hasSpawned: 0
 --- !u!114 &5022048523250997173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,9 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6392e0e681f3daf468fd38500efd5296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInGameName: {fileID: 5022048523804239179}
-  _playerInGameAvatar: {fileID: 5022048523572024646}
-  _playerSuspected: {fileID: 5022048523004698227}
+  playerInGameName: {fileID: 5022048523804239179}
+  playerInGameAvatar: {fileID: 5022048523572024646}
+  playerSuspected: {fileID: 5022048523004698227}
   sendVoteUI: {fileID: 0}
 --- !u!1 &5022048523572024644
 GameObject:
