@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour
     {
         players.Add(player);
     }
-    
 
     private void OnStartGameReceived(StartGameMessage msg)
     {
         onGameStarted?.Invoke();
     }
+    
+    
 }

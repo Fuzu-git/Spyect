@@ -15,17 +15,25 @@ namespace Player.DataPlayer
         public static bool canMove = true;
         
         public GameObject profileFillerPrefab;
-        public GameObject instantiatedProfileFIller; 
-        
+        public GameObject instantiatedProfileFiller;
+
+        private ProfileFiller _profileFillerComponent; 
         private IEnumerator Start()
         {
             if (isLocalPlayer)
             {
                 local = this; 
             
-                //GameManager.playerList.Add(gameObject);
             }
-
+            
+            if (isServer)
+            {
+                if(hasAuthority)
+                { 
+                    InstantiateProfileFiller();
+                }
+                StartCoroutine(SelectRandomProfile());
+            }
             
             if (GameManager.instance)
             {
@@ -35,48 +43,49 @@ namespace Player.DataPlayer
                 canMove = true; 
             }
 
-            if (isServer && hasAuthority)
-            {
-                Debug.Log("isLocalPlayer Entry");
-                InstantiateProfileFiller();
-            }
-            StartCoroutine(SelectRandomProfile());
+            
         }
-        
+
         private int _profileIndex = -1;
         public TMP_Text playerNameText;
         private string _playerInGameName;
 
         IEnumerator SelectRandomProfile()
         {
-            while (instantiatedProfileFIller == null)
+            while (instantiatedProfileFiller == null)
             {
                 yield return new WaitForSeconds(0.1f); 
-                instantiatedProfileFIller = GameObject.FindGameObjectWithTag("profileFiller");
+                instantiatedProfileFiller = GameObject.FindGameObjectWithTag("profileFiller");
             }
-            
-            Debug.Log(connectionToClient.connectionId);
-            
-            ProfileFiller profileFillerComponent = instantiatedProfileFIller.GetComponent<ProfileFiller>();
+
+            ProfileFiller profileFillerComponent = instantiatedProfileFiller.GetComponent<ProfileFiller>();
 
            
             yield return new WaitForSeconds(0.1f);
             
             _profileIndex = profileFillerComponent.GetIndex(connectionToClient.connectionId);
 
-            Debug.Log(_profileIndex);
-            
-            PlayerData currentSo = profileFillerComponent.profiles[_profileIndex];
-            _playerInGameName = currentSo.playerInGameName;
-            playerNameText.text = _playerInGameName;
-            
+
+            SendProfilToClient(_profileIndex);
+
         }
 
-
+        [ClientRpc]
+        void SendProfilToClient(int profileIndex)
+        {
+            if (_profileFillerComponent == null)
+            {
+                instantiatedProfileFiller = GameObject.FindGameObjectWithTag("profileFiller");
+                _profileFillerComponent = instantiatedProfileFiller.GetComponent<ProfileFiller>();
+            }
+            PlayerData currentSo = _profileFillerComponent.profiles[profileIndex];
+            _playerInGameName = currentSo.playerInGameName;
+            playerNameText.text = _playerInGameName;
+        }
+        
         [Server]
         void InstantiateProfileFiller()
         {
-            Debug.Log("Entry instantiate");
             GameObject instantiatedProfileFiller = Instantiate(profileFillerPrefab);
             NetworkServer.Spawn(instantiatedProfileFiller);
         }

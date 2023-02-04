@@ -19,24 +19,14 @@ namespace Player.DataPlayer
             {
                 playerIndex.Add(i);
             }
-            Debug.Log("Avant shuffle" + playerIndex.Count);
             Shuffle(playerIndex);
-            Debug.Log("Après shuffle" + playerIndex.Count);
-            Debug.Log("Start server " + gameObject.name);
         }
 
-        public int GetIndex(int index)
+        public int GetIndex(int connId)
         {
-            Debug.Log("Dans index" + playerIndex.Count);
-            Debug.Log("Index " + gameObject.name);
-            return playerIndex[index];
-            
+            return playerIndex[connId];
         }
 
-        private void Update()
-        {
-                Debug.Log("Update " +playerIndex.Count);
-        }
 
         public void Shuffle(SyncList<int> list)
         {
