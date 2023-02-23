@@ -39,5 +39,7 @@ namespace UI.VoteUI
             receiveGridVoteUi.FillReceiveContent(playerIndex);
             receiveVoteContentList.Add(receiveGridVoteUi);
         }
+        
+        
     }
 }

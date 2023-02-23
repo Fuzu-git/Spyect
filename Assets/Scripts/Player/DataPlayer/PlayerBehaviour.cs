@@ -7,11 +7,18 @@ using static Player.DataPlayer.ProfileFiller;
 
 namespace Player.DataPlayer
 {
+    public enum PlayerState
+    {
+        Alive, 
+        Spectate
+    }
+    
     public class PlayerBehaviour : NetworkBehaviour
     {
         public static PlayerBehaviour local;
-        
-        //[SyncVar]
+
+        [SyncVar(hook = nameof(OnPlayerStateChanged))] 
+        protected internal PlayerState state = PlayerState.Alive; 
         public static bool canMove = true;
         
         public GameObject profileFillerPrefab;
@@ -134,5 +141,31 @@ namespace Player.DataPlayer
             // Add client as owner
             uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }
+
+        private void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
+        {
+            switch (newState)
+            {
+                case PlayerState.Spectate:
+                    gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    break; 
+            }
+        }
+        
+        [Command]
+        public void CmdVote(PlayerBehaviour playerVoted)
+        {
+            if (GameManager.instance.Vote(this, playerVoted))
+            {
+                GameManager.instance.CheckAllVotes(); 
+            }
+        }
+
+        [ClientRpc]
+        public void RpcVote(PlayerBehaviour playerVoted)
+        {
+            
+        }
+        
     }
 }

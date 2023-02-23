@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 57
+  controlID: 42
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -120,14 +120,14 @@ MonoBehaviour:
     y: 566
     width: 1494
     height: 373
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 16
+  controlID: 47
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17
+  controlID: 48
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -346,22 +346,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 55
   m_LastFolders:
-  - Assets/Scripts
+  - Assets
   m_LastFoldersGridSize: 55
   m_LastProjectPath: C:\Users\valen\OneDrive\Bureau\Local-Repository\Spyect
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 1a5e0000
-    m_LastClickedID: 24090
-    m_ExpandedIDs: 00000000185e00001a5e00001c5e00001e5e0000205e0000225e0000245e0000265e0000285e00002a5e00002c5e00002e5e0000305e00003e5e000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 3e5e0000
+    m_LastClickedID: 24126
+    m_ExpandedIDs: 00000000185e00001a5e00001c5e00001e5e0000205e0000225e0000245e0000265e0000285e00002a5e00002c5e00002e5e0000305e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,7 +519,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: caadffff06b2ffff4cb2ffff2ab4fffff8b4ffff1cb9ffff54c1ffff9ac1ffff78c3ffff46c4ffff66c6ffffa6caffffeccaffffcaccffff98cdffff2ed0ffff72d4ffffb8d4ffff96d6ffff64d7ffff1adbffff90dbffffd8dfffff20e0fffffee1ffffcce2ffffcae6ffff20ebffff74ebffff4cedffff1aeefffff6f1ffff4cf5ffff04f6ffff00f7ffff04fbffff247600008e780000647d0000b88100000a8600005a8a0000aa8f0000
+      m_ExpandedIDs: b4c1ffff2ac2ffff78d1ffffc0d1ffff9ed3ffff6cd4ffff44dbffffbadbffff22e1ffff68e1ffff8ce1ffff5ae2ffff36e3ffff7ce3ffff54e5ffff22e6ffff4ef0ffff1cf2ffff64f2ffff34f4ffff14f5ffff2cf8ffff72f8ffff04fbfffff4ffffff325f0000565f0000b0810000d481000002880000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -790,9 +790,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 489.21783, y: 226.01611, z: 2.5494118}
+    m_Target: {x: 631.76807, y: 257.99585, z: -2.3538158}
     speed: 2
-    m_Value: {x: 489.21783, y: 226.01611, z: 2.5494118}
+    m_Value: {x: 631.76807, y: 257.99585, z: -2.3538158}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -843,9 +843,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 475.28772
+    m_Target: 428.2342
     speed: 2
-    m_Value: 475.28772
+    m_Value: 428.2342
   m_Ortho:
     m_Target: 1
     speed: 2

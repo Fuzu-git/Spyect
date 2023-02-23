@@ -9,6 +9,7 @@ TagManager:
   - SendVoteUI
   - PlayerCounter
   - GameManager
+  - PlayerVisuals
   layers:
   - Default
   - TransparentFX
