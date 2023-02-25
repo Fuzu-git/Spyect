@@ -26,11 +26,12 @@ namespace UI.VoteUI
 
         public ReceiveVoteUI _receiveVoteUI;
 
-        public RectTransform mainCanvas; 
+        public RectTransform mainCanvas;
+
         public IEnumerator Start()
         {
             mainCanvas = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<RectTransform>();
-            
+
             while (_receiveVoteUI == null)
             {
                 Debug.Log("ReceiveVoteUI is null");
@@ -42,8 +43,9 @@ namespace UI.VoteUI
         public void FillComponent(int playerIndex)
         {
             sendVoteUI = GetComponentInParent<SendVoteUI>().transform;
-            
-            playerInGameName.text = GameManager.playerList[playerIndex].GetComponent<PlayerBehaviour>().playerNameText.text;
+
+            playerInGameName.text =
+                GameManager.playerList[playerIndex].GetComponent<PlayerBehaviour>().playerNameText.text;
             //PLAYER IMAGE TO DO 
             _playerIndex = playerIndex;
             playerSuspected.onClick.AddListener(SuspectedButtonClicked);
@@ -56,11 +58,12 @@ namespace UI.VoteUI
 
         IEnumerator SuspectButtonClickedCo()
         {
-            Debug.Log("LOCAL " + PlayerBehaviour.local.gameObject.name + " " + (PlayerBehaviour.local != null));
-            Debug.Log("XXXXXXXXXXXXXXXXXXXXXXXxx " + (_receiveVoteUI != null));
             PlayerBehaviour.local.CmdAssignNetworkAuthority(_receiveVoteUI.GetComponent<NetworkIdentity>());
             yield return new WaitForSeconds(0.2f);
-            _receiveVoteUI.CmdUpdateContentData(_playerIndex);
+            if (GameManager.instance.IsAlreadySuspected(_playerIndex))
+            {
+                _receiveVoteUI.CmdUpdateContentData(_playerIndex);
+            }
             sendVoteUI.gameObject.SetActive(false);
         }
     }

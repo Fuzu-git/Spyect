@@ -33,11 +33,17 @@ namespace UI.VoteUI
 
         private void VoteYes()
         {
-            PlayerBehaviour.local.CmdVote(playerBinding); 
+            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.Yes); 
         }
 
         private void VoteNo()
         {
+            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.No);
+        }
+
+        private void VoteWhite()
+        {
+            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.White);
         }
     }
 }

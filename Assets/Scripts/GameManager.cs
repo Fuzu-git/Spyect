@@ -16,6 +16,14 @@ public struct PlayerVote
 {
     public PlayerBehaviour origin; // player who voted; 
     public PlayerBehaviour target; // player who's been voted; 
+    public EVoteResult voteResult; //vote decision
+}
+
+public enum EVoteResult
+{
+    Yes,
+    No,
+    White
 }
 
 public class GameManager : MonoBehaviour
@@ -28,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public bool totalPlayerUpdateOccured = false;
 
-    private List<PlayerVote> _votedPlayer = new List<PlayerVote>();
+    private List<PlayerVote> _votedPlayer = new List<PlayerVote>(); //votes
 
     public void Awake()
     {
@@ -60,12 +68,12 @@ public class GameManager : MonoBehaviour
         onGameStarted?.Invoke();
     }
 
-    internal bool Vote(PlayerBehaviour origin, PlayerBehaviour target)
+    internal bool Vote(PlayerBehaviour origin, PlayerBehaviour target, EVoteResult voteResult)
     {
         int index = _votedPlayer.FindIndex(x => x.origin == origin);
         if (index == -1)
         {
-            _votedPlayer.Add(new PlayerVote {origin = origin, target = target});
+            _votedPlayer.Add(new PlayerVote {origin = origin, target = target, voteResult = voteResult});
             return true;
         }
 
@@ -80,22 +88,50 @@ public class GameManager : MonoBehaviour
 
             foreach (PlayerVote vote in _votedPlayer)
             {
-                if (votes.ContainsKey(vote.target))
+                if (vote.voteResult == EVoteResult.Yes)
                 {
-                    ++votes[vote.target];
+                    if (votes.ContainsKey(vote.target))
+                    {
+                        ++votes[vote.target];
+                    }
+                    else
+                    {
+                        votes.Add(vote.target, 1);
+                    }
                 }
-                else
+                else if (vote.voteResult == EVoteResult.No)
                 {
-                    votes.Add(vote.target, 1);
+                    if (votes.ContainsKey(vote.target))
+                    {
+                        --votes[vote.target];
+                    }
+                    else
+                    {
+                        votes.Add(vote.target, -1);
+                    }
                 }
             }
 
-            List<KeyValuePair<PlayerBehaviour, int>> order = votes.OrderByDescending(x => x.Value).ToList();
-            if (order.Count() <= 1 || order[0].Value != order[1].Value)
+            foreach (var vote in votes)
             {
-                PlayerBehaviour player = order[0].Key;
-                player.state = PlayerState.Spectate;
+                if (vote.Value > 0)
+                {
+                    vote.Key.state = PlayerState.Spectate;
+                }   
+            }
+            
+        }
+    }
+
+    public bool IsAlreadySuspected(int playerIndex)
+    {
+        foreach (var vote in _votedPlayer)
+        {
+            if (playerIndex == vote.target.profileIndex)
+            {
+                return true;
             }
         }
+        return false; 
     }
 }
