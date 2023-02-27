@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Member.Player.DataPlayer;
 using Mirror;
-using Player.DataPlayer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

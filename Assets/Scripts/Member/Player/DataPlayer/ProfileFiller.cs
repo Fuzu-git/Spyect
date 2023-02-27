@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Mirror;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Player.DataPlayer
+namespace Member.Player.DataPlayer
 {
     public class ProfileFiller : NetworkBehaviour
     {

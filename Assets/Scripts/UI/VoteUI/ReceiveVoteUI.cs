@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Mirror;
-using Player.DataPlayer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

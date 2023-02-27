@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Player.DataPlayer
+namespace Member.Player.DataPlayer
 {
     [CreateAssetMenu]
     public class PlayerData : ScriptableObject

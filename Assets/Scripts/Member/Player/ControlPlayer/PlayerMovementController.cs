@@ -1,8 +1,8 @@
+using Member.Player.DataPlayer;
 using Mirror;
-using Player.DataPlayer;
 using UnityEngine;
 
-namespace Player.ControlPlayer
+namespace Member.Player.ControlPlayer
 {
     public class PlayerMovementController : NetworkBehaviour
     {

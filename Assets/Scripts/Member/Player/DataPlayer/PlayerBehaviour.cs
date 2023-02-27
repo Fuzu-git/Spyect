@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Mirror;
-using TMPro;
 using UnityEngine;
-using static Player.DataPlayer.ProfileFiller;
 
-namespace Player.DataPlayer
+namespace Member.Player.DataPlayer
 {
     public class PlayerBehaviour : AvatarBehaviour
     {
@@ -19,8 +16,7 @@ namespace Player.DataPlayer
         public GameObject receiveVoteUIPrefab;
         [SerializeField] private GameObject instantiatedReceiveVoteUI;
         
-        
-         protected override IEnumerator Start()
+        protected override IEnumerator Start()
         {
             if (isServer)
             {

@@ -1,6 +1,6 @@
 using System;
+using Member.Player.DataPlayer;
 using Mirror;
-using Player.DataPlayer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

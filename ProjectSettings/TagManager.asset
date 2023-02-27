@@ -10,6 +10,7 @@ TagManager:
   - PlayerCounter
   - GameManager
   - PlayerVisuals
+  - AI
   layers:
   - Default
   - TransparentFX

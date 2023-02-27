@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Member.Player.DataPlayer;
 using Mirror;
-using Player.DataPlayer;
 using UI.VoteUI;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
 
     public static readonly List<GameObject> playerList = new List<GameObject>();
     [SerializeField] private List<GameObject> showPlayerList = playerList;
+    public static readonly List<GameObject> aiList = new List<GameObject>();
+    public static readonly List<GameObject> memberList = new List<GameObject>(); 
+
     public static GameManager instance;
 
     public bool totalPlayerUpdateOccured = false;
@@ -61,6 +64,16 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(GameObject player)
     {
         playerList.Add(player);
+    }
+
+    public void AddAI(GameObject ai)
+    {
+        aiList.Add(ai);
+    }
+
+    public void AddMember(GameObject member)
+    {
+        memberList.Add(member);
     }
 
     private void OnStartGameReceived(StartGameMessage msg)

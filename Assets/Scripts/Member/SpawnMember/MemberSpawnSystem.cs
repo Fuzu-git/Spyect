@@ -4,11 +4,11 @@ using Lobby;
 using Mirror;
 using UnityEngine;
 
-namespace Player.SpawnPlayer
+namespace Member.SpawnMember
 {
-    public class PlayerSpawnSystem : NetworkBehaviour
+    public class MemberSpawnSystem : NetworkBehaviour
     {
-        [SerializeField] private GameObject playerPrefab = null;
+        [SerializeField] private GameObject memberPrefab = null;
         private static List<Transform> _spawnPoints = new List<Transform>();
         
         private int _nextIndex = 0;
@@ -40,7 +40,7 @@ namespace Player.SpawnPlayer
                 return; 
             }
 
-            GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[_nextIndex].position, _spawnPoints[_nextIndex].rotation);
+            GameObject playerInstance = Instantiate(memberPrefab, _spawnPoints[_nextIndex].position, _spawnPoints[_nextIndex].rotation);
             NetworkServer.Spawn(playerInstance, conn);
 
             _nextIndex++;

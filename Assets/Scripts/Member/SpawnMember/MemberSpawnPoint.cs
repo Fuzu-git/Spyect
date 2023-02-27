@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Player.SpawnPlayer
+namespace Member.SpawnMember
 {
-    public class PlayerSpawnPoint : MonoBehaviour
+    public class MemberSpawnPoint : MonoBehaviour
     {
-        private void Awake() => PlayerSpawnSystem.AddSpawnPoint(transform);
+        private void Awake() => MemberSpawnSystem.AddSpawnPoint(transform);
 
-        private void OnDestroy() => PlayerSpawnSystem.RemoveSpawnPoint(transform);
+        private void OnDestroy() => MemberSpawnSystem.RemoveSpawnPoint(transform);
 
         private void OnDrawGizmos()
         {

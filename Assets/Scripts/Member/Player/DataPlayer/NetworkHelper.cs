@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-namespace Player.DataPlayer
+namespace Member.Player.DataPlayer
 {
     public static class NetworkHelper
     {

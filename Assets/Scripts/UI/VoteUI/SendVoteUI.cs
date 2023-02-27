@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Lobby;
 using Mirror;
-using Player.DataPlayer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
