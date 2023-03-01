@@ -7,67 +7,27 @@ namespace Member.Player.DataPlayer
     public class PlayerBehaviour : AvatarBehaviour
     {
         public static PlayerBehaviour local;
-
-        //public GameObject profileFillerPrefab;
-        //private ProfileFiller _profileFillerComponent;
-
-        public GameObject sendVoteUIPrefab;
-        [SerializeField] private GameObject instantiatedSendVoteUI;
-        public GameObject receiveVoteUIPrefab;
-        [SerializeField] private GameObject instantiatedReceiveVoteUI;
+        [SyncVar]
+        public int PlayerIndex = -1;
         
         protected override IEnumerator Start()
         {
             if (isServer)
             {
-                local = this;
+                PlayerIndex = connectionToClient.connectionId;
             }
-            else if (hasAuthority)
+            if (isLocalPlayer)
             {
                 local = this;
             }
-            
-            if (isServer)
-            {
-                if(hasAuthority)
-                { 
-                    //InstantiateProfileFiller();
-                    
-                    InstantiateGridVote();
-                    InstantiateReceiveVote();
-                }
-                StartCoroutine(SelectRandomProfile());
-            }
-            
-            if (GameManager.instance)
-            {
-                GameManager.instance.AddPlayer(this.gameObject);
-                canMove = false;
-                yield return new WaitForSeconds(5);
-                canMove = true; 
-            }
-        }
-        
-        /*[Server]
-        void InstantiateProfileFiller()
-        {
-            GameObject instantiatedProfileFiller = Instantiate(profileFillerPrefab);
-            NetworkServer.Spawn(instantiatedProfileFiller);
-        }*/
-        
-        [Server]
-        private void InstantiateGridVote()
-        {
-            instantiatedSendVoteUI = Instantiate(sendVoteUIPrefab);
-            NetworkServer.Spawn(instantiatedSendVoteUI);
+            yield return StartCoroutine(base.Start());
         }
 
-        [Server]
-        private void InstantiateReceiveVote()
+        //[Command]
+        protected override void CmdSelectRandomProfile()
         {
-            instantiatedReceiveVoteUI = Instantiate(receiveVoteUIPrefab);
-            NetworkServer.Spawn(instantiatedReceiveVoteUI);
-            instantiatedReceiveVoteUI.GetComponent<NetworkIdentity>().RemoveClientAuthority();
+            profileIndex = profileFillerComponent.GetIndex(PlayerIndex);
+            RpcSendProfilToClient(profileIndex);
         }
         
         [Command]

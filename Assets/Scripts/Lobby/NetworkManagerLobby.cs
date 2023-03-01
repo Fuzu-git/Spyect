@@ -152,8 +152,9 @@ namespace Lobby
         {
             if (SceneManager.GetActiveScene().path == menuScene && newSceneName.StartsWith("Scene_Map_01"))
             {
-                for (int i = RoomPlayers.Count - 1; i > 0; i--)
+                for (int i = RoomPlayers.Count - 1; i >= 0; i--)
                 {
+                    Debug.Log("DESTRUCTION");
                     var conn = RoomPlayers[i].connectionToClient;
                     var gameplayerInstance = Instantiate(gamePlayerPrefab);
                     gameplayerInstance.SetDisplayName(RoomPlayers[i].displayName);

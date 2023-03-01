@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Member.Player.ControlPlayer;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Member.Player.DataPlayer;
+using Mirror;
 
 namespace Member.AI
 {
@@ -13,7 +15,9 @@ namespace Member.AI
         private static List<Transform> _movePoints = new List<Transform>();
         private Transform _designatedPoint;
         public float epsilon;
-
+        [SyncVar(hook = nameof(AiIndexChanged))]
+        public int aiIndex; 
+        
         private void Awake()
         {
             _actualAIMoveSpeed = movementSpeed;
@@ -32,6 +36,27 @@ namespace Member.AI
             }
         }
 
+        public void AiIndexChanged(int oldValue, int newValue)
+        {
+            StartCoroutine(WaitForProfiller());
+        }
+
+        IEnumerator WaitForProfiller()
+        {
+            while (profileFillerComponent == null)
+            {
+                yield return null;
+            }
+            CmdSelectRandomProfile();
+        }
+
+        //[Command]
+        protected override void CmdSelectRandomProfile()
+        {
+            profileIndex = profileFillerComponent.GetIndex(aiIndex);
+            RpcSendProfilToClient(profileIndex);
+        }
+
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);
         public static void RemoveMovePoint(Transform transform) => _movePoints.Remove(transform);
 
@@ -46,10 +71,10 @@ namespace Member.AI
                     Mathf.Approximately(transform.position.y, _designatedPoint.position.y / epsilon) &&
                     Mathf.Approximately(transform.position.z, _designatedPoint.position.z / epsilon))
                 {
-                    _actualAIMoveSpeed = 0; 
+                    _actualAIMoveSpeed = 0;
                     SetDesignatedPoint();
                     Idle();
-                    _actualAIMoveSpeed = movementSpeed; 
+                    _actualAIMoveSpeed = movementSpeed;
                 }
             }
         }

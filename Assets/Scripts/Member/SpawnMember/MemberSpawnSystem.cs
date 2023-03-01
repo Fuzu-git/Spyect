@@ -1,6 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Lobby;
+using Member.AI;
+using Member.Player;
+using Member.Player.DataPlayer;
 using Mirror;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -29,10 +33,15 @@ namespace Member.SpawnMember
             Shuffle(_spawnPoints);
             
             NetworkManagerLobby.OnServerReadied += SpawnPlayer;
+            //NetworkManagerLobby.OnServerReadied += SpawnAi; 
         }
 
         [ServerCallback]
-        private void OnDestroy() => NetworkManagerLobby.OnServerReadied -= SpawnPlayer;
+        private void OnDestroy()
+        {
+            NetworkManagerLobby.OnServerReadied -= SpawnPlayer;
+            //NetworkManagerLobby.OnServerReadied -= SpawnAi; 
+        }
 
         [Server]
         public void SpawnPlayer(NetworkConnection conn)
@@ -48,20 +57,33 @@ namespace Member.SpawnMember
             GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[_nextIndex].position,
                 _spawnPoints[_nextIndex].rotation);
             NetworkServer.Spawn(playerInstance, conn);
+            NetworkServer.ReplacePlayerForConnection(conn.identity.connectionToClient, playerInstance);
 
-            SpawnAI(_nextIndex);
-            
-            _nextIndex++;
+            PlayerBehaviour playerBehaviour = playerInstance.GetComponent<PlayerBehaviour>();
+            StartCoroutine(SpawnAi(playerBehaviour));
         }
 
-        public void SpawnAI(int nextNextIndex)
+        //[Server]
+        public IEnumerator SpawnAi(PlayerBehaviour playerBehaviour /*NetworkConnection conn*/)
         {
-            nextNextIndex++; 
-            GameObject aiInstance = Instantiate(aiPrefab, _spawnPoints[nextNextIndex].position, _spawnPoints[nextNextIndex].rotation);
-            NetworkServer.Spawn(aiInstance);
-            _spawnPoints.RemoveAt(nextNextIndex);
+            while (playerBehaviour.PlayerIndex == -1)
+            {
+                yield return null;
+            }
+            int totalPlayerNumber = GameObject.FindGameObjectWithTag("PlayerCounter")
+                .GetComponent<PlayerNumberCounter>().playerNumber;
+            //Debug.Log("PlayerNumberCounter " + totalPlayerNumber);
+            Debug.Log("XXXXXXX "+playerBehaviour.PlayerIndex);
+            InstantiateAI(playerBehaviour.PlayerIndex+totalPlayerNumber);
         }
-
+        
+        public void InstantiateAI(int aiIndex)
+        {
+            aiPrefab.GetComponent<AIBehaviour>().aiIndex = aiIndex; 
+            GameObject aiInstance = Instantiate(aiPrefab, _spawnPoints[aiIndex].position, _spawnPoints[aiIndex].rotation);
+            NetworkServer.Spawn(aiInstance);
+            _spawnPoints.RemoveAt(aiIndex);
+        }
         public void Shuffle(List<Transform> list)
         {
             int n = list.Count;

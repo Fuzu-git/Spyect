@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
 
     private List<PlayerVote> _votedPlayer = new List<PlayerVote>(); //votes
 
+    public ProfileFiller ProfileFiller;
+    public SendVoteUI SendVoteUI;
+    public ReceiveVoteUI ReceiveVoteUI;
+
     public void Awake()
     {
         instance = this;

@@ -21,28 +21,21 @@ namespace Member
 
         public float movementSpeed = 5f;
         public static bool canMove = true;
-
-        public GameObject instantiatedProfileFiller;
         public int profileIndex { get; protected set; } = -1;
         public TMP_Text playerNameText;
         protected string playerInGameName;
         protected ProfileFiller profileFillerComponent;
-        
-        protected abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
+        protected GameManager gameManager;
 
-        public GameObject profileFillerPrefab;
-        protected ProfileFiller _profileFillerComponent;
+        protected abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
 
         protected virtual IEnumerator Start()
         {
-            if (isServer)
-            {
-                if (hasAuthority)
-                {
-                    InstantiateProfileFiller();
-                }
-                StartCoroutine(SelectRandomProfile());
-            }
+            GameObject go = GameObject.FindGameObjectWithTag("GameManager");
+            gameManager = go.GetComponent<GameManager>();
+            profileFillerComponent = gameManager.ProfileFiller;
+
+            CmdSelectRandomProfile();
 
             if (GameManager.instance)
             {
@@ -62,42 +55,27 @@ namespace Member
             }
         }
 
-        [Server]
-        void InstantiateProfileFiller()
+        //[ClientRpc]
+        protected void RpcSendProfilToClient(int profileIndex)
         {
-            GameObject instantiatedProfileFiller = Instantiate(profileFillerPrefab);
-            NetworkServer.Spawn(instantiatedProfileFiller);
+            StartCoroutine(SendProfilToClientCo(profileIndex));
         }
 
-        [ClientRpc]
-        private void SendProfilToClient(int profileIndex)
+        protected IEnumerator SendProfilToClientCo(int profileIndex)
         {
-            if (profileFillerComponent == null)
+            while (profileFillerComponent == null)
             {
-                instantiatedProfileFiller = GameObject.FindGameObjectWithTag("profileFiller");
-                profileFillerComponent = instantiatedProfileFiller.GetComponent<ProfileFiller>();
+                yield return null;
             }
-
             PlayerData currentSo = profileFillerComponent.profiles[profileIndex];
             playerInGameName = currentSo.playerInGameName;
             playerNameText.text = playerInGameName;
         }
 
-        protected IEnumerator SelectRandomProfile()
+        //[Command]
+        protected virtual void CmdSelectRandomProfile()
         {
-            while (instantiatedProfileFiller == null)
-            {
-                instantiatedProfileFiller = GameObject.FindGameObjectWithTag("profileFiller");
-                yield return new WaitForSeconds(0.1f);
-            }
-
-            ProfileFiller profileFillerComponent = instantiatedProfileFiller.GetComponent<ProfileFiller>();
-
-            yield return new WaitForSeconds(0.1f);
-
-            profileIndex = profileFillerComponent.GetIndex(connectionToClient.connectionId);
-
-            SendProfilToClient(profileIndex);
+            
         }
     }
 }
