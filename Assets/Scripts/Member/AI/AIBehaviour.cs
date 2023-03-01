@@ -9,7 +9,7 @@ namespace Member.AI
 {
     public class AIBehaviour : AvatarBehaviour
     {
-        private float _actualAIMoveSpeed; 
+        private float _actualAIMoveSpeed;
         private static List<Transform> _movePoints = new List<Transform>();
         private Transform _designatedPoint;
         public float epsilon;
@@ -17,6 +17,7 @@ namespace Member.AI
         private void Awake()
         {
             _actualAIMoveSpeed = movementSpeed;
+            SetDesignatedPoint();
         }
 
         protected override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
@@ -38,23 +39,17 @@ namespace Member.AI
         {
             if (canMove)
             {
-                if (_designatedPoint == null)
-                {
-                    SetDesignatedPoint();
-                }
-
                 transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
                     _actualAIMoveSpeed * Time.deltaTime);
-
 
                 if (Mathf.Approximately(transform.position.x, _designatedPoint.position.x / epsilon) &&
                     Mathf.Approximately(transform.position.y, _designatedPoint.position.y / epsilon) &&
                     Mathf.Approximately(transform.position.z, _designatedPoint.position.z / epsilon))
                 {
-                    SetDesignatedPoint();
                     _actualAIMoveSpeed = 0; 
-                    Idle(); // unhappy coroutine because in update, how to fix here ? 
-                    _actualAIMoveSpeed = movementSpeed;
+                    SetDesignatedPoint();
+                    Idle();
+                    _actualAIMoveSpeed = movementSpeed; 
                 }
             }
         }
@@ -66,13 +61,19 @@ namespace Member.AI
             {
                 randIndex = Random.Range(0, _movePoints.Count);
             }
+
             _designatedPoint = _movePoints[randIndex];
         }
 
-        private IEnumerator Idle()
+        private void Idle()
         {
-            int randTime = Random.Range(4, 10);
-            yield return new WaitForSeconds(randTime);
+            float timer = 0;
+            int randStop = Random.Range(4, 10);
+            
+            while (timer < randStop)
+            {
+                timer += Time.deltaTime;
+            }
         }
     }
 }
