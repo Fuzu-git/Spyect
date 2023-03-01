@@ -22,6 +22,7 @@ namespace Member.Player.DataPlayer
 
         public int GetIndex(int connId)
         {
+            //AI doesn't have connID
             return playerIndex[connId];
         }
 

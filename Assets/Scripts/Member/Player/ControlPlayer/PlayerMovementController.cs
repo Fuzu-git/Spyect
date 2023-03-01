@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Member.Player.ControlPlayer
 {
-    public class PlayerMovementController : NetworkBehaviour
+    public class PlayerMovementController :  NetworkBehaviour
     {
-        [SerializeField] private float movementSpeed = 5f;
         [SerializeField] private CharacterController controller; 
         
+        [SerializeField] public float movementSpeed = 5f;
         //[SerializeField] private Animator _animator;
         
         private Vector2 _previousInput; 
@@ -39,10 +39,11 @@ namespace Member.Player.ControlPlayer
         [ClientCallback]
         private void OnDisable() => Controls.Disable();
 
+        //better on PlayerBehaviour ? 
         [ClientCallback]
         private void Update()
         {
-            if (PlayerBehaviour.canMove)
+            if (AvatarBehaviour.canMove)
             {
                 Move(); 
             }

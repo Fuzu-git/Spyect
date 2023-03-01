@@ -1,4 +1,5 @@
 using System.Collections;
+using Member;
 using Member.Player.DataPlayer;
 using TMPro;
 using UnityEngine;

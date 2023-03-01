@@ -8,8 +8,8 @@ namespace Member.Player.DataPlayer
     {
         public static PlayerBehaviour local;
 
-        public GameObject profileFillerPrefab;
-        private ProfileFiller _profileFillerComponent;
+        //public GameObject profileFillerPrefab;
+        //private ProfileFiller _profileFillerComponent;
 
         public GameObject sendVoteUIPrefab;
         [SerializeField] private GameObject instantiatedSendVoteUI;
@@ -31,7 +31,7 @@ namespace Member.Player.DataPlayer
             {
                 if(hasAuthority)
                 { 
-                    InstantiateProfileFiller();
+                    //InstantiateProfileFiller();
                     
                     InstantiateGridVote();
                     InstantiateReceiveVote();
@@ -48,12 +48,12 @@ namespace Member.Player.DataPlayer
             }
         }
         
-        [Server]
+        /*[Server]
         void InstantiateProfileFiller()
         {
             GameObject instantiatedProfileFiller = Instantiate(profileFillerPrefab);
             NetworkServer.Spawn(instantiatedProfileFiller);
-        }
+        }*/
         
         [Server]
         private void InstantiateGridVote()

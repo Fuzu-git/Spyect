@@ -275,8 +275,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  movementSpeed: 5
   instantiatedProfileFiller: {fileID: 0}
   playerNameText: {fileID: 1250944906613186934}
+  profileFillerPrefab: {fileID: 208054162306632727, guid: 4f7038b6c7d125e45a1a129d64c2c173, type: 3}
+  epsilon: 0.5
 --- !u!1 &8079880182340776927
 GameObject:
   m_ObjectHideFlags: 0
