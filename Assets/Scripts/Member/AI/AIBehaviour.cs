@@ -16,7 +16,9 @@ namespace Member.AI
         private Transform _designatedPoint;
         public float epsilon;
         [SyncVar(hook = nameof(AiIndexChanged))]
-        public int aiIndex; 
+        public int aiIndex;
+
+        private bool _isWaiting = false; 
         
         private void Awake()
         {
@@ -60,21 +62,15 @@ namespace Member.AI
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);
         public static void RemoveMovePoint(Transform transform) => _movePoints.Remove(transform);
 
-        public void Update()
+        private void Update()
         {
-            if (canMove)
+            if (canMove && !_isWaiting)
             {
                 transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
                     _actualAIMoveSpeed * Time.deltaTime);
-
-                if (Mathf.Approximately(transform.position.x, _designatedPoint.position.x / epsilon) &&
-                    Mathf.Approximately(transform.position.y, _designatedPoint.position.y / epsilon) &&
-                    Mathf.Approximately(transform.position.z, _designatedPoint.position.z / epsilon))
+                if (transform.position == _designatedPoint.position)
                 {
-                    _actualAIMoveSpeed = 0;
-                    SetDesignatedPoint();
-                    Idle();
-                    _actualAIMoveSpeed = movementSpeed;
+                    StartCoroutine(Idle());
                 }
             }
         }
@@ -90,15 +86,13 @@ namespace Member.AI
             _designatedPoint = _movePoints[randIndex];
         }
 
-        private void Idle()
+        private IEnumerator Idle()
         {
-            float timer = 0;
-            int randStop = Random.Range(4, 10);
-            
-            while (timer < randStop)
-            {
-                timer += Time.deltaTime;
-            }
+            _isWaiting = true; 
+            float randStop = Random.Range(4f, 10f);
+            yield return new WaitForSeconds(randStop);
+            SetDesignatedPoint();
+            _isWaiting = false; 
         }
     }
 }

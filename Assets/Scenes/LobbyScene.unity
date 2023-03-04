@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,7 +158,7 @@ MonoBehaviour:
   autoStartServerBuild: 1
   serverTickRate: 30
   offlineScene: 
-  onlineScene: Assets/Scenes/SampleScene.unity
+  onlineScene: 
   transport: {fileID: 369341166}
   networkAddress: localhost
   maxConnections: 10
@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: 208054162306632727, guid: 4f7038b6c7d125e45a1a129d64c2c173, type: 3}
   - {fileID: 487762690664815845, guid: 92650ca7b67e7dc4aba8c882a9595d46, type: 3}
   minPlayers: 1
-  menuScene: Assets/Scenes/SampleScene.unity
+  menuScene: LobbyScene
   roomPlayerPrefab: {fileID: 675499442488788004, guid: 5f6e4cb4b8cec4840b7c8147c70abf32, type: 3}
   gamePlayerPrefab: {fileID: 4417775391330916353, guid: b67bf5f2a17959a4daaf7ca8e0906928, type: 3}
   playerSpawnSystem: {fileID: 6810103056051336783, guid: fc3851f762364f04eaca206e6532fffd, type: 3}
