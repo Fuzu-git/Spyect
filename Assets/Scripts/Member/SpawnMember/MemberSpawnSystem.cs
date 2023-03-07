@@ -79,9 +79,9 @@ namespace Member.SpawnMember
         
         public void InstantiateAI(int aiIndex)
         {
-            aiPrefab.GetComponent<AIBehaviour>().aiIndex = aiIndex; 
             GameObject aiInstance = Instantiate(aiPrefab, _spawnPoints[aiIndex].position, _spawnPoints[aiIndex].rotation);
             NetworkServer.Spawn(aiInstance);
+            aiInstance.GetComponent<AIBehaviour>().aiIndex = aiIndex;
             _spawnPoints.RemoveAt(aiIndex);
         }
         public void Shuffle(List<Transform> list)

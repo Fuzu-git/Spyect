@@ -39,8 +39,11 @@ namespace Member
             GameObject go = GameObject.FindGameObjectWithTag("GameManager");
             GameManager = go.GetComponent<GameManager>();
             ProfileFillerComponent = GameManager.ProfileFiller;
-
-            CmdSelectRandomProfile();
+            while (!ProfileFillerComponent.IsReady)
+            {
+                yield return null;
+            }
+            SelectRandomProfile();
 
             if (GameManager.instance)
             {
@@ -90,7 +93,7 @@ namespace Member
         }
 
         //[ClientRpc]
-        protected void RpcSendProfilToClient(int profileIndex)
+        protected void SendProfilToClient(int profileIndex)
         {
             StartCoroutine(SendProfilToClientCo(profileIndex));
         }
@@ -107,7 +110,7 @@ namespace Member
         }
 
         //[Command]
-        protected virtual void CmdSelectRandomProfile()
+        protected virtual void SelectRandomProfile()
         {
         }
     }

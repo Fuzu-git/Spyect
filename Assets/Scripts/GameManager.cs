@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
             {
                 if (vote.voteResult == EVoteResult.Yes)
                 {
+                    Debug.Log("NANI "+(vote.target == null)+" "+(votes == null));
                     if (votes.ContainsKey(vote.target))
                     {
                         ++votes[vote.target];

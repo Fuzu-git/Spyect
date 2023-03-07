@@ -9,18 +9,22 @@ namespace Member.Player.DataPlayer
     {
         public CharacterController cc; 
         public static PlayerBehaviour local;
-        [SyncVar]
+        [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
-        
         
         protected override IEnumerator Start()
         {
-            if (isServer)
-            {
-                playerIndex = connectionToClient.connectionId;
-            }
             if (isLocalPlayer)
             {
+                if (isServer)
+                {
+                    playerIndex = connectionToClient.connectionId;
+                }
+                else
+                {
+                    playerIndex = 1 + connectionToServer.connectionId;
+                    CmdSetPlayerIndex(playerIndex);
+                }
                 local = this;
             }
             yield return StartCoroutine(base.Start());
@@ -33,11 +37,28 @@ namespace Member.Player.DataPlayer
             animator.SetFloat("speed", characterVelocity);
         }
 
-        //[Command]
-        protected override void CmdSelectRandomProfile()
+        void UpdatePlayerIndex(int oldValue, int newValue)
         {
+            Debug.Log("HOOKED "+oldValue+" "+newValue);
+            playerIndex = newValue;
+            Debug.Log("HOOKED 1");
+            SelectRandomProfile();
+            Debug.Log("HOOKED 2 "+isLocalPlayer);
+        }
+
+        [Command]
+        private void CmdSetPlayerIndex(int playerIndex)
+        {
+            Debug.Log("CMD RECEIVE");
+            this.playerIndex = playerIndex;
+        }
+
+        //[Command]
+        protected override void SelectRandomProfile()
+        {
+            if (playerIndex == -1) return;
             profileIndex = ProfileFillerComponent.GetIndex(playerIndex);
-            RpcSendProfilToClient(profileIndex);
+            SendProfilToClient(profileIndex);
         }
         
         [Command]

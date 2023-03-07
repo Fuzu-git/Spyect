@@ -60,6 +60,7 @@ namespace Member.AI
 
         public void AiIndexChanged(int oldValue, int newValue)
         {
+            //CmdSelectRandomProfile();
             StartCoroutine(WaitForProfiller());
         }
 
@@ -69,14 +70,14 @@ namespace Member.AI
             {
                 yield return null;
             }
-            CmdSelectRandomProfile();
+            SelectRandomProfile();
         }
 
         //[Command]
-        protected override void CmdSelectRandomProfile()
+        protected override void SelectRandomProfile()
         {
             profileIndex = ProfileFillerComponent.GetIndex(aiIndex);
-            RpcSendProfilToClient(profileIndex);
+            SendProfilToClient(profileIndex);
         }
 
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);

@@ -60,8 +60,10 @@ namespace UI.VoteUI
         {
             PlayerBehaviour.local.CmdAssignNetworkAuthority(_receiveVoteUI.GetComponent<NetworkIdentity>());
             yield return new WaitForSeconds(0.2f);
-            if (GameManager.instance.IsAlreadySuspected(_playerIndex))
+            Debug.Log("TEST 0");
+            if (!GameManager.instance.IsAlreadySuspected(_playerIndex))
             {
+                Debug.Log("TEST 1");
                 _receiveVoteUI.CmdUpdateContentData(_playerIndex);
             }
             sendVoteUI.gameObject.SetActive(false);

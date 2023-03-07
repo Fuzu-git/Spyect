@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Mirror;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace Member.Player.DataPlayer
 {
@@ -9,7 +9,8 @@ namespace Member.Player.DataPlayer
         public List<PlayerData> profiles = new List<PlayerData>();
 
         public readonly SyncList<int> playerIndex = new SyncList<int>();
-        
+
+        public bool IsReady => playerIndex.Count > 0;       
         public override void OnStartServer()
         { 
             base.OnStartServer();
@@ -23,6 +24,7 @@ namespace Member.Player.DataPlayer
         public int GetIndex(int connId)
         {
             //AI doesn't have connID
+            Debug.Log(connId+" "+playerIndex.Count);
             return playerIndex[connId];
         }
 
