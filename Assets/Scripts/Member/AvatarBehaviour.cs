@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Member.Player.DataPlayer;
@@ -17,23 +18,27 @@ namespace Member
     public abstract class AvatarBehaviour : NetworkBehaviour
     {
         [SyncVar(hook = nameof(OnPlayerStateChanged))]
-        protected internal PlayerState state = PlayerState.Alive;
+        protected internal PlayerState State = PlayerState.Alive;
 
         public float movementSpeed = 5f;
         public static bool canMove = true;
         public int profileIndex { get; protected set; } = -1;
         public TMP_Text playerNameText;
-        protected string playerInGameName;
-        protected ProfileFiller profileFillerComponent;
-        protected GameManager gameManager;
+        protected string PlayerInGameName;
+        protected ProfileFiller ProfileFillerComponent;
+        
+        protected GameManager GameManager;
+
+        public Animator animator;
+        public SpriteRenderer spriteRenderer; 
 
         protected abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
 
         protected virtual IEnumerator Start()
         {
             GameObject go = GameObject.FindGameObjectWithTag("GameManager");
-            gameManager = go.GetComponent<GameManager>();
-            profileFillerComponent = gameManager.ProfileFiller;
+            GameManager = go.GetComponent<GameManager>();
+            ProfileFillerComponent = GameManager.ProfileFiller;
 
             CmdSelectRandomProfile();
 
@@ -47,11 +52,40 @@ namespace Member
                 {
                     GameManager.instance.AddAI(this.gameObject);
                 }
-
                 GameManager.instance.AddMember(gameObject);
                 canMove = false;
                 yield return new WaitForSeconds(5);
                 canMove = true;
+            }
+        }
+
+        protected void Flip(float velocity)
+        {
+            if (velocity > 0.1f && spriteRenderer.flipX)
+            {
+                spriteRenderer.flipX = false;
+                CmdFlipX(false);
+            }
+            else if (velocity < -0.1f && !spriteRenderer.flipX)
+            {
+                spriteRenderer.flipX = true; 
+                CmdFlipX(true);
+            }
+        }
+
+        [Command]
+        private void CmdFlipX(bool isSpriteRendererFlipped)
+        {
+            spriteRenderer.flipX = isSpriteRendererFlipped;
+            RpcFlipX(isSpriteRendererFlipped);
+        }
+        
+        [ClientRpc]
+        private void RpcFlipX(bool isSpriteRendererFlipped)
+        {
+            if (!isLocalPlayer)
+            {
+                spriteRenderer.flipX = isSpriteRendererFlipped; 
             }
         }
 
@@ -63,19 +97,18 @@ namespace Member
 
         protected IEnumerator SendProfilToClientCo(int profileIndex)
         {
-            while (profileFillerComponent == null)
+            while (ProfileFillerComponent == null)
             {
                 yield return null;
             }
-            PlayerData currentSo = profileFillerComponent.profiles[profileIndex];
-            playerInGameName = currentSo.playerInGameName;
-            playerNameText.text = playerInGameName;
+            PlayerData currentSo = ProfileFillerComponent.profiles[profileIndex];
+            PlayerInGameName = currentSo.playerInGameName;
+            playerNameText.text = PlayerInGameName;
         }
 
         //[Command]
         protected virtual void CmdSelectRandomProfile()
         {
-            
         }
     }
 }

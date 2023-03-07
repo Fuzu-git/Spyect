@@ -66,15 +66,15 @@ namespace Member.SpawnMember
         //[Server]
         public IEnumerator SpawnAi(PlayerBehaviour playerBehaviour /*NetworkConnection conn*/)
         {
-            while (playerBehaviour.PlayerIndex == -1)
+            while (playerBehaviour.playerIndex == -1)
             {
                 yield return null;
             }
             int totalPlayerNumber = GameObject.FindGameObjectWithTag("PlayerCounter")
                 .GetComponent<PlayerNumberCounter>().playerNumber;
             //Debug.Log("PlayerNumberCounter " + totalPlayerNumber);
-            Debug.Log("XXXXXXX "+playerBehaviour.PlayerIndex);
-            InstantiateAI(playerBehaviour.PlayerIndex+totalPlayerNumber);
+            Debug.Log("XXXXXXX "+playerBehaviour.playerIndex);
+            InstantiateAI(playerBehaviour.playerIndex+totalPlayerNumber);
         }
         
         public void InstantiateAI(int aiIndex)

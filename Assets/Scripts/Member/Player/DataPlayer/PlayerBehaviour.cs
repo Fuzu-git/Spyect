@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Mirror;
 using UnityEngine;
@@ -6,15 +7,17 @@ namespace Member.Player.DataPlayer
 {
     public class PlayerBehaviour : AvatarBehaviour
     {
+        public CharacterController cc; 
         public static PlayerBehaviour local;
         [SyncVar]
-        public int PlayerIndex = -1;
+        public int playerIndex = -1;
+        
         
         protected override IEnumerator Start()
         {
             if (isServer)
             {
-                PlayerIndex = connectionToClient.connectionId;
+                playerIndex = connectionToClient.connectionId;
             }
             if (isLocalPlayer)
             {
@@ -23,10 +26,17 @@ namespace Member.Player.DataPlayer
             yield return StartCoroutine(base.Start());
         }
 
+        private void Update()
+        {
+            Flip(cc.velocity.x);
+            float characterVelocity = Mathf.Abs(cc.velocity.x);
+            animator.SetFloat("speed", characterVelocity);
+        }
+
         //[Command]
         protected override void CmdSelectRandomProfile()
         {
-            profileIndex = profileFillerComponent.GetIndex(PlayerIndex);
+            profileIndex = ProfileFillerComponent.GetIndex(playerIndex);
             RpcSendProfilToClient(profileIndex);
         }
         
@@ -39,7 +49,6 @@ namespace Member.Player.DataPlayer
                 // Remove authority
                 uiAuthorityId.RemoveClientAuthority();
             }
-
             // Add client as owner
             uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }

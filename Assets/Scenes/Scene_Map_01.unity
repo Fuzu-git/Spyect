@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 1000436078}
   - component: {fileID: 1000436077}
   m_Layer: 0
-  m_Name: f
+  m_Name: MovementReference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

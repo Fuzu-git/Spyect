@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
             _votedPlayer.Add(new PlayerVote {origin = origin, target = target, voteResult = voteResult});
             return true;
         }
-
         return false;
     }
 
@@ -134,10 +133,9 @@ public class GameManager : MonoBehaviour
             {
                 if (vote.Value > 0)
                 {
-                    vote.Key.state = PlayerState.Spectate;
+                    vote.Key.State = PlayerState.Spectate;
                 }   
             }
-            
         }
     }
 

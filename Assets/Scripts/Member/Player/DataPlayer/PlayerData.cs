@@ -6,6 +6,7 @@ namespace Member.Player.DataPlayer
     public class PlayerData : ScriptableObject
     {
         public string playerInGameName;
-        public Sprite playerInGameImage;    
+        public Sprite playerInGameImage;
+        public int memberId; 
     }
 }

@@ -169,8 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  movementSpeed: 5
   controller: {fileID: 1895909210374158316}
+  movementSpeed: 5
 --- !u!114 &5080670388410614502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,13 +200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  instantiatedProfileFiller: {fileID: 0}
+  movementSpeed: 5
   playerNameText: {fileID: 6676791487969277931}
-  profileFillerPrefab: {fileID: 208054162306632727, guid: 4f7038b6c7d125e45a1a129d64c2c173, type: 3}
-  sendVoteUIPrefab: {fileID: 3205678455355668909, guid: 3c50910d1e6bf9e4ebcf54992cc6bdb7, type: 3}
-  instantiatedSendVoteUI: {fileID: 0}
-  receiveVoteUIPrefab: {fileID: 1900001054303654362, guid: c65da49cfd187a04ab69ed08e22a5b63, type: 3}
-  instantiatedReceiveVoteUI: {fileID: 0}
+  animator: {fileID: 6832546713560106635}
+  spriteRenderer: {fileID: 3714351948670687974}
+  PlayerIndex: -1
+  cc: {fileID: 1895909210374158316}
 --- !u!1 &3608770204236439733
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1573107791586298162}
   - component: {fileID: 3714351948670687974}
+  - component: {fileID: 6832546713560106635}
   m_Layer: 0
   m_Name: Player_Visuals
   m_TagString: PlayerVisuals
@@ -292,6 +292,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6832546713560106635
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608770204236439733}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2c476b10c51bd2478aff4d6e7f8a452, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3653091149554939787
 GameObject:
   m_ObjectHideFlags: 0
