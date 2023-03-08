@@ -11,10 +11,8 @@ namespace Member.AI
 {
     public class AIBehaviour : AvatarBehaviour
     {
-        private float _actualAIMoveSpeed;
         private static List<Transform> _movePoints = new List<Transform>();
         private Transform _designatedPoint;
-        public float epsilon;
         
         public Rigidbody2D rb;
 
@@ -25,21 +23,20 @@ namespace Member.AI
 
         private void Awake()
         {
-            _actualAIMoveSpeed = movementSpeed;
             SetDesignatedPoint();
         }
 
         private void Update()
         {
             Flip(rb.velocity.x);
-            float characterVelocityX  = Mathf.Abs(rb.velocity.x);
+            float characterVelocityX = Mathf.Abs(rb.velocity.x);
             float characterVelocityY = Mathf.Abs(rb.velocity.y);
-            animator.SetFloat("speed", characterVelocityX + characterVelocityY);
+            animator.SetBool("isWaiting", _isWaiting);
             
             if (canMove && !_isWaiting)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
-                    _actualAIMoveSpeed * Time.deltaTime);
+                rb.transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
+                    movementSpeed * Time.deltaTime);
                 if (transform.position == _designatedPoint.position)
                 {
                     StartCoroutine(Idle());
