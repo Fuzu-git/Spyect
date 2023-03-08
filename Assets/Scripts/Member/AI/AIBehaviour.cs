@@ -32,8 +32,9 @@ namespace Member.AI
         private void Update()
         {
             Flip(rb.velocity.x);
-            float characterVelocity = Mathf.Abs(rb.velocity.x /*+ rb.velocity.y would work ?*/);
-            animator.SetFloat("speed", characterVelocity);
+            float characterVelocityX  = Mathf.Abs(rb.velocity.x);
+            float characterVelocityY = Mathf.Abs(rb.velocity.y);
+            animator.SetFloat("speed", characterVelocityX + characterVelocityY);
             
             if (canMove && !_isWaiting)
             {

@@ -33,8 +33,9 @@ namespace Member.Player.DataPlayer
         private void Update()
         {
             Flip(cc.velocity.x);
-            float characterVelocity = Mathf.Abs(cc.velocity.x);
-            animator.SetFloat("speed", characterVelocity);
+            float characterVelocityX = Mathf.Abs(cc.velocity.x);
+            float characterVelocityY = Mathf.Abs(cc.velocity.y);
+            animator.SetFloat("speedX", characterVelocityX + characterVelocityY);
         }
 
         void UpdatePlayerIndex(int oldValue, int newValue)
