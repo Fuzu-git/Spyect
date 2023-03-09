@@ -36,6 +36,12 @@ namespace Member
 
         protected virtual IEnumerator Start()
         {
+            yield return StartCoroutine(GetReferences());
+            StartCoroutine(AllowMovement());
+        }
+
+        protected IEnumerator GetReferences()
+        {
             GameObject go = GameObject.FindGameObjectWithTag("GameManager");
             GameManager = go.GetComponent<GameManager>();
             ProfileFillerComponent = GameManager.ProfileFiller;
@@ -43,8 +49,10 @@ namespace Member
             {
                 yield return null;
             }
-            SelectRandomProfile();
+        }
 
+        protected IEnumerator AllowMovement()
+        {
             if (GameManager.instance)
             {
                 if (gameObject.CompareTag("Player"))
@@ -60,6 +68,15 @@ namespace Member
                 yield return new WaitForSeconds(5);
                 canMove = true;
             }
+        }
+
+        protected virtual IEnumerator WaitForProfiller()
+        {
+            while (ProfileFillerComponent == null)
+            {
+                yield return null;
+            }
+            SelectRandomProfile();
         }
 
         protected void Flip(float velocity)
@@ -91,26 +108,14 @@ namespace Member
                 spriteRenderer.flipX = isSpriteRendererFlipped; 
             }
         }
-
-        //[ClientRpc]
         protected void SendProfilToClient(int profileIndex)
         {
-            StartCoroutine(SendProfilToClientCo(profileIndex));
-        }
-
-        protected IEnumerator SendProfilToClientCo(int profileIndex)
-        {
-            while (ProfileFillerComponent == null)
-            {
-                yield return null;
-            }
             PlayerData currentSo = ProfileFillerComponent.profiles[profileIndex];
             PlayerInGameName = currentSo.playerInGameName;
             playerNameText.text = PlayerInGameName;
         }
 
-        //[Command]
-        protected virtual void SelectRandomProfile()
+        public virtual void SelectRandomProfile()
         {
         }
     }

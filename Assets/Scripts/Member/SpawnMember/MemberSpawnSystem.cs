@@ -60,28 +60,29 @@ namespace Member.SpawnMember
             NetworkServer.ReplacePlayerForConnection(conn.identity.connectionToClient, playerInstance);
 
             PlayerBehaviour playerBehaviour = playerInstance.GetComponent<PlayerBehaviour>();
+            playerBehaviour.SetPlayerIndex(_nextIndex);
+            _nextIndex++;
             StartCoroutine(SpawnAi(playerBehaviour));
         }
 
-        //[Server]
+        [Server]
         public IEnumerator SpawnAi(PlayerBehaviour playerBehaviour /*NetworkConnection conn*/)
         {
             while (playerBehaviour.playerIndex == -1)
             {
                 yield return null;
             }
-            int totalPlayerNumber = GameObject.FindGameObjectWithTag("PlayerCounter")
-                .GetComponent<PlayerNumberCounter>().playerNumber;
-            //Debug.Log("PlayerNumberCounter " + totalPlayerNumber);
-            Debug.Log("XXXXXXX "+playerBehaviour.playerIndex);
+            int totalPlayerNumber = NetworkServer.connections.Count();
+
             InstantiateAI(playerBehaviour.playerIndex+totalPlayerNumber);
         }
-        
+
+        [Server]
         public void InstantiateAI(int aiIndex)
         {
             GameObject aiInstance = Instantiate(aiPrefab, _spawnPoints[aiIndex].position, _spawnPoints[aiIndex].rotation);
             NetworkServer.Spawn(aiInstance);
-            aiInstance.GetComponent<AIBehaviour>().aiIndex = aiIndex;
+            aiInstance.GetComponent<AIBehaviour>().SetAiIndex(aiIndex);
             _spawnPoints.RemoveAt(aiIndex);
         }
         public void Shuffle(List<Transform> list)

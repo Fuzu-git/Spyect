@@ -56,24 +56,20 @@ namespace Member.AI
             }
         }
 
-        public void AiIndexChanged(int oldValue, int newValue)
+        public void SetAiIndex(int newValue)
         {
-            //CmdSelectRandomProfile();
+            aiIndex = newValue;
             StartCoroutine(WaitForProfiller());
         }
 
-        IEnumerator WaitForProfiller()
+        public void AiIndexChanged(int oldValue, int newValue)
         {
-            while (ProfileFillerComponent == null)
-            {
-                yield return null;
-            }
-            SelectRandomProfile();
+            StartCoroutine(WaitForProfiller());
         }
 
-        //[Command]
-        protected override void SelectRandomProfile()
+        public override void SelectRandomProfile()
         {
+            if (aiIndex == -1 || ProfileFillerComponent == null) return;
             profileIndex = ProfileFillerComponent.GetIndex(aiIndex);
             SendProfilToClient(profileIndex);
         }

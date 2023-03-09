@@ -280,9 +280,8 @@ MonoBehaviour:
   playerNameText: {fileID: 1250944906613186934}
   animator: {fileID: 277800700629637450}
   spriteRenderer: {fileID: 3147572375345808259}
-  epsilon: 0.5
   rb: {fileID: 5600531204942683996}
-  aiIndex: 3
+  aiIndex: -1
 --- !u!50 &5600531204942683996
 Rigidbody2D:
   serializedVersion: 4

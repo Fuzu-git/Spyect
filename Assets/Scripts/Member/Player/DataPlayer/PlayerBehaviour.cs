@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -11,24 +12,6 @@ namespace Member.Player.DataPlayer
         public static PlayerBehaviour local;
         [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
-        
-        protected override IEnumerator Start()
-        {
-            if (isLocalPlayer)
-            {
-                if (isServer)
-                {
-                    playerIndex = connectionToClient.connectionId;
-                }
-                else
-                {
-                    playerIndex = 1 + connectionToServer.connectionId;
-                    CmdSetPlayerIndex(playerIndex);
-                }
-                local = this;
-            }
-            yield return StartCoroutine(base.Start());
-        }
 
         private void Update()
         {
@@ -40,28 +23,28 @@ namespace Member.Player.DataPlayer
 
         void UpdatePlayerIndex(int oldValue, int newValue)
         {
-            Debug.Log("HOOKED "+oldValue+" "+newValue);
-            playerIndex = newValue;
-            Debug.Log("HOOKED 1");
-            SelectRandomProfile();
-            Debug.Log("HOOKED 2 "+isLocalPlayer);
+            StartCoroutine(WaitForProfiller());
         }
 
         [Command]
         private void CmdSetPlayerIndex(int playerIndex)
         {
-            Debug.Log("CMD RECEIVE");
             this.playerIndex = playerIndex;
         }
 
-        //[Command]
-        protected override void SelectRandomProfile()
+        public override void SelectRandomProfile()
         {
-            if (playerIndex == -1) return;
+            if (playerIndex == -1 || ProfileFillerComponent == null) return;
             profileIndex = ProfileFillerComponent.GetIndex(playerIndex);
             SendProfilToClient(profileIndex);
         }
         
+        public void SetPlayerIndex(int playerIndex)
+        {
+            this.playerIndex = playerIndex;
+            StartCoroutine(WaitForProfiller());
+        }
+
         [Command]
         public void CmdAssignNetworkAuthority(NetworkIdentity uiAuthorityId)
         {
