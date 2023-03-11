@@ -1,4 +1,5 @@
 using System;
+using Member;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
@@ -15,7 +16,7 @@ namespace UI.VoteUI
         public Button notSuspectedButton;
         public Button suspectedButton;
 
-        public PlayerBehaviour playerBinding; 
+        public AvatarBehaviour avatarBinding; 
 
         private void Start()
         {
@@ -24,26 +25,26 @@ namespace UI.VoteUI
         }
 
 
-        public void FillReceiveContent(int playerIndex)
+        public void FillReceiveContent(int avatarIndex)
         {
-            playerNameVoteText.text =
-                GameManager.playerList[playerIndex].GetComponent<PlayerBehaviour>().playerNameText.text;
+            avatarBinding = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>();
+            playerNameVoteText.text = avatarBinding.playerNameText.text;
             //Player Image TO DO 
         }
 
         private void VoteYes()
         {
-            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.Yes); 
+            PlayerBehaviour.local.CmdVote(avatarBinding.GetAvatarIndex(), EVoteResult.Yes); 
         }
 
         private void VoteNo()
         {
-            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.No);
+            PlayerBehaviour.local.CmdVote(avatarBinding.GetAvatarIndex(), EVoteResult.No);
         }
 
         private void VoteWhite()
         {
-            PlayerBehaviour.local.CmdVote(playerBinding, EVoteResult.White);
+            PlayerBehaviour.local.CmdVote(avatarBinding.GetAvatarIndex(), EVoteResult.White);
         }
     }
 }

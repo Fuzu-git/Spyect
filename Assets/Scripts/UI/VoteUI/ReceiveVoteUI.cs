@@ -23,19 +23,19 @@ namespace UI.VoteUI
         }
         
         [Command]
-        public void CmdUpdateContentData(int playerIndex)
+        public void CmdUpdateContentData(int avatarIndex)
         {
-             RpcUpdateContentData(playerIndex);
+             RpcUpdateContentData(avatarIndex);
              Debug.Log("Command Called");
         }
 
         [ClientRpc]
-        private void RpcUpdateContentData(int playerIndex)
+        private void RpcUpdateContentData(int avatarIndex)
         {
             Debug.Log("ClientRpc called");
             gameObject.SetActive(true);
             ReceiveGridVoteUI receiveGridVoteUi = Instantiate(playerEntryPrefab, gridLayout.transform);
-            receiveGridVoteUi.FillReceiveContent(playerIndex);
+            receiveGridVoteUi.FillReceiveContent(avatarIndex);
             receiveVoteContentList.Add(receiveGridVoteUi);
         }
         

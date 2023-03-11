@@ -96,5 +96,10 @@ namespace Member.AI
             SetDesignatedPoint();
             _isWaiting = false;
         }
+
+        public override int GetAvatarIndex()
+        {
+            return aiIndex;
+        }
     }
 }

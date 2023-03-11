@@ -13,6 +13,15 @@ namespace Member.Player.DataPlayer
         [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
 
+        protected override IEnumerator Start()
+        {
+            if (isLocalPlayer)
+            {
+                local = this;
+            }
+            yield return StartCoroutine(base.Start());
+        }
+
         private void Update()
         {
             Flip(cc.velocity.x);
@@ -70,12 +79,19 @@ namespace Member.Player.DataPlayer
         }
         
         [Command]
-        public void CmdVote(PlayerBehaviour playerVoted, EVoteResult voteResult)
+        public void CmdVote(int targetedAvatarIndex, EVoteResult voteResult)
         {
-            if (GameManager.instance.Vote(this, playerVoted, voteResult))
+            //recuperer le player/ia en fonction de avatar
+            AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex].GetComponent<AvatarBehaviour>();
+            if (GameManager.instance.Vote(this, target, voteResult))
             {
                 GameManager.instance.CheckAllVotes();
             }
+        }
+
+        public override int GetAvatarIndex()
+        {
+            return playerIndex;
         }
     }
 }

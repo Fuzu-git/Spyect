@@ -681,7 +681,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee301c8930942242b60ca73449f0feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPlayerList: []
+  playerList: []
+  aiList: []
+  memberList: []
   totalPlayerUpdateOccured: 0
   ProfileFiller: {fileID: 1033752002}
   SendVoteUI: {fileID: 1875894243}
@@ -1206,6 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   group: {fileID: 0}
   roleText: {fileID: 0}
+  gameManager: {fileID: 454807951}
 --- !u!224 &1000625875 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1900001054303654365, guid: c65da49cfd187a04ab69ed08e22a5b63, type: 3}

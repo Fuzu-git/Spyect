@@ -30,7 +30,7 @@ namespace Member
         protected GameManager GameManager;
 
         public Animator animator;
-        public SpriteRenderer spriteRenderer; 
+        public SpriteRenderer spriteRenderer;
 
         protected abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
 
@@ -113,6 +113,11 @@ namespace Member
             PlayerData currentSo = ProfileFillerComponent.profiles[profileIndex];
             PlayerInGameName = currentSo.playerInGameName;
             playerNameText.text = PlayerInGameName;
+        }
+
+        public virtual int GetAvatarIndex()
+        {
+            return -1;
         }
 
         public virtual void SelectRandomProfile()

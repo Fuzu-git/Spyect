@@ -16,7 +16,7 @@ public struct StartGameMessage : NetworkMessage
 public struct PlayerVote
 {
     public PlayerBehaviour origin; // player who voted; 
-    public PlayerBehaviour target; // player who's been voted; 
+    public AvatarBehaviour target; // player who's been voted; 
     public EVoteResult voteResult; //vote decision
 }
 
@@ -29,12 +29,12 @@ public enum EVoteResult
 
 public class GameManager : MonoBehaviour
 {
-    public static Action onGameStarted;
+    public Action onGameStarted;
 
-    public static readonly List<GameObject> playerList = new List<GameObject>();
-    [SerializeField] private List<GameObject> showPlayerList = playerList;
-    public static readonly List<GameObject> aiList = new List<GameObject>();
-    public static readonly List<GameObject> memberList = new List<GameObject>(); 
+    public List<GameObject> playerList = new List<GameObject>();
+    //[SerializeField] private List<GameObject> showPlayerList = playerList;
+    public List<GameObject> aiList = new List<GameObject>();
+    public List<GameObject> memberList = new List<GameObject>(); 
 
     public static GameManager instance;
 
@@ -86,8 +86,10 @@ public class GameManager : MonoBehaviour
         onGameStarted?.Invoke();
     }
 
-    internal bool Vote(PlayerBehaviour origin, PlayerBehaviour target, EVoteResult voteResult)
+    internal bool Vote(PlayerBehaviour origin, AvatarBehaviour target, EVoteResult voteResult)
     {
+        Debug.Log((origin == null)+" "+(target == null));
+
         int index = _votedPlayer.FindIndex(x => x.origin == origin);
         if (index == -1)
         {
@@ -101,13 +103,12 @@ public class GameManager : MonoBehaviour
     {
         if (playerList.Count == _votedPlayer.Count)
         {
-            Dictionary<PlayerBehaviour, int> votes = new Dictionary<PlayerBehaviour, int>();
+            Dictionary<AvatarBehaviour, int> votes = new Dictionary<AvatarBehaviour, int>();
 
             foreach (PlayerVote vote in _votedPlayer)
             {
                 if (vote.voteResult == EVoteResult.Yes)
                 {
-                    Debug.Log("NANI "+(vote.target == null)+" "+(votes == null));
                     if (votes.ContainsKey(vote.target))
                     {
                         ++votes[vote.target];
@@ -134,7 +135,8 @@ public class GameManager : MonoBehaviour
             {
                 if (vote.Value > 0)
                 {
-                    vote.Key.State = PlayerState.Spectate;
+                    vote.Key.State = PlayerState.Dead;
+                    Debug.Log(vote.Key.name+" IS DEAD");
                 }   
             }
         }

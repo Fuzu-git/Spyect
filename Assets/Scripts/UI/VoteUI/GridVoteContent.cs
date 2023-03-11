@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Member;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
@@ -18,11 +19,11 @@ namespace UI.VoteUI
 
         public Transform sendVoteUI;
 
-        private string _playerInGameNameText;
+        //private string _playerInGameNameText;
 
-        private new List<String> _playerNamesList = new List<string>();
+        //private new List<String> _playerNamesList = new List<string>();
 
-        private int _playerIndex;
+        private int _avatarIndex;
 
         public ReceiveVoteUI _receiveVoteUI;
 
@@ -40,14 +41,13 @@ namespace UI.VoteUI
             }
         }
 
-        public void FillComponent(int playerIndex)
+        public void FillComponent(int avatarIndex)
         {
             sendVoteUI = GetComponentInParent<SendVoteUI>().transform;
-
             playerInGameName.text =
-                GameManager.playerList[playerIndex].GetComponent<PlayerBehaviour>().playerNameText.text;
+                GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>().playerNameText.text;
             //PLAYER IMAGE TO DO 
-            _playerIndex = playerIndex;
+            _avatarIndex = avatarIndex;
             playerSuspected.onClick.AddListener(SuspectedButtonClicked);
         }
 
@@ -58,13 +58,14 @@ namespace UI.VoteUI
 
         IEnumerator SuspectButtonClickedCo()
         {
+            Debug.Log("XXXXX "+(PlayerBehaviour.local == null)+" "+(_receiveVoteUI == null));
             PlayerBehaviour.local.CmdAssignNetworkAuthority(_receiveVoteUI.GetComponent<NetworkIdentity>());
             yield return new WaitForSeconds(0.2f);
             Debug.Log("TEST 0");
-            if (!GameManager.instance.IsAlreadySuspected(_playerIndex))
+            if (!GameManager.instance.IsAlreadySuspected(_avatarIndex))
             {
                 Debug.Log("TEST 1");
-                _receiveVoteUI.CmdUpdateContentData(_playerIndex);
+                _receiveVoteUI.CmdUpdateContentData(_avatarIndex);
             }
             sendVoteUI.gameObject.SetActive(false);
         }

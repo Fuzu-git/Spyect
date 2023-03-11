@@ -50,7 +50,7 @@ namespace UI.VoteUI
                 RectTransform myTransform = (RectTransform) transform;
                 myTransform.anchoredPosition = Vector2.zero;
 
-                Debug.Log(GameManager.playerList.Count);
+                Debug.Log(GameManager.instance.playerList.Count);
 
                 gameObject.SetActive(false);
                 once = true;
@@ -80,7 +80,7 @@ namespace UI.VoteUI
                 gridVoteContentList.Clear();
             }
 
-            for (int i = 0; i < GameManager.playerList.Count; i++)
+            for (int i = 0; i < GameManager.instance.memberList.Count; i++)
             {
                 GridVoteContent go = Instantiate(playerEntryPrefab, gridLayout.transform);
                 go.FillComponent(i);

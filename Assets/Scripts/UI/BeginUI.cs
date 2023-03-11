@@ -10,22 +10,23 @@ namespace UI
     {
         public CanvasGroup group;
         public TMP_Text roleText;
+        public GameManager gameManager;
 
         void Start()
         {
-            GameManager.onGameStarted += OnGameStart;
+            gameManager.onGameStarted += OnGameStart;
         }
 
         private void OnDestroy()
         {
-            GameManager.onGameStarted -= OnGameStart; 
+            gameManager.onGameStarted -= OnGameStart; 
         }
 
         private void OnGameStart()
         {
             PlayerBehaviour player = PlayerBehaviour.local;
             
-            foreach (GameObject element in GameManager.playerList)
+            foreach (GameObject element in gameManager.playerList)
             {
                     roleText.text = "There is your new identity... " + player.name + ".";
             }
