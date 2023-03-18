@@ -11,7 +11,7 @@ namespace UI.VoteUI
     public class ReceiveGridVoteUI : MonoBehaviour
     {
         public TMP_Text playerNameVoteText;
-        public Image playerNameImage;
+        public Image playerInGameImage;
 
         public Button notSuspectedButton;
         public Button suspectedButton;
@@ -29,7 +29,8 @@ namespace UI.VoteUI
         {
             avatarBinding = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>();
             playerNameVoteText.text = avatarBinding.playerNameText.text;
-            //Player Image TO DO 
+            playerInGameImage.sprite = GameManager.instance.ProfileFiller.profiles[avatarIndex].playerInGameImage;
+            
         }
 
         private void VoteYes()

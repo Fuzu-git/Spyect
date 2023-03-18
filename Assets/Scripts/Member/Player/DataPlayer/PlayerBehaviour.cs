@@ -41,7 +41,7 @@ namespace Member.Player.DataPlayer
             this.playerIndex = playerIndex;
         }
 
-        public override void SelectRandomProfile()
+        protected override void SelectRandomProfile()
         {
             if (playerIndex == -1 || ProfileFillerComponent == null) return;
             profileIndex = ProfileFillerComponent.GetIndex(playerIndex);
@@ -71,9 +71,14 @@ namespace Member.Player.DataPlayer
         {
             switch (newState)
             {
-                case PlayerState.Spectate:
-                    gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                case PlayerState.Dead:
+                    //gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    gameObject.layer = 8; //DeadPlayer
+                        //Change mainCamera to render DeadPlayers. (can't access culling mask. 
                     //joueur désigné mort. (lien vers UI)
+                    break; 
+                
+                case PlayerState.Spectate:
                     break; 
             }
         }

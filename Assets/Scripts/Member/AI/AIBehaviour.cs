@@ -50,6 +50,7 @@ namespace Member.AI
             {
                 case PlayerState.Dead:
                     Destroy(gameObject);
+                    NetworkServer.Destroy(gameObject);
                     //joueur désigné mort. (lien vers UI)
                     // if VoteYes, playerVote are suspected.
                     break;
@@ -67,7 +68,7 @@ namespace Member.AI
             StartCoroutine(WaitForProfiller());
         }
 
-        public override void SelectRandomProfile()
+        protected override void SelectRandomProfile()
         {
             if (aiIndex == -1 || ProfileFillerComponent == null) return;
             profileIndex = ProfileFillerComponent.GetIndex(aiIndex);

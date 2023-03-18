@@ -23,12 +23,10 @@ namespace Member.Player.DataPlayer
 
         public int GetIndex(int connId)
         {
-            //AI doesn't have connID
             Debug.Log(connId+" "+playerIndex.Count);
             return playerIndex[connId];
         }
-
-
+        
         public void Shuffle(SyncList<int> list)
         {
             int n = list.Count;

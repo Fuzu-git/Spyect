@@ -39,7 +39,7 @@ namespace Member
             yield return StartCoroutine(GetReferences());
             StartCoroutine(AllowMovement());
         }
-
+        
         protected IEnumerator GetReferences()
         {
             GameObject go = GameObject.FindGameObjectWithTag("GameManager");
@@ -120,7 +120,7 @@ namespace Member
             return -1;
         }
 
-        public virtual void SelectRandomProfile()
+        protected virtual void SelectRandomProfile()
         {
         }
     }

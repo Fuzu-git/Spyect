@@ -217,6 +217,8 @@ MonoBehaviour:
   playerInGameAvatar: {fileID: 5022048523572024646}
   playerSuspected: {fileID: 5022048523004698227}
   sendVoteUI: {fileID: 0}
+  _receiveVoteUI: {fileID: 0}
+  mainCanvas: {fileID: 0}
 --- !u!1 &5022048523572024644
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +255,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 37.1, y: 0}
-  m_SizeDelta: {x: 61.2176, y: 61.2176}
+  m_SizeDelta: {x: 45.4628, y: 70.965}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5022048523572024641
 CanvasRenderer:

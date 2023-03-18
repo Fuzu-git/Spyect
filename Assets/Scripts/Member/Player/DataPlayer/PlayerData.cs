@@ -7,6 +7,5 @@ namespace Member.Player.DataPlayer
     {
         public string playerInGameName;
         public Sprite playerInGameImage;
-        public int memberId; 
     }
 }

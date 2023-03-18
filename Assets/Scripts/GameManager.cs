@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
                 if (vote.Value > 0)
                 {
                     vote.Key.State = PlayerState.Dead;
+                    //PlayerStateIsDead(vote.Key.gameObject;)
                     Debug.Log(vote.Key.name+" IS DEAD");
                 }   
             }

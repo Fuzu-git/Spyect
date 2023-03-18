@@ -44,9 +44,8 @@ namespace UI.VoteUI
         public void FillComponent(int avatarIndex)
         {
             sendVoteUI = GetComponentInParent<SendVoteUI>().transform;
-            playerInGameName.text =
-                GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>().playerNameText.text;
-            //PLAYER IMAGE TO DO 
+            playerInGameName.text = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>().playerNameText.text;
+            playerInGameAvatar.sprite = GameManager.instance.ProfileFiller.profiles[avatarIndex].playerInGameImage;
             _avatarIndex = avatarIndex;
             playerSuspected.onClick.AddListener(SuspectedButtonClicked);
         }
