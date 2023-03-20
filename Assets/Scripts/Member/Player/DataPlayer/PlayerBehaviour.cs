@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Mirror;
+using UI.VoteUI;
 using UnityEngine;
 
 namespace Member.Player.DataPlayer
@@ -12,7 +13,7 @@ namespace Member.Player.DataPlayer
         public static PlayerBehaviour local;
         [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
-
+        
         protected override IEnumerator Start()
         {
             if (isLocalPlayer)
@@ -67,13 +68,22 @@ namespace Member.Player.DataPlayer
             uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }
         
-        protected override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
+        public override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
         {
             switch (newState)
             {
                 case PlayerState.Dead:
                     //gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-                    gameObject.layer = 8; //DeadPlayer
+                    var renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+                    foreach (var r in renderers)
+                    {
+                        r.gameObject.layer = 8; //DeadPLayers
+                        
+                    }
+                    if (isLocalPlayer)
+                    {
+                        Camera.main.cullingMask = -1;
+                    }
                         //Change mainCamera to render DeadPlayers. (can't access culling mask. 
                     //joueur désigné mort. (lien vers UI)
                     break; 
@@ -86,7 +96,6 @@ namespace Member.Player.DataPlayer
         [Command]
         public void CmdVote(int targetedAvatarIndex, EVoteResult voteResult)
         {
-            //recuperer le player/ia en fonction de avatar
             AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex].GetComponent<AvatarBehaviour>();
             if (GameManager.instance.Vote(this, target, voteResult))
             {

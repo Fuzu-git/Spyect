@@ -31,7 +31,7 @@ namespace Member.AI
             Flip(rb.velocity.x);
             float characterVelocityX = Mathf.Abs(rb.velocity.x);
             float characterVelocityY = Mathf.Abs(rb.velocity.y);
-            animator.SetBool("isWaiting", _isWaiting);
+            animator.SetBool("isWaiting", _isWaiting || !canMove);
             
             if (canMove && !_isWaiting)
             {
@@ -44,7 +44,7 @@ namespace Member.AI
             }
         }
 
-        protected override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
+        public override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
         {
             switch (newState)
             {

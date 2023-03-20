@@ -28,9 +28,8 @@ namespace UI.VoteUI
         public void FillReceiveContent(int avatarIndex)
         {
             avatarBinding = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>();
-            playerNameVoteText.text = avatarBinding.playerNameText.text;
-            playerInGameImage.sprite = GameManager.instance.ProfileFiller.profiles[avatarIndex].playerInGameImage;
-            
+            playerNameVoteText.text = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameName;
+            playerInGameImage.sprite = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameImage;
         }
 
         private void VoteYes()

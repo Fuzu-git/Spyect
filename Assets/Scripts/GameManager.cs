@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using Member;
 using Member.Player.DataPlayer;
 using Mirror;
@@ -88,12 +89,13 @@ public class GameManager : MonoBehaviour
 
     internal bool Vote(PlayerBehaviour origin, AvatarBehaviour target, EVoteResult voteResult)
     {
-        Debug.Log((origin == null)+" "+(target == null));
+        Debug.Log((origin == null)+" "+(target.name + " " + target.GetAvatarIndex()));
 
         int index = _votedPlayer.FindIndex(x => x.origin == origin);
         if (index == -1)
         {
             _votedPlayer.Add(new PlayerVote {origin = origin, target = target, voteResult = voteResult});
+            
             return true;
         }
         return false;

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Member
@@ -23,16 +25,17 @@ namespace Member
         public float movementSpeed = 5f;
         public static bool canMove = true;
         public int profileIndex { get; protected set; } = -1;
-        public TMP_Text playerNameText;
-        protected string PlayerInGameName;
         protected ProfileFiller ProfileFillerComponent;
         
-        protected GameManager GameManager;
-
-        public Animator animator;
+        public TMP_Text playerNameText;
+        protected string PlayerInGameName;
         public SpriteRenderer spriteRenderer;
-
-        protected abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
+        
+        public Animator animator;
+        
+        protected GameManager GameManager;
+        
+        public abstract void OnPlayerStateChanged(PlayerState oldState, PlayerState newState);
 
         protected virtual IEnumerator Start()
         {
@@ -67,6 +70,10 @@ namespace Member
                 canMove = false;
                 yield return new WaitForSeconds(5);
                 canMove = true;
+                if (isLocalPlayer)
+                {
+                    GameManager.memberList = GameManager.memberList.OrderBy(x => x.GetComponent<AvatarBehaviour>().GetAvatarIndex()).ToList();
+                }
             }
         }
 
@@ -113,6 +120,7 @@ namespace Member
             PlayerData currentSo = ProfileFillerComponent.profiles[profileIndex];
             PlayerInGameName = currentSo.playerInGameName;
             playerNameText.text = PlayerInGameName;
+            animator.runtimeAnimatorController = currentSo.avatarAnimator;
         }
 
         public virtual int GetAvatarIndex()

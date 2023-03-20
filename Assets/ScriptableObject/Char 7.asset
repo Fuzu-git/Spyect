@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInGameName: Arthur
   playerInGameImage: {fileID: -1296336775, guid: 38fa669a8641b9746837ec9ded4ba1e4, type: 3}
-  memberId: 6
+  avatarAnimator: {fileID: 9100000, guid: e9fd5ba835ba0744a86ebadc5fc52d5f, type: 2}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInGameName: Astrid
   playerInGameImage: {fileID: -500641082, guid: 38fa669a8641b9746837ec9ded4ba1e4, type: 3}
-  memberId: 9
+  avatarAnimator: {fileID: 9100000, guid: 68edf69725f5f1646abff744d13deb5c, type: 2}

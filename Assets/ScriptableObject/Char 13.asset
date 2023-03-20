@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInGameName: Maria
   playerInGameImage: {fileID: -88445045, guid: 38fa669a8641b9746837ec9ded4ba1e4, type: 3}
-  memberId: 12
+  avatarAnimator: {fileID: 9100000, guid: 1efe39431453fc449941a681f8ed2f8b, type: 2}

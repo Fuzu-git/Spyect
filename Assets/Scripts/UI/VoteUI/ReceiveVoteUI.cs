@@ -8,7 +8,7 @@ namespace UI.VoteUI
 {
     public class ReceiveVoteUI : NetworkBehaviour
     {
-        [SerializeField] private List<ReceiveGridVoteUI> receiveVoteContentList = new List<ReceiveGridVoteUI>();
+        [SerializeField] public List<ReceiveGridVoteUI> receiveVoteContentList = new List<ReceiveGridVoteUI>();
         public ReceiveGridVoteUI playerEntryPrefab; 
         public GridLayoutGroup gridLayout;
 
@@ -38,7 +38,5 @@ namespace UI.VoteUI
             receiveGridVoteUi.FillReceiveContent(avatarIndex);
             receiveVoteContentList.Add(receiveGridVoteUi);
         }
-        
-        
     }
 }

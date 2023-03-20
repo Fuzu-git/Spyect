@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInGameName: Cesar
   playerInGameImage: {fileID: -969133741, guid: 38fa669a8641b9746837ec9ded4ba1e4, type: 3}
-  memberId: 15
+  avatarAnimator: {fileID: 9100000, guid: 54eb1fd704bc87b42ad460937afc9e7c, type: 2}
