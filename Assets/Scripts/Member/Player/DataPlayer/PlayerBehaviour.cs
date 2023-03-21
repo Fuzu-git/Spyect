@@ -4,6 +4,7 @@ using System.Linq;
 using Mirror;
 using UI.VoteUI;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 namespace Member.Player.DataPlayer
 {
@@ -74,11 +75,13 @@ namespace Member.Player.DataPlayer
             {
                 case PlayerState.Dead:
                     //gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-                    var renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+                    var renderers = gameObject.GetComponentsInChildren<SpriteRenderer>(true);
                     foreach (var r in renderers)
                     {
                         r.gameObject.layer = 8; //DeadPLayers
-                        
+                        Color rColor = spriteRenderer.color;
+                        rColor.a = 0.39f;
+                        r.color = rColor;
                     }
                     if (isLocalPlayer)
                     {
