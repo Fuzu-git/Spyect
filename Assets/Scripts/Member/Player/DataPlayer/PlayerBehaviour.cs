@@ -87,7 +87,7 @@ namespace Member.Player.DataPlayer
                     {
                         Camera.main.cullingMask = -1;
                     }
-                        //Change mainCamera to render DeadPlayers. (can't access culling mask. 
+                    //Change mainCamera to render DeadPlayers. (can't access culling mask. 
                     //joueur désigné mort. (lien vers UI)
                     break; 
                 

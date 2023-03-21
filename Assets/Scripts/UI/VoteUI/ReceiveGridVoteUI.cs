@@ -10,11 +10,14 @@ namespace UI.VoteUI
 {
     public class ReceiveGridVoteUI : MonoBehaviour
     {
-        public TMP_Text playerNameVoteText;
+        public TMP_Text playerVoteText;
         public Image playerInGameImage;
+
+        public Image shapeImage; 
 
         public Button notSuspectedButton;
         public Button suspectedButton;
+        
 
         public AvatarBehaviour avatarBinding; 
 
@@ -28,7 +31,7 @@ namespace UI.VoteUI
         public void FillReceiveContent(int avatarIndex)
         {
             avatarBinding = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>();
-            playerNameVoteText.text = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameName;
+            playerVoteText.text = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameName.ToUpper() + " is being suspected, do you want to get rid of him ?";
             playerInGameImage.sprite = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameImage;
         }
 

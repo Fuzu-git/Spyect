@@ -5,7 +5,6 @@ using System.Linq;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Member

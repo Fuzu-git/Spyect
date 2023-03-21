@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Member.Player.DataPlayer
@@ -8,6 +7,6 @@ namespace Member.Player.DataPlayer
     {
         public string playerInGameName;
         public Sprite playerInGameImage;
-        public AnimatorController avatarAnimator; 
+        public RuntimeAnimatorController avatarAnimator; 
     }
 }

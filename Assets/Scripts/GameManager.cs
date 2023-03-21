@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
                     //PlayerStateIsDead(vote.Key.gameObject;)
                     Debug.Log(vote.Key.name+" IS DEAD");
                     Debug.Log(ReceiveVoteUI.receiveVoteContentList.Count);
+                    ReceiveVoteUI.receiveVoteContentList[0].gameObject.SetActive(false);
                 }   
             }
         }
