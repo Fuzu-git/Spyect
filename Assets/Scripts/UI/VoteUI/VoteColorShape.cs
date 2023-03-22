@@ -3,6 +3,5 @@ namespace UI.VoteUI
 {
     public class VoteColorShape : MonoBehaviour
     {
-        
     }
 }
