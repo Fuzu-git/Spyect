@@ -103,6 +103,16 @@ namespace Member.Player.DataPlayer
             if (GameManager.instance.Vote(this, target, voteResult))
             {
                 GameManager.instance.CheckAllVotes();
+
+                /*  WRONG : Get color on all prefabs at once, one side all red, the other all green. 
+                if (voteResult == EVoteResult.Yes)
+                {
+                    VoteColorShape.ColorGreen();
+                } else if (voteResult == EVoteResult.No)
+                {
+                    VoteColorShape.ColorRed();
+                }
+                */
             }
         }
 

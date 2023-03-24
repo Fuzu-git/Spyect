@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
     public ProfileFiller ProfileFiller;
     public SendVoteUI SendVoteUI;
     public ReceiveVoteUI ReceiveVoteUI;
+    
+    
+    public GameObject shapeVoteImage;
+
 
     public void Awake()
     {

@@ -172,8 +172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -18.1, y: -16.65095}
-  m_SizeDelta: {x: 165.7946, y: 33.3019}
+  m_AnchoredPosition: {x: -18.5, y: -20.9}
+  m_SizeDelta: {x: 165.7946, y: 39.0011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8190272361143693032
 CanvasRenderer:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This player is being suspected, do you want to get rid of him ? '
+  m_text: <PlayerInGameName> is being suspected, what is your opinion ?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -727,6 +727,8 @@ MonoBehaviour:
   notSuspectedButton: {fileID: 8190272361685798766}
   suspectedButton: {fileID: 8190272362215411041}
   avatarBinding: {fileID: 0}
+  voteCountGrid: {fileID: 9138020036003720602}
+  playerVoteShape: {fileID: 6924910212962914278, guid: 60455ecc37ee7f04b889612fc2c405d9, type: 3}
 --- !u!1 &8209945884901312452
 GameObject:
   m_ObjectHideFlags: 0
