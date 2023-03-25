@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Lobby;
+using Member;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -82,9 +83,12 @@ namespace UI.VoteUI
 
             for (int i = 0; i < GameManager.instance.memberList.Count; i++)
             {
-                GridVoteContent go = Instantiate(playerEntryPrefab, gridLayout.transform);
-                go.FillComponent(i);
-                gridVoteContentList.Add(go);
+                if (GameManager.instance.memberList[i].GetComponent<AvatarBehaviour>().State == PlayerState.Alive)
+                { 
+                    GridVoteContent go = Instantiate(playerEntryPrefab, gridLayout.transform);
+                    go.FillComponent(i); 
+                    gridVoteContentList.Add(go);
+                }
             }
         }
     }

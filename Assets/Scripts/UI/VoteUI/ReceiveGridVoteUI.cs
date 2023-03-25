@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Member;
 using Member.Player.DataPlayer;
 using Mirror;
@@ -20,7 +21,8 @@ namespace UI.VoteUI
 
         public Transform voteCountGrid; 
         public GameObject playerVoteShape;
-        
+        public List<Image> playerVoteShapeList = new List<Image>();
+
         private void Start()
         {
             suspectedButton.onClick.AddListener(VoteYes);
@@ -36,7 +38,8 @@ namespace UI.VoteUI
 
             foreach (var player in GameManager.instance.playerList)
             {
-                Instantiate(playerVoteShape, voteCountGrid);
+                GameObject tempVoteShape = Instantiate(playerVoteShape, voteCountGrid);
+                playerVoteShapeList.Add(tempVoteShape.GetComponent<Image>());
             }
         }
 

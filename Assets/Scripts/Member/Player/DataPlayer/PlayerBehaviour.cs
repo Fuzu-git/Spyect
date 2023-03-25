@@ -60,11 +60,9 @@ namespace Member.Player.DataPlayer
         public void CmdAssignNetworkAuthority(NetworkIdentity uiAuthorityId)
         {
             //If -> cube has a owner && owner isn't the actual owner
-            if (uiAuthorityId.hasAuthority == false)
-            {
-                // Remove authority
-                uiAuthorityId.RemoveClientAuthority();
-            }
+            
+            // Remove authority
+            uiAuthorityId.RemoveClientAuthority();
             // Add client as owner
             uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }
@@ -100,19 +98,24 @@ namespace Member.Player.DataPlayer
         public void CmdVote(int targetedAvatarIndex, EVoteResult voteResult)
         {
             AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex].GetComponent<AvatarBehaviour>();
+            
+            Debug.Log("CmdVote before if");
+
             if (GameManager.instance.Vote(this, target, voteResult))
             {
-                GameManager.instance.CheckAllVotes();
+                Debug.Log("CmdVote after if");
 
-                /*  WRONG : Get color on all prefabs at once, one side all red, the other all green. 
+                GameManager.instance.CheckAllVotes(targetedAvatarIndex);
+
                 if (voteResult == EVoteResult.Yes)
                 {
-                    VoteColorShape.ColorGreen();
+                    GameManager.instance.ReceiveVoteUI.RpcColorFirstColorlessShape(Color.green, targetedAvatarIndex);
+
                 } else if (voteResult == EVoteResult.No)
                 {
-                    VoteColorShape.ColorRed();
+                    GameManager.instance.ReceiveVoteUI.RpcColorFirstColorlessShape(Color.red, targetedAvatarIndex);
                 }
-                */
+                
             }
         }
 

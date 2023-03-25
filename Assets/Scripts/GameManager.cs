@@ -33,9 +33,10 @@ public class GameManager : MonoBehaviour
     public Action onGameStarted;
 
     public List<GameObject> playerList = new List<GameObject>();
+
     //[SerializeField] private List<GameObject> showPlayerList = playerList;
     public List<GameObject> aiList = new List<GameObject>();
-    public List<GameObject> memberList = new List<GameObject>(); 
+    public List<GameObject> memberList = new List<GameObject>();
 
     public static GameManager instance;
 
@@ -46,8 +47,8 @@ public class GameManager : MonoBehaviour
     public ProfileFiller ProfileFiller;
     public SendVoteUI SendVoteUI;
     public ReceiveVoteUI ReceiveVoteUI;
-    
-    
+
+
     public GameObject shapeVoteImage;
 
 
@@ -93,28 +94,42 @@ public class GameManager : MonoBehaviour
 
     internal bool Vote(PlayerBehaviour origin, AvatarBehaviour target, EVoteResult voteResult)
     {
-        Debug.Log((origin == null)+" "+(target.name + " " + target.GetAvatarIndex()));
+        Debug.Log("JOJO " + (origin == null) + " " + (target.name + " " + target.GetAvatarIndex()));
 
-        int index = _votedPlayer.FindIndex(x => x.origin == origin);
+        int index = _votedPlayer.FindIndex(x => x.origin == origin && x.target == target);
         if (index == -1)
         {
             _votedPlayer.Add(new PlayerVote {origin = origin, target = target, voteResult = voteResult});
-            
+
             return true;
         }
+
         return false;
     }
 
-    public void CheckAllVotes()
+    public void CheckAllVotes(int targetedAvatarIndex)
     {
-        if (playerList.Count == _votedPlayer.Count)
+        List<PlayerVote> voteAgainstTarget = _votedPlayer.Where(x => x.target.GetAvatarIndex() == targetedAvatarIndex).ToList();
+        
+        
+        if (playerList.Count == voteAgainstTarget.Count)
         {
             Dictionary<AvatarBehaviour, int> votes = new Dictionary<AvatarBehaviour, int>();
+            Dictionary<AvatarBehaviour, int> voteNumber = new Dictionary<AvatarBehaviour, int>();
 
             foreach (PlayerVote vote in _votedPlayer)
             {
                 if (vote.voteResult == EVoteResult.Yes)
                 {
+                    if (voteNumber.ContainsKey(vote.target))
+                    {
+                        ++voteNumber[vote.target];
+                    }
+                    else
+                    {
+                        voteNumber.Add(vote.target, 1);
+                    }
+
                     if (votes.ContainsKey(vote.target))
                     {
                         ++votes[vote.target];
@@ -126,6 +141,15 @@ public class GameManager : MonoBehaviour
                 }
                 else if (vote.voteResult == EVoteResult.No)
                 {
+                    if (voteNumber.ContainsKey(vote.target))
+                    {
+                        ++voteNumber[vote.target];
+                    }
+                    else
+                    {
+                        voteNumber.Add(vote.target, 1);
+                    }
+
                     if (votes.ContainsKey(vote.target))
                     {
                         --votes[vote.target];
@@ -135,7 +159,14 @@ public class GameManager : MonoBehaviour
                         votes.Add(vote.target, -1);
                     }
                 }
+
+                if (voteNumber[vote.target] == playerList.Count)
+                {
+                    _votedPlayer = _votedPlayer.Except(voteAgainstTarget).ToList();
+                    ReceiveVoteUI.RpcCloseVoteContent(vote.target.GetAvatarIndex());
+                }
             }
+
 
             foreach (var vote in votes)
             {
@@ -143,13 +174,12 @@ public class GameManager : MonoBehaviour
                 {
                     vote.Key.State = PlayerState.Dead;
                     //PlayerStateIsDead(vote.Key.gameObject;)
-                    Debug.Log(vote.Key.name+" IS DEAD");
                     Debug.Log(ReceiveVoteUI.receiveVoteContentList.Count);
-                    ReceiveVoteUI.receiveVoteContentList[0].gameObject.SetActive(false);
-                }   
+                }
             }
         }
     }
+
 
     public bool IsAlreadySuspected(int playerIndex)
     {
@@ -160,6 +190,7 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
-        return false; 
+
+        return false;
     }
 }

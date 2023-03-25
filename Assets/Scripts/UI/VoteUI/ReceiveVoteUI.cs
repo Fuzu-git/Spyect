@@ -9,7 +9,7 @@ namespace UI.VoteUI
     public class ReceiveVoteUI : NetworkBehaviour
     {
         [SerializeField] public List<ReceiveGridVoteUI> receiveVoteContentList = new List<ReceiveGridVoteUI>();
-        public ReceiveGridVoteUI playerEntryPrefab; 
+        public ReceiveGridVoteUI playerEntryPrefab;
         public GridLayoutGroup gridLayout;
 
         public RectTransform mainCanvas;
@@ -18,15 +18,15 @@ namespace UI.VoteUI
         {
             mainCanvas = (RectTransform) GameObject.FindGameObjectWithTag("CanvasUI").transform;
             transform.SetParent(mainCanvas, false);
-            RectTransform myTransform = (RectTransform)transform;
+            RectTransform myTransform = (RectTransform) transform;
             myTransform.anchoredPosition = Vector2.zero;
         }
-        
+
         [Command]
         public void CmdUpdateContentData(int avatarIndex)
         {
-             RpcUpdateContentData(avatarIndex);
-             Debug.Log("Command Called");
+            RpcUpdateContentData(avatarIndex);
+            Debug.Log("Command Called");
         }
 
         [ClientRpc]
@@ -37,6 +37,45 @@ namespace UI.VoteUI
             ReceiveGridVoteUI receiveGridVoteUi = Instantiate(playerEntryPrefab, gridLayout.transform);
             receiveGridVoteUi.FillReceiveContent(avatarIndex);
             receiveVoteContentList.Add(receiveGridVoteUi);
+        }
+
+        [ClientRpc]
+        public void RpcColorFirstColorlessShape(Color voteColor, int avatarIndex)
+        {
+            foreach (ReceiveGridVoteUI vote in receiveVoteContentList)
+            {
+                if (vote.avatarBinding.GetAvatarIndex() == avatarIndex)
+                {
+
+                    foreach (var shape in vote.playerVoteShapeList)
+                    {
+
+                        if (shape.color == Color.white)
+                        {
+
+                            shape.color = voteColor;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        [ClientRpc]
+        public void RpcCloseVoteContent(int avatarIndex)
+        {
+            Debug.Log("NANANAN" + receiveVoteContentList.Count);
+            for (int i = receiveVoteContentList.Count - 1; i >= 0; i--)
+            {
+                var vote = receiveVoteContentList[i];
+
+                Debug.Log("OIEZRHEOPIFHZEOM" + vote.avatarBinding.GetAvatarIndex() + " " + avatarIndex);
+                if (vote.avatarBinding.GetAvatarIndex() == avatarIndex)
+                {
+                    receiveVoteContentList.RemoveAt(i);
+                    Destroy(vote.gameObject);
+                }
+            }
         }
     }
 }

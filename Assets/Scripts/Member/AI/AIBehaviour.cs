@@ -13,18 +13,24 @@ namespace Member.AI
     {
         private static List<Transform> _movePoints = new List<Transform>();
         private Transform _designatedPoint;
-        
+
         public Rigidbody2D rb;
 
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
 
-        private bool _isWaiting = false;
+        [SerializeField] private bool _isWaiting = false;
 
         private void Awake()
         {
             SetDesignatedPoint();
         }
+
+        /*protected override IEnumerator Start()
+        {
+            StartCoroutine(base.Start());
+            
+        }*/
 
         private void Update()
         {
@@ -32,7 +38,7 @@ namespace Member.AI
             float characterVelocityX = Mathf.Abs(rb.velocity.x);
             float characterVelocityY = Mathf.Abs(rb.velocity.y);
             animator.SetBool("isWaiting", _isWaiting || !canMove);
-            
+
             if (canMove && !_isWaiting)
             {
                 rb.transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
@@ -49,8 +55,12 @@ namespace Member.AI
             switch (newState)
             {
                 case PlayerState.Dead:
-                    Destroy(gameObject);
-                    NetworkServer.Destroy(gameObject);
+                    Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+                    foreach (var _renderer in renderers)
+                    {
+                        _renderer.enabled = false;
+                    }
+
                     //joueur désigné mort. (lien vers UI)
                     // if VoteYes, playerVote are suspected.
                     break;
@@ -86,16 +96,25 @@ namespace Member.AI
             {
                 randIndex = Random.Range(0, _movePoints.Count);
             }
+
             _designatedPoint = _movePoints[randIndex];
         }
 
         private IEnumerator Idle()
         {
             _isWaiting = true;
+            UpdateisWatingState(true);
             float randStop = Random.Range(4f, 10f);
             yield return new WaitForSeconds(randStop);
             SetDesignatedPoint();
             _isWaiting = false;
+            UpdateisWatingState(false);
+        }
+
+        [ClientRpc]
+        private void UpdateisWatingState(bool isWaiting)
+        {
+            _isWaiting = isWaiting;
         }
 
         public override int GetAvatarIndex()
