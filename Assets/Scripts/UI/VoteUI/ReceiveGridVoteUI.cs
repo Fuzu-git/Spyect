@@ -33,7 +33,8 @@ namespace UI.VoteUI
         public void FillReceiveContent(int avatarIndex)
         {
             avatarBinding = GameManager.instance.memberList[avatarIndex].GetComponent<AvatarBehaviour>();
-            playerVoteText.text = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameName.ToUpper() + " is being suspected, what is your opinion ?";
+            playerVoteText.text = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameName.ToUpper() 
+                                  + " is being suspected, what is your opinion ?";
             playerInGameImage.sprite = GameManager.instance.ProfileFiller.profiles[avatarBinding.profileIndex].playerInGameImage;
 
             foreach (var player in GameManager.instance.playerList)

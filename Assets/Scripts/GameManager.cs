@@ -109,7 +109,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckAllVotes(int targetedAvatarIndex)
     {
-        List<PlayerVote> voteAgainstTarget = _votedPlayer.Where(x => x.target.GetAvatarIndex() == targetedAvatarIndex).ToList();
+        List<PlayerVote> voteAgainstTarget = _votedPlayer.Where
+            (x => x.target.GetAvatarIndex() 
+                  == targetedAvatarIndex).ToList();
         
         
         if (playerList.Count == voteAgainstTarget.Count)
@@ -166,8 +168,6 @@ public class GameManager : MonoBehaviour
                     ReceiveVoteUI.RpcCloseVoteContent(vote.target.GetAvatarIndex());
                 }
             }
-
-
             foreach (var vote in votes)
             {
                 if (vote.Value > 0)
