@@ -15,40 +15,40 @@ namespace Member.AI
         private Transform _designatedPoint;
 
         public Rigidbody2D rb;
+        private Vector3 _lastPosition;
+        private Transform _transform; 
+        
 
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
-
+        
         [SerializeField] private bool _isWaiting = false;
 
         private void Awake()
         {
             SetDesignatedPoint();
-        }
 
-        /*protected override IEnumerator Start()
-        {
-            StartCoroutine(base.Start());
-            
-        }*/
+            _transform = transform;
+            _lastPosition = _transform.position;
+        }
 
         private void Update()
         {
-            Flip(rb.velocity.x);
             float characterVelocityX = Mathf.Abs(rb.velocity.x);
             float characterVelocityY = Mathf.Abs(rb.velocity.y);
             animator.SetBool("isWaiting", _isWaiting || !canMove);
 
-            if (canMove && !_isWaiting)
+            if (canMove && !_isWaiting && isServer)
             {
-                rb.transform.position = Vector3.MoveTowards(transform.position, _designatedPoint.position,
-                    movementSpeed * Time.deltaTime);
-                if (transform.position == _designatedPoint.position)
+                _transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
+                Flip(_transform.position.x - _lastPosition.x);
+                if (_transform.position == _designatedPoint.position)
                 {
                     StartCoroutine(Idle());
                 }
             }
-        }
+            _lastPosition = _transform.position; 
+        }   
 
         public override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
         {

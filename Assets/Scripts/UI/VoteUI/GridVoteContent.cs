@@ -35,7 +35,6 @@ namespace UI.VoteUI
 
             while (_receiveVoteUI == null)
             {
-                Debug.Log("ReceiveVoteUI is null");
                 yield return new WaitForSeconds(1f);
                 _receiveVoteUI = mainCanvas.GetComponentInChildren<ReceiveVoteUI>(true);
             }
@@ -58,13 +57,10 @@ namespace UI.VoteUI
 
         IEnumerator SuspectButtonClickedCo()
         {
-            Debug.Log("XXXXX "+(PlayerBehaviour.local == null)+" "+(_receiveVoteUI == null));
             PlayerBehaviour.local.CmdAssignNetworkAuthority(_receiveVoteUI.GetComponent<NetworkIdentity>());
             yield return new WaitForSeconds(0.2f);
-            Debug.Log("TEST 0");
             if (!GameManager.instance.IsAlreadySuspected(_avatarIndex))
             {
-                Debug.Log("TEST 1");
                 _receiveVoteUI.CmdUpdateContentData(_avatarIndex);
             }
             sendVoteUI.gameObject.SetActive(false);

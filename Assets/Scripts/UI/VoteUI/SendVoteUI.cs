@@ -28,12 +28,10 @@ namespace UI.VoteUI
             {
                 /*int totalPlayerNumber = GameObject.FindGameObjectWithTag("PlayerCounter")
                     .GetComponent<PlayerNumberCounter>().PlayerNumber;
-                Debug.Log(totalPlayerNumber);
 
                 while (GameManager.playerList.Count != totalPlayerNumber)
                 {
                     yield return new WaitForSeconds(1f);
-                    Debug.Log(GameManager.playerList.Count);
                 }*/
 
                 while (mainCanvasUI == null)
@@ -46,12 +44,10 @@ namespace UI.VoteUI
                     yield return new WaitForSeconds(1f);
                 }
                 
-                Debug.Log("Sortie Coroutine.");
                 transform.SetParent(mainCanvasUI, false);
                 RectTransform myTransform = (RectTransform) transform;
                 myTransform.anchoredPosition = Vector2.zero;
 
-                Debug.Log(GameManager.instance.playerList.Count);
 
                 gameObject.SetActive(false);
                 once = true;

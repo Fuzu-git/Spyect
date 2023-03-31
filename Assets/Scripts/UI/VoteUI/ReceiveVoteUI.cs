@@ -26,13 +26,11 @@ namespace UI.VoteUI
         public void CmdUpdateContentData(int avatarIndex)
         {
             RpcUpdateContentData(avatarIndex);
-            Debug.Log("Command Called");
         }
 
         [ClientRpc]
         private void RpcUpdateContentData(int avatarIndex)
         {
-            Debug.Log("ClientRpc called");
             gameObject.SetActive(true);
             ReceiveGridVoteUI receiveGridVoteUi = Instantiate(playerEntryPrefab, gridLayout.transform);
             receiveGridVoteUi.FillReceiveContent(avatarIndex);
@@ -64,12 +62,10 @@ namespace UI.VoteUI
         [ClientRpc]
         public void RpcCloseVoteContent(int avatarIndex)
         {
-            Debug.Log("NANANAN" + receiveVoteContentList.Count);
             for (int i = receiveVoteContentList.Count - 1; i >= 0; i--)
             {
                 var vote = receiveVoteContentList[i];
 
-                Debug.Log("OIEZRHEOPIFHZEOM" + vote.avatarBinding.GetAvatarIndex() + " " + avatarIndex);
                 if (vote.avatarBinding.GetAvatarIndex() == avatarIndex)
                 {
                     receiveVoteContentList.RemoveAt(i);

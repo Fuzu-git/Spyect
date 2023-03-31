@@ -8,7 +8,6 @@ using Member.Player.DataPlayer;
 using Mirror;
 using UI.VoteUI;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public struct StartGameMessage : NetworkMessage
 {
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerList = new List<GameObject>();
 
-    //[SerializeField] private List<GameObject> showPlayerList = playerList;
     public List<GameObject> aiList = new List<GameObject>();
     public List<GameObject> memberList = new List<GameObject>();
 
@@ -94,8 +92,6 @@ public class GameManager : MonoBehaviour
 
     internal bool Vote(PlayerBehaviour origin, AvatarBehaviour target, EVoteResult voteResult)
     {
-        Debug.Log("JOJO " + (origin == null) + " " + (target.name + " " + target.GetAvatarIndex()));
-
         int index = _votedPlayer.FindIndex(x => x.origin == origin && x.target == target);
         if (index == -1)
         {
@@ -173,8 +169,6 @@ public class GameManager : MonoBehaviour
                 if (vote.Value > 0)
                 {
                     vote.Key.State = PlayerState.Dead;
-                    //PlayerStateIsDead(vote.Key.gameObject;)
-                    Debug.Log(ReceiveVoteUI.receiveVoteContentList.Count);
                 }
             }
         }

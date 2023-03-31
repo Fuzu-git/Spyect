@@ -74,6 +74,7 @@ namespace Member.Player.DataPlayer
                 case PlayerState.Dead:
                     //gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
                     var renderers = gameObject.GetComponentsInChildren<SpriteRenderer>(true);
+                    var meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
                     foreach (var r in renderers)
                     {
                         r.gameObject.layer = 8; //DeadPLayers
@@ -81,6 +82,11 @@ namespace Member.Player.DataPlayer
                         rColor.a = 0.39f;
                         r.color = rColor;
                     }
+                    foreach (var mr in meshRenderers)
+                    {
+                        mr.gameObject.layer = 8;
+                    }
+                    
                     if (isLocalPlayer)
                     {
                         Camera.main.cullingMask = -1;
@@ -98,13 +104,9 @@ namespace Member.Player.DataPlayer
         public void CmdVote(int targetedAvatarIndex, EVoteResult voteResult)
         {
             AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex].GetComponent<AvatarBehaviour>();
-            
-            Debug.Log("CmdVote before if");
 
             if (GameManager.instance.Vote(this, target, voteResult))
             {
-                Debug.Log("CmdVote after if");
-
                 GameManager.instance.CheckAllVotes(targetedAvatarIndex);
 
                 if (voteResult == EVoteResult.Yes)

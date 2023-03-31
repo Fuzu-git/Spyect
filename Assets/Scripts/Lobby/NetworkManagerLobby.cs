@@ -154,7 +154,6 @@ namespace Lobby
             {
                 for (int i = RoomPlayers.Count - 1; i >= 0; i--)
                 {
-                    Debug.Log("DESTRUCTION");
                     var conn = RoomPlayers[i].connectionToClient;
                     var gameplayerInstance = Instantiate(gamePlayerPrefab); 
                     gameplayerInstance.SetDisplayName(RoomPlayers[i].displayName);
@@ -172,12 +171,6 @@ namespace Lobby
         {
             base.OnServerReady(conn);
             OnServerReadied?.Invoke(conn);
-        }
-
-        [ContextMenu("SHOW NUM PLAYERS")]
-        public void ShowNumPlayer()
-        {
-            Debug.Log(numPlayers);
         }
     }
 }

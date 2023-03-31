@@ -23,7 +23,6 @@ namespace Member.Player.DataPlayer
 
         public int GetIndex(int connId)
         {
-            Debug.Log(connId+" "+playerIndex.Count);
             return playerIndex[connId];
         }
         

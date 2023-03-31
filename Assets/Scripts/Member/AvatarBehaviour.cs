@@ -87,12 +87,12 @@ namespace Member
 
         protected void Flip(float velocity)
         {
-            if (velocity > 0.1f && spriteRenderer.flipX)
+            if (velocity > 0f && spriteRenderer.flipX)
             {
                 spriteRenderer.flipX = false;
                 CmdFlipX(false);
             }
-            else if (velocity < -0.1f && !spriteRenderer.flipX)
+            else if (velocity < 0f && !spriteRenderer.flipX)
             {
                 spriteRenderer.flipX = true; 
                 CmdFlipX(true);
