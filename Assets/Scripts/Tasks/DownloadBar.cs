@@ -1,22 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Tasks
 {
-    public class DownloadBar : MonoBehaviour
+    public class DownloadBar : GenericTask
     {
-        
         public Slider slider;
-        
-        public void SetDownloadBar(int taskNumber)
-        {
-            slider.maxValue = taskNumber;
-            slider.value = taskNumber;
-        }
+        public float duration; 
 
-        public void UpdateDownloadbar(int taskDone)
+        public override void PlayMiniGame()
         {
-            slider.value = taskDone;
+            if (_taskIsDone)
+            {
+                return; 
+            }
+            base.PlayMiniGame();
+            slider.value = 0;
+            slider.DOValue(1, duration).OnComplete(CloseMiniGame);
         }
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - GameManager
   - PlayerVisuals
   - AI
+  - Task
   layers:
   - Default
   - TransparentFX

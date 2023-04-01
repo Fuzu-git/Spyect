@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 3561320021976514454}
   - component: {fileID: 3561320021976514453}
   - component: {fileID: 3561320021976514452}
-  - component: {fileID: 3561320021976514443}
+  - component: {fileID: 3257484896703994469}
   m_Layer: 10
   m_Name: Interractable
-  m_TagString: Untagged
+  m_TagString: Task
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,7 +201,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3561320021976514443
+--- !u!114 &3257484896703994469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,7 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3561320021976514442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c74389d75e70cf47a8e26b118e104a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 41d40b1df5bff304b9e7fe7704f46b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGame: {fileID: 8299339172534313635, guid: 9fed1fad5cbcd3b4a8d10e8b752a8a65, type: 3}
+  miniGame: {fileID: 0}
+  useButton: {fileID: 0}
+  genericTask: {fileID: 0}
+  renderer: {fileID: 3561320021976514454}
