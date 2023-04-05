@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using Lobby;
 using Member;
+using Member.Player;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
@@ -51,27 +53,39 @@ public class GameManager : MonoBehaviour
     public GameObject shapeVoteImage;
     
     public GameObject victoryPanel;
-    public TMP_Text victoryMessage; 
+    public TMP_Text victoryMessage;
 
+    private PlayerNumberCounter _playerNumberCounter;
+    private List<NetworkGamePlayer> _lobbyGamePlayerList = new List<NetworkGamePlayer>();
 
     public void Awake()
     {
         instance = this;
+        GameObject temp = GameObject.FindGameObjectWithTag("PlayerCounter");
+        
+        _playerNumberCounter = temp.GetComponent<PlayerNumberCounter>();
     }
 
     IEnumerator Start()
     {
         NetworkClient.RegisterHandler<StartGameMessage>(OnStartGameReceived);
 
-        yield return new WaitUntil(() => NetworkServer.active);
-        yield return new WaitUntil(() => NetworkClient.active);
-
+        yield return new WaitUntil(() => NetworkServer.active || NetworkClient.active);
+        
         NetworkServer.SendToReady(new StartGameMessage());
 
         if (NetworkClient.active)
         {
             onGameStarted?.Invoke();
         }
+        
+        GameObject[] gamePlayerPrefabs = GameObject.FindGameObjectsWithTag("GamePlayerPrefab");
+        Debug.Log(gamePlayerPrefabs.Length);
+        foreach (GameObject gamePlayer in gamePlayerPrefabs)
+        {
+            _lobbyGamePlayerList.Add(gamePlayer.GetComponent<NetworkGamePlayer>());
+        }
+        _lobbyGamePlayerList = _lobbyGamePlayerList.OrderBy(x => x.GetPlayerIndex()).ToList(); 
     }
 
     public void AddPlayer(GameObject player)
@@ -201,7 +215,7 @@ public class GameManager : MonoBehaviour
         if (deadPlayers == playerList.Count - 1)
         {
             victoryPanel.SetActive(true);
-            victoryMessage.text = $"{lastPlayer.playerNameText.text} a gagné !";
+            victoryMessage.text = $" {_lobbyGamePlayerList[lastPlayer.playerIndex].GetDisplayName()} ({lastPlayer.playerNameText.text}) a gagné !";
         }
     }
     

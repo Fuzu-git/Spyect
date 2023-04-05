@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Mirror;
 using TMPro;
@@ -48,6 +49,15 @@ namespace Lobby
             this.playerIndex = index;
         }
 
+        public string GetDisplayName()
+        {
+            return this.displayName; 
+        }
+
+        public int GetPlayerIndex()
+        {
+            return this.playerIndex; 
+        }
         
     }
 }
