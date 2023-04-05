@@ -164,6 +164,7 @@ namespace Lobby
                 }
             }
             PlayerNumberCounter.CountPlayer(numPlayers);
+            PlayerNumberCounter.SetNames(RoomPlayers);
             base.ServerChangeScene(newSceneName);
         }
         
