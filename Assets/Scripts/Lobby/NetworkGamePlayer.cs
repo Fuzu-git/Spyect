@@ -9,7 +9,8 @@ namespace Lobby
     {
         [SyncVar]
         private string displayName = "Loading...";
-        
+        [SyncVar]
+        private int playerIndex = -1;
 
         private NetworkManagerLobby _room;
         private NetworkManagerLobby Room
@@ -39,6 +40,12 @@ namespace Lobby
         public void SetDisplayName(string displayName)
         {
             this.displayName = displayName;
+        }
+
+        [Server]
+        public void SetPlayerIndex(int index)
+        {
+            this.playerIndex = index;
         }
 
         

@@ -1,5 +1,6 @@
 using Mirror;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Member.Player
 {
@@ -7,8 +8,6 @@ namespace Member.Player
     {
         [SyncVar]
         public int playerNumber = 0;
-        [SyncVar]
-        public List<string> playerNames = new List<string>();
 
         private void Awake()
         {
@@ -18,14 +17,6 @@ namespace Member.Player
         public void CountPlayer(int i)
         {
             playerNumber = i;
-        }
-
-        public void SetNames(List<Lobby.NetworkRoomPlayer> players)
-        {
-            foreach (Lobby.NetworkRoomPlayer roomPlayer in players)
-            {
-                playerNames.Add(roomPlayer.displayName);
-            }
         }
     }
 }
