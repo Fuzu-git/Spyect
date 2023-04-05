@@ -86,6 +86,7 @@ namespace Member.Player.DataPlayer
                     {
                         mr.gameObject.layer = 8;
                     }
+                    GameManager.CheckVictory();
                     
                     if (isLocalPlayer)
                     {
@@ -108,7 +109,7 @@ namespace Member.Player.DataPlayer
             if (GameManager.instance.Vote(this, target, voteResult))
             {
                 GameManager.instance.CheckAllVotes(targetedAvatarIndex);
-
+                
                 if (voteResult == EVoteResult.Yes)
                 {
                     GameManager.instance.ReceiveVoteUI.RpcColorFirstColorlessShape(Color.green, targetedAvatarIndex);

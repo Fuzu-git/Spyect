@@ -6,8 +6,10 @@ using Cinemachine;
 using Member;
 using Member.Player.DataPlayer;
 using Mirror;
+using TMPro;
 using UI.VoteUI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct StartGameMessage : NetworkMessage
 {
@@ -46,8 +48,10 @@ public class GameManager : MonoBehaviour
     public SendVoteUI SendVoteUI;
     public ReceiveVoteUI ReceiveVoteUI;
 
-
     public GameObject shapeVoteImage;
+    
+    public GameObject victoryPanel;
+    public TMP_Text victoryMessage; 
 
 
     public void Awake()
@@ -174,7 +178,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CheckVictory()
+    {
+        // Assign it on suspection kill when DONE 
 
+        int deadPlayers = 0;
+        PlayerBehaviour lastPlayer = null; 
+        foreach (var player in playerList)
+        {
+            PlayerBehaviour currentPlayer = player.GetComponent<PlayerBehaviour>(); 
+            
+            if(currentPlayer.State == PlayerState.Dead)
+            {
+                deadPlayers++; 
+            }
+            else
+            {
+                lastPlayer = currentPlayer; 
+            }
+        }
+
+        if (deadPlayers == playerList.Count - 1)
+        {
+            victoryPanel.SetActive(true);
+            victoryMessage.text = $"{lastPlayer.playerNameText.text} a gagné !";
+        }
+    }
+    
     public bool IsAlreadySuspected(int playerIndex)
     {
         foreach (var vote in _votedPlayer)
@@ -187,4 +217,6 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
+    
+    
 }
