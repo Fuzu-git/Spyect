@@ -10,8 +10,9 @@ namespace Tasks
         private GameObject _highlight;
 
         public TaskManager taskManager;
-        
-        public bool _taskIsDone = false;
+
+        public TaskData taskData;
+        public Interactable interactable; 
         
         public  virtual void PlayMiniGame()
         {
@@ -21,11 +22,12 @@ namespace Tasks
         protected void CloseMiniGame()
         {
             gameObject.SetActive(false);
+            
+            taskData.taskIsDone = true; 
+            interactable.CleanButtonState();
+            
             Debug.Log(gameObject.activeInHierarchy);
-            _taskIsDone = true; 
             taskManager.AddTask();
         }
-        
-        
     }
 }

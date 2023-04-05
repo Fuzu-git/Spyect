@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Member;
 using Member.Player.DataPlayer;
 using UnityEngine;
@@ -21,9 +22,12 @@ namespace Tasks
 
         private GameObject _highlight;
 
+        [SerializeField] 
+        private TaskData task; 
+        
         private IEnumerator Start()
         {
-            while (!genericTask._taskIsDone)
+            while (!task.taskIsDone)
             {
                 _highlight.SetActive(true);
                 yield return new WaitForSeconds(1f);
@@ -31,7 +35,7 @@ namespace Tasks
                 yield return new WaitForSeconds(1f);
             } 
             
-            if (genericTask._taskIsDone)
+            if (task.taskIsDone)
             {
                 _highlight.SetActive(false); 
             }
@@ -39,9 +43,11 @@ namespace Tasks
         
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == PlayerBehaviour.local.gameObject)
+            if (other.gameObject == PlayerBehaviour.local.gameObject && !task.taskIsDone)
             {
-                useButton.interactable = true;  
+                genericTask.interactable = this; 
+                genericTask.taskData = task;
+                useButton.interactable = true;
                 useButton.onClick.RemoveAllListeners();
                 useButton.onClick.AddListener(genericTask.PlayMiniGame);
             }
@@ -51,11 +57,17 @@ namespace Tasks
         {
             if (other.gameObject == PlayerBehaviour.local.gameObject)
             {
-                useButton.interactable = false;  
-                useButton.onClick.RemoveAllListeners();
+                CleanButtonState();
             }
         }
 
+        public void CleanButtonState()
+        {
+            genericTask.taskData = null; 
+            useButton.interactable = false;  
+            useButton.onClick.RemoveAllListeners();
+        }
+        
         private void OnEnable()
         {
             _highlight = transform.GetChild(0).gameObject;

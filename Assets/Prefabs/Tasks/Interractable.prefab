@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 3561320021976514453}
   - component: {fileID: 3561320021976514452}
   - component: {fileID: 3257484896703994469}
+  - component: {fileID: 1788302076}
+  - component: {fileID: 4400566402221835608}
   m_Layer: 10
   m_Name: Interractable
   m_TagString: Task
@@ -216,4 +218,29 @@ MonoBehaviour:
   miniGame: {fileID: 0}
   useButton: {fileID: 0}
   genericTask: {fileID: 0}
-  renderer: {fileID: 3561320021976514454}
+  task: {fileID: 4400566402221835608}
+--- !u!114 &1788302076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561320021976514442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823c2f6e4f9b83248b0d76ec40b8abe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4400566402221835608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561320021976514442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82e33bee4cd86a4e9c1be3126038318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskIsDone: 0
