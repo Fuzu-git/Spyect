@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
 using Member;
 using Member.Player.DataPlayer;
 using UnityEngine;
-using UnityEngine.UI; 
-using DG.Tweening;
-using UnityEditor.TextCore.Text;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 namespace Tasks

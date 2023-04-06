@@ -11,7 +11,7 @@ namespace Member.AI
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, 1f);
+            Gizmos.DrawSphere(transform.position, 1.25f);
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, transform.position + transform.forward *2);
         }
