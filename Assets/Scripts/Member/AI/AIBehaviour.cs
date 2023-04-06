@@ -6,6 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Member.Player.DataPlayer;
 using Mirror;
+using UnityEngine.AI;
 
 namespace Member.AI
 {
@@ -14,7 +15,6 @@ namespace Member.AI
         private static List<Transform> _movePoints = new List<Transform>();
         private Transform _designatedPoint;
 
-        public Rigidbody2D rb;
         private Vector3 _lastPosition;
         private Transform _transform; 
         
@@ -23,6 +23,7 @@ namespace Member.AI
         public int aiIndex;
         
         [SerializeField] private bool _isWaiting = false;
+        [SerializeField] private NavMeshAgent _meshAgent;
 
         private void Awake()
         {
@@ -34,13 +35,12 @@ namespace Member.AI
 
         private void Update()
         {
-            float characterVelocityX = Mathf.Abs(rb.velocity.x);
-            float characterVelocityY = Mathf.Abs(rb.velocity.y);
             animator.SetBool("isWaiting", _isWaiting || !canMove);
 
             if (canMove && !_isWaiting && isServer)
             {
-                _transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
+
+                //_transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
                 Flip(_transform.position.x - _lastPosition.x);
                 if (_transform.position == _designatedPoint.position)
                 {
@@ -98,6 +98,7 @@ namespace Member.AI
             }
 
             _designatedPoint = _movePoints[randIndex];
+            _meshAgent.SetDestination(_designatedPoint.position);
         }
 
         private IEnumerator Idle()
