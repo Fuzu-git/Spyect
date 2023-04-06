@@ -16,8 +16,8 @@ namespace Member.AI
         private Transform _designatedPoint;
 
         private Vector3 _lastPosition;
-        private Transform _transform; 
-        
+        private Transform _transform;
+        bool isWalkingTowardTarget = false;
 
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
@@ -39,10 +39,16 @@ namespace Member.AI
 
             if (canMove && !_isWaiting && isServer)
             {
-
+                if (!isWalkingTowardTarget) 
+                {
+                    isWalkingTowardTarget = true;
+                    _meshAgent.SetDestination(_designatedPoint.position);
+                }
                 //_transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
                 Flip(_transform.position.x - _lastPosition.x);
-                if (_transform.position == _designatedPoint.position)
+                //Debug.Log(_transform.position+" "+_designatedPoint.position);
+                //Debug.Log(Vector3.Distance(_transform.position, _designatedPoint.position) +" | "+ (_meshAgent.stoppingDistance + 0.1f));
+                if (Vector3.Distance(_transform.position,_designatedPoint.position) <= _meshAgent.stoppingDistance+0.1f)
                 {
                     StartCoroutine(Idle());
                 }
@@ -98,7 +104,6 @@ namespace Member.AI
             }
 
             _designatedPoint = _movePoints[randIndex];
-            _meshAgent.SetDestination(_designatedPoint.position);
         }
 
         private IEnumerator Idle()
@@ -109,6 +114,7 @@ namespace Member.AI
             yield return new WaitForSeconds(randStop);
             SetDesignatedPoint();
             _isWaiting = false;
+            isWalkingTowardTarget = false;
             UpdateisWatingState(false);
         }
 

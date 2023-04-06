@@ -40,7 +40,7 @@ namespace Tasks
         
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == PlayerBehaviour.local.gameObject && !task.taskIsDone)
+            if (PlayerBehaviour.local != null && other.gameObject == PlayerBehaviour.local.gameObject && !task.taskIsDone)
             {
                 genericTask.interactable = this; 
                 genericTask.taskData = task;
@@ -52,7 +52,7 @@ namespace Tasks
 
         public void OnTriggerExit(Collider other)
         {
-            if (other.gameObject == PlayerBehaviour.local.gameObject)
+            if (PlayerBehaviour.local != null && other.gameObject == PlayerBehaviour.local.gameObject)
             {
                 CleanButtonState();
             }

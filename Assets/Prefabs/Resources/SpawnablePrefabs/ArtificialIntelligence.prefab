@@ -277,6 +277,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   movementSpeed: 5
+  canMove: 0
   playerNameText: {fileID: 1250944906613186934}
   spriteRenderer: {fileID: 3147572375345808259}
   animator: {fileID: 277800700629637450}
@@ -293,15 +294,15 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 3.5
-  m_Acceleration: 50
+  m_Speed: 5
+  m_Acceleration: 50000
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 720
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -316,6 +317,7 @@ GameObject:
   - component: {fileID: 2293950684260921378}
   - component: {fileID: 3147572375345808259}
   - component: {fileID: 277800700629637450}
+  - component: {fileID: 7166507670903151000}
   m_Layer: 0
   m_Name: AI_Visuals
   m_TagString: PlayerVisuals
@@ -411,3 +413,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7166507670903151000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079880182340776927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2769dd160371240a42a4805ba9b218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

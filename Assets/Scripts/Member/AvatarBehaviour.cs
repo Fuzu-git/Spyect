@@ -22,7 +22,7 @@ namespace Member
         protected internal PlayerState State = PlayerState.Alive;
 
         public float movementSpeed = 5f;
-        public static bool canMove = true;
+        public bool canMove = false;
         public int profileIndex { get; protected set; } = -1;
         protected ProfileFiller ProfileFillerComponent;
         

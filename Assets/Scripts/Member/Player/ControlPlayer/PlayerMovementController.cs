@@ -6,8 +6,8 @@ namespace Member.Player.ControlPlayer
 {
     public class PlayerMovementController :  NetworkBehaviour
     {
-        [SerializeField] private CharacterController controller; 
-        
+        [SerializeField] private CharacterController controller;
+        [SerializeField] private PlayerBehaviour playerBehaviour;
         [SerializeField] public float movementSpeed = 5f;
         //[SerializeField] private Animator _animator;
         
@@ -43,7 +43,7 @@ namespace Member.Player.ControlPlayer
         [ClientCallback]
         private void Update()
         {
-            if (AvatarBehaviour.canMove)
+            if (playerBehaviour.canMove)
             {
                 Move(); 
             }
@@ -62,13 +62,7 @@ namespace Member.Player.ControlPlayer
         [Client]
         private void Move()
         {
-            Transform controllerTransform = controller.transform;
-            Vector3 right = controllerTransform.right;
-            Vector3 up = controllerTransform.up;
-            right.z = 0f;
-            up.z = 0f;
-
-            Vector3 movement = right.normalized * _previousInput.x + up.normalized * _previousInput.y;
+            Vector3 movement = transform.right.normalized * _previousInput.x + transform.up.normalized * _previousInput.y;
 
             controller.Move(movement * (movementSpeed * Time.deltaTime));
         }

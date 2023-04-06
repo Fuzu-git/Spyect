@@ -28,7 +28,7 @@ namespace Member.Player.DataPlayer
         {
             Flip(cc.velocity.x);
             float characterVelocityX = Mathf.Abs(cc.velocity.x);
-            float characterVelocityY = Mathf.Abs(cc.velocity.y);
+            float characterVelocityY = Mathf.Abs(cc.velocity.z);
             animator.SetFloat("speedX", characterVelocityX + characterVelocityY);
         }
 

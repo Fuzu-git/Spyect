@@ -170,6 +170,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 1895909210374158316}
+  playerBehaviour: {fileID: -4240317740453379036}
   movementSpeed: 5
 --- !u!114 &5080670388410614502
 MonoBehaviour:
@@ -201,6 +202,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   movementSpeed: 5
+  canMove: 0
   playerNameText: {fileID: 6676791487969277931}
   spriteRenderer: {fileID: 3714351948670687974}
   animator: {fileID: 6832546713560106635}
