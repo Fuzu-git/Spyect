@@ -66,7 +66,7 @@ namespace Member.SpawnMember
         }
 
         [Server]
-        public IEnumerator SpawnAi(PlayerBehaviour playerBehaviour /*NetworkConnection conn*/)
+        public IEnumerator SpawnAi(PlayerBehaviour playerBehaviour)
         {
             while (playerBehaviour.playerIndex == -1)
             {
@@ -78,11 +78,15 @@ namespace Member.SpawnMember
         }
 
         [Server]
-        public void InstantiateAI(int aiIndex)
+        public void InstantiateAI(int aiIndex )
         {
             GameObject aiInstance = Instantiate(aiPrefab, _spawnPoints[aiIndex].position, _spawnPoints[aiIndex].rotation);
-            NetworkServer.Spawn(aiInstance);
-            aiInstance.GetComponent<AIBehaviour>().SetAiIndex(aiIndex);
+            //NetworkServer.Spawn(aiInstance);
+            NetworkServer.Spawn(aiInstance, NetworkServer.connections[0]);
+            var aiBehaviourInstance = aiInstance.GetComponent<AIBehaviour>();
+            aiBehaviourInstance.SetAiIndex(aiIndex);
+            /*aiBehaviourInstance.netIdentity.RemoveClientAuthority();
+            aiBehaviourInstance.netIdentity.AssignClientAuthority(connectionToClient);*/
             _spawnPoints.RemoveAt(aiIndex);
         }
         public void Shuffle(List<Transform> list)

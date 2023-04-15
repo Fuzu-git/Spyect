@@ -166,6 +166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_12
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1501,6 +1505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_5
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1651,6 +1659,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_9
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1753,6 +1765,10 @@ PrefabInstance:
     - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Name
       value: Interractable_14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
@@ -2066,6 +2082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_10
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2168,6 +2188,10 @@ PrefabInstance:
     - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Name
       value: Interractable_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
@@ -2525,6 +2549,10 @@ MonoBehaviour:
   totalTask: 0
   actualTask: 0
   taskBar: {fileID: 1002289811}
+  pingList: []
+  pingObject: {fileID: 2794215696048477021, guid: c517e1e5edf8f55428ee9cb4e6654e51, type: 3}
+  pingInterval: 15
+  pingLife: 10
 --- !u!1 &1009165921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,6 +3038,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_6
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3159,6 +3191,10 @@ PrefabInstance:
     - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Name
       value: Interractable_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
@@ -4033,6 +4069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_11
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4138,6 +4178,10 @@ PrefabInstance:
     - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Name
       value: Interractable_13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
@@ -4663,6 +4707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interractable_4
       objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4765,6 +4813,10 @@ PrefabInstance:
     - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Name
       value: Interractable_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561320021976514442, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3561320021976514454, guid: 7dfc135235dc3de4c9528086f9f85ddf, type: 3}
       propertyPath: m_Sprite
