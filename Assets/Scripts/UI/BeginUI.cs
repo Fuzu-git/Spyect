@@ -28,7 +28,7 @@ namespace UI
             
             foreach (GameObject element in gameManager.playerList)
             {
-                    roleText.text = "There is your new identity... " + player.name + ".";
+                    roleText.text = "There is your new identity... " + player.playerNameText.text + ".";
             }
             StartCoroutine(DoFade());
         }
