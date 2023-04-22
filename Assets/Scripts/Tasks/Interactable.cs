@@ -10,17 +10,17 @@ namespace Tasks
 {
     public class Interactable : MonoBehaviour
     {
-        [SerializeField] private GameObject miniGame;
+        [SerializeField] public GameObject miniGame;
 
         public Button useButton;
 
         [SerializeField]
-        private GenericTask genericTask;
+        public GenericTask genericTask;
 
         private GameObject _highlight;
 
         [SerializeField] 
-        private TaskData task; 
+        public TaskData task; 
         
         private IEnumerator Start()
         {

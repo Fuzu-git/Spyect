@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using kcp2k;
 using Member;
 using Member.Player;
 using Member.Player.DataPlayer;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Tasks
 {
@@ -14,9 +16,14 @@ namespace Tasks
     {
         [SerializeField]
         private int totalTask;
+        [SerializeField] 
+        private int taskToDo = 5; 
         [SerializeField]
-        private int actualTask = 0; 
-        
+        private int actualTask = 0;
+
+        [SerializeField] private List<GameObject> totalTaskList = new List<GameObject>();
+        [SerializeField] private List<GameObject> gameTaskList = new List<GameObject>();
+
         [SerializeField]
         private  Slider taskBar;
 
@@ -26,15 +33,21 @@ namespace Tasks
         [SerializeField]
         private float pingInterval = 15;
         [SerializeField]
-        private float pingLife = 2; 
-        
-        
+        private float pingLife = 2;
 
+        [Header("Interactable")]
+        public GameObject interactableMiniGame;
+        public Button interactableUseButton;
+        public GenericTask interactableGenericTask; 
+        
         public IEnumerator Start()
         {
-            totalTask = GameObject.FindGameObjectsWithTag("Task").Length;
-            taskBar.maxValue = totalTask;
-
+            totalTaskList.AddRange(GameObject.FindGameObjectsWithTag("Task"));
+            taskBar.maxValue = taskToDo;
+            
+            AssignRandomTask();
+            AddTaskComponent();
+            
             yield return new WaitForSeconds(5f);
 
             GameObject playerCounter = GameObject.FindGameObjectWithTag("PlayerCounter");
@@ -45,6 +58,42 @@ namespace Tasks
             }
         }
 
+        private void AssignRandomTask()
+        {
+            for (int i = 0; i < taskToDo; i++)
+            {
+                int rng = Random.Range(0, totalTaskList.Count);
+                gameTaskList.Add(totalTaskList[rng]);
+                totalTaskList.RemoveAt(rng);
+
+                var temp = new List<GameObject>();
+                
+                foreach (GameObject task in totalTaskList)
+                {
+                    if (task != null)
+                    {
+                        temp.Add(task);
+                    }
+                }
+                totalTaskList.Clear();
+                totalTaskList = temp;
+            }
+        }
+
+        private void AddTaskComponent()
+        {
+            foreach (GameObject task in gameTaskList)
+            {
+                task.AddComponent<Interactable>();
+                task.AddComponent<TaskData>();
+
+                task.GetComponent<Interactable>().miniGame = interactableMiniGame;
+                task.GetComponent<Interactable>().useButton = interactableUseButton;
+                task.GetComponent<Interactable>().genericTask = interactableGenericTask;
+                task.GetComponent<Interactable>().task = task.GetComponent<TaskData>();
+            }
+        }
+        
         public void AddTask()
         {
             actualTask++;
@@ -57,7 +106,6 @@ namespace Tasks
 
         private IEnumerator TaskEnd()
         {
-            Debug.Log("ASSEMBLE");
             while (true)
             {
                 for (int i = 0; i < GameManager.instance.playerList.Count; i++)
@@ -71,7 +119,6 @@ namespace Tasks
                     {
                         pingList[i].transform.position = currentPlayer.transform.position;
                         pingList[i].SetActive(true); 
-                        Debug.Log("WEEEEEEEEEEEEEEEEEEHEEEEEEE");
                     }
                     else
                     {

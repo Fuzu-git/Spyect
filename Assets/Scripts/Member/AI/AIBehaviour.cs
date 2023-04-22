@@ -93,8 +93,7 @@ namespace Member.AI
 
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);
         public static void RemoveMovePoint(Transform transform) => _movePoints.Remove(transform);
-
-
+        
         private void SetDesignatedPoint()
         {
             int randIndex = Random.Range(0, _movePoints.Count);

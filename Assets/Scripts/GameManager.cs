@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public ReceiveVoteUI ReceiveVoteUI;
 
     public GameObject shapeVoteImage;
-    
+
     public GameObject victoryPanel;
     public TMP_Text victoryMessage;
 
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         GameObject temp = GameObject.FindGameObjectWithTag("PlayerCounter");
-        
+
         _playerNumberCounter = temp.GetComponent<PlayerNumberCounter>();
     }
 
@@ -71,21 +71,21 @@ public class GameManager : MonoBehaviour
         NetworkClient.RegisterHandler<StartGameMessage>(OnStartGameReceived);
 
         yield return new WaitUntil(() => NetworkServer.active || NetworkClient.active);
-        
+
         NetworkServer.SendToReady(new StartGameMessage());
 
         if (NetworkClient.active)
         {
             onGameStarted?.Invoke();
         }
-        
+
         GameObject[] gamePlayerPrefabs = GameObject.FindGameObjectsWithTag("GamePlayerPrefab");
-        Debug.Log(gamePlayerPrefabs.Length);
         foreach (GameObject gamePlayer in gamePlayerPrefabs)
         {
             _lobbyGamePlayerList.Add(gamePlayer.GetComponent<NetworkGamePlayer>());
         }
-        _lobbyGamePlayerList = _lobbyGamePlayerList.OrderBy(x => x.GetPlayerIndex()).ToList(); 
+
+        _lobbyGamePlayerList = _lobbyGamePlayerList.OrderBy(x => x.GetPlayerIndex()).ToList();
     }
 
     public void AddPlayer(GameObject player)
@@ -124,10 +124,10 @@ public class GameManager : MonoBehaviour
     public void CheckAllVotes(int targetedAvatarIndex)
     {
         List<PlayerVote> voteAgainstTarget = _votedPlayer.Where
-            (x => x.target.GetAvatarIndex() 
-                  == targetedAvatarIndex).ToList();
-        
-        
+        (x => x.target.GetAvatarIndex()
+              == targetedAvatarIndex).ToList();
+
+
         if (playerList.Count == voteAgainstTarget.Count)
         {
             Dictionary<AvatarBehaviour, int> votes = new Dictionary<AvatarBehaviour, int>();
@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
                     ReceiveVoteUI.RpcCloseVoteContent(vote.target.GetAvatarIndex());
                 }
             }
+
             foreach (var vote in votes)
             {
                 if (vote.Value > 0)
@@ -197,28 +198,29 @@ public class GameManager : MonoBehaviour
         // Assign it on suspection kill when DONE 
 
         int deadPlayers = 0;
-        PlayerBehaviour lastPlayer = null; 
+        PlayerBehaviour lastPlayer = null;
         foreach (var player in playerList)
         {
-            PlayerBehaviour currentPlayer = player.GetComponent<PlayerBehaviour>(); 
-            
-            if(currentPlayer.State == PlayerState.Dead)
+            PlayerBehaviour currentPlayer = player.GetComponent<PlayerBehaviour>();
+
+            if (currentPlayer.State == PlayerState.Dead)
             {
-                deadPlayers++; 
+                deadPlayers++;
             }
             else
             {
-                lastPlayer = currentPlayer; 
+                lastPlayer = currentPlayer;
             }
         }
 
         if (deadPlayers == playerList.Count - 1)
         {
             victoryPanel.SetActive(true);
-            victoryMessage.text = $" {_lobbyGamePlayerList[lastPlayer.playerIndex].GetDisplayName()} ({lastPlayer.playerNameText.text}) a gagné !";
+            victoryMessage.text =
+                $" {_lobbyGamePlayerList[lastPlayer.playerIndex].GetDisplayName()} ({lastPlayer.playerNameText.text}) a gagné !";
         }
     }
-    
+
     public bool IsAlreadySuspected(int playerIndex)
     {
         foreach (var vote in _votedPlayer)
@@ -231,6 +233,4 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
-    
-    
 }
