@@ -8,6 +8,7 @@ using Member.Player;
 using Member.Player.DataPlayer;
 using Mirror;
 using TMPro;
+using UI.Ranking;
 using UI.VoteUI;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public Action onGameStarted;
 
     public List<GameObject> playerList = new List<GameObject>();
+    public List<PlayerBehaviour> deadPlayerList = new List<PlayerBehaviour>();
 
     public List<GameObject> aiList = new List<GameObject>();
     public List<GameObject> memberList = new List<GameObject>();
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     private PlayerNumberCounter _playerNumberCounter;
     private List<NetworkGamePlayer> _lobbyGamePlayerList = new List<NetworkGamePlayer>();
+
+    [SerializeField] private RankingUIManager rankingUIManager; 
 
     public void Awake()
     {
@@ -205,17 +209,22 @@ public class GameManager : MonoBehaviour
 
             if (currentPlayer.State == PlayerState.Dead)
             {
+                if (!deadPlayerList.Contains(currentPlayer))
+                {
+                    deadPlayerList.Add(currentPlayer); 
+                    thisTurnDead = currentPlayer; 
+                }
                 deadPlayers++;
-                thisTurnDead = currentPlayer; 
             }
             else
             {
                 lastPlayer = currentPlayer;
             }
         }
+        
+        
         if (thisTurnDead != null)
         {
-            Debug.Log(" YAYA " + playerList.Count + " " + deadPlayers);
             thisTurnDead.playerRank = playerList.Count - (deadPlayers -1);
         }
         
@@ -225,6 +234,14 @@ public class GameManager : MonoBehaviour
             victoryPanel.SetActive(true);
             victoryMessage.text =
                 $" {_lobbyGamePlayerList[lastPlayer.playerIndex].GetDisplayName()} ({lastPlayer.playerNameText.text}) a gagné !";
+        }
+    }
+
+    public void UpdateRankingUIManager()
+    {
+        if (rankingUIManager.gameObject.activeInHierarchy)
+        {
+            rankingUIManager.FillRankingMessage();
         }
     }
 

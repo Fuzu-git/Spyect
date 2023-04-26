@@ -208,6 +208,8 @@ MonoBehaviour:
   animator: {fileID: 6832546713560106635}
   cc: {fileID: 1895909210374158316}
   playerIndex: -1
+  playerRank: -1
+  realPlayerName: 
 --- !u!1 &3608770204236439733
 GameObject:
   m_ObjectHideFlags: 0

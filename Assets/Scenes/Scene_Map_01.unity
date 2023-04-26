@@ -1102,6 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerList: []
+  deadPlayerList: []
   aiList: []
   memberList: []
   totalPlayerUpdateOccured: 0
@@ -1111,6 +1112,7 @@ MonoBehaviour:
   shapeVoteImage: {fileID: 6924910212962914278, guid: 60455ecc37ee7f04b889612fc2c405d9, type: 3}
   victoryPanel: {fileID: 794471968}
   victoryMessage: {fileID: 1598989060}
+  rankingUIManager: {fileID: 179531213}
 --- !u!4 &454807952
 Transform:
   m_ObjectHideFlags: 0

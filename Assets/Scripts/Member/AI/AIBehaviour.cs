@@ -46,8 +46,6 @@ namespace Member.AI
                 }
                 //_transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
                 Flip(_transform.position.x - _lastPosition.x);
-                //Debug.Log(_transform.position+" "+_designatedPoint.position);
-                //Debug.Log(Vector3.Distance(_transform.position, _designatedPoint.position) +" | "+ (_meshAgent.stoppingDistance + 0.1f));
                 if (Vector3.Distance(_transform.position,_designatedPoint.position) <= _meshAgent.stoppingDistance+0.1f)
                 {
                     StartCoroutine(Idle());

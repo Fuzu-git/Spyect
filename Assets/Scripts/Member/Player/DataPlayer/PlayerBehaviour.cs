@@ -15,7 +15,7 @@ namespace Member.Player.DataPlayer
         public int playerIndex = -1;
 
         [SyncVar (hook =  nameof(UpdatePlayerRank))]
-        public int playerRank = 1;
+        public int playerRank = -1;
 
         [SyncVar (hook = nameof(UpdateRealPlayerName))]
         public string realPlayerName; 
@@ -44,18 +44,13 @@ namespace Member.Player.DataPlayer
 
         void UpdatePlayerRank(int oldValue, int newValue)
         {
-            playerRank = newValue; 
+            playerRank = newValue;
+            GameManager.instance.UpdateRankingUIManager();
         }
 
         void UpdateRealPlayerName(string oldValue, string newValue)
         {
             realPlayerName = newValue; 
-        }
-
-        [Command]
-        private void CmdSetPlayerIndex(int playerIndex)
-        {
-            this.playerIndex = playerIndex;
         }
 
         protected override void SelectRandomProfile()
