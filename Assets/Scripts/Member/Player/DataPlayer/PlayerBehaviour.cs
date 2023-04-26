@@ -4,7 +4,6 @@ using System.Linq;
 using Mirror;
 using UI.VoteUI;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 namespace Member.Player.DataPlayer
 {
@@ -14,6 +13,12 @@ namespace Member.Player.DataPlayer
         public static PlayerBehaviour local;
         [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
+
+        [SyncVar (hook =  nameof(UpdatePlayerRank))]
+        public int playerRank = 1;
+
+        [SyncVar (hook = nameof(UpdateRealPlayerName))]
+        public string realPlayerName; 
         
         protected override IEnumerator Start()
         {
@@ -35,6 +40,16 @@ namespace Member.Player.DataPlayer
         void UpdatePlayerIndex(int oldValue, int newValue)
         {
             StartCoroutine(WaitForProfiller());
+        }
+
+        void UpdatePlayerRank(int oldValue, int newValue)
+        {
+            playerRank = newValue; 
+        }
+
+        void UpdateRealPlayerName(string oldValue, string newValue)
+        {
+            realPlayerName = newValue; 
         }
 
         [Command]

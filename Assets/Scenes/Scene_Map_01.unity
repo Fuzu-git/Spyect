@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 179531212}
   - component: {fileID: 179531211}
   - component: {fileID: 179531210}
+  - component: {fileID: 179531213}
   m_Layer: 5
   m_Name: RankingGrid
   m_TagString: Untagged
@@ -604,6 +605,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179531208}
   m_CullTransparentMesh: 1
+--- !u!114 &179531213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179531208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8543551de8389468254d4a444322eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rankingMessagePrefab: {fileID: 4334045686259272032, guid: 95b59d97aa2eec0418e3eafc7e771d51, type: 3}
+  rankingMessageList: []
+  rankingGrid: {fileID: 179531209}
 --- !u!1 &245146376
 GameObject:
   m_ObjectHideFlags: 0

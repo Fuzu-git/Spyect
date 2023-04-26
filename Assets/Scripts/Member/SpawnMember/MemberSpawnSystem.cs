@@ -46,21 +46,24 @@ namespace Member.SpawnMember
         [Server]
         public void SpawnPlayer(NetworkConnection conn)
         {
-            Transform spawnPoint = _spawnPoints.ElementAtOrDefault(_nextIndex);
+            Transform spawnPoint = _spawnPoints.ElementAtOrDefault(conn.connectionId);
 
             if (spawnPoint == null)
             {
-                Debug.LogError("Missing spawn point for player " + _nextIndex);
+                Debug.LogError("Missing spawn point for player " + conn.connectionId);
                 return;
             }
 
-            GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[_nextIndex].position,
-                _spawnPoints[_nextIndex].rotation);
+            GameObject playerInstance = Instantiate(playerPrefab, _spawnPoints[conn.connectionId].position,
+                _spawnPoints[conn.connectionId].rotation);
             NetworkServer.Spawn(playerInstance, conn);
             NetworkServer.ReplacePlayerForConnection(conn.identity.connectionToClient, playerInstance);
 
             PlayerBehaviour playerBehaviour = playerInstance.GetComponent<PlayerBehaviour>();
-            playerBehaviour.SetPlayerIndex(_nextIndex);
+            playerBehaviour.SetPlayerIndex(conn.connectionId);
+            
+            //playerBehaviour.realPlayerName = GameManager.instance.GetNetworkGamePlayer(conn.connectionId).GetDisplayName();
+            
             _nextIndex++;
             StartCoroutine(SpawnAi(playerBehaviour));
         }

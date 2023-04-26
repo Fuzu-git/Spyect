@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Cinemachine;
 using Lobby;
 using Member;
 using Member.Player;
@@ -11,7 +10,6 @@ using Mirror;
 using TMPro;
 using UI.VoteUI;
 using UnityEngine;
-using UnityEngine.UI;
 
 public struct StartGameMessage : NetworkMessage
 {
@@ -199,6 +197,8 @@ public class GameManager : MonoBehaviour
 
         int deadPlayers = 0;
         PlayerBehaviour lastPlayer = null;
+        PlayerBehaviour thisTurnDead = null; 
+            
         foreach (var player in playerList)
         {
             PlayerBehaviour currentPlayer = player.GetComponent<PlayerBehaviour>();
@@ -206,15 +206,22 @@ public class GameManager : MonoBehaviour
             if (currentPlayer.State == PlayerState.Dead)
             {
                 deadPlayers++;
+                thisTurnDead = currentPlayer; 
             }
             else
             {
                 lastPlayer = currentPlayer;
             }
         }
-
+        if (thisTurnDead != null)
+        {
+            Debug.Log(" YAYA " + playerList.Count + " " + deadPlayers);
+            thisTurnDead.playerRank = playerList.Count - (deadPlayers -1);
+        }
+        
         if (deadPlayers == playerList.Count - 1)
         {
+            lastPlayer.playerRank = playerList.Count - deadPlayers; 
             victoryPanel.SetActive(true);
             victoryMessage.text =
                 $" {_lobbyGamePlayerList[lastPlayer.playerIndex].GetDisplayName()} ({lastPlayer.playerNameText.text}) a gagné !";
@@ -230,7 +237,11 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
-
         return false;
+    }
+
+    public NetworkGamePlayer GetNetworkGamePlayer(int playerIndex)
+    {
+        return _lobbyGamePlayerList.Find(x => x.GetPlayerIndex() == playerIndex);
     }
 }

@@ -157,7 +157,7 @@ namespace Lobby
                     var conn = RoomPlayers[i].connectionToClient;
                     var gameplayerInstance = Instantiate(gamePlayerPrefab); 
                     gameplayerInstance.SetDisplayName(RoomPlayers[i].displayName);
-                    gameplayerInstance.SetPlayerIndex(i);
+                    gameplayerInstance.SetPlayerIndex(conn.connectionId); //SI Y'A UN PROBLEME C'EST ICI
                     NetworkServer.Destroy(conn.identity.gameObject);
 
                     NetworkServer.ReplacePlayerForConnection(conn, gameplayerInstance.gameObject);

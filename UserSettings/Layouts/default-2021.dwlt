@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Debug
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 134
+  controlID: 150
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 71
+  controlID: 64
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 92
+  controlID: 18
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 601
     width: 1077
     height: 338
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -298,8 +298,8 @@ MonoBehaviour:
     y: 0
     width: 402
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -431,7 +431,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6651ffff6659ffffdc61ffff3865ffff3e80ffff4c86ffffdc91ffff209cffff389dffff66a0ffffc2a3ffff8ea7ffff16aafffff6aeffff30b5fffff0b9fffff8bfffff16c5ffff7ac8ffff24d5ffff70d8ffff7addffffa4e2ffff04fbffff90840000d48400007a850000ce88000012890000b8890000088d00004c8d0000f28d00003c90000044900000889000002e91000004a4000048a40000eea400003ea8000082a8000028a9000078ad0000bcad000062ae0000b2b10000f6b100009cb20000eeb5000032b60000d8b6000028ba00006cba000012bb000062bd0000a6bd00004cbe000042c6000086c600002cc7000050d2000026d3000030dd000038dd000006de00004ade000024e80000fae800005eec000066ec0000aaec000034ed000050ed00009af0000070f10000
+      m_ExpandedIDs: bc60ffff0461ffff3e64ffff0c65ffff0868ffffee6effffc67affff0e7bffff487effff167fffff588fffffa08fffffda92ffffa893ffff32a0ffff80a0ffffbaa3ffff88a4ffff6ea9ffff28abffff52b6ffff10bfffff9cc4ffffe4c4ffff1ec8ffffecc8ffff24ccffff6cccffffa6cfffff74d0fffff2d2ffff0cd5ffffbaddffff4ae0ffff92e0fffface3ffff98e4ffffb2f5ffff94f8fffffcfafffff4ffffff2461000048610000b861000044620000a29d00009e9e00000eb2000048b60000b8b6000044b700004ee10000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -524,22 +524,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Lobby
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 55
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Lobby
   m_LastFoldersGridSize: 55
   m_LastProjectPath: C:\Users\valen\OneDrive\Bureau\Local-Repository\Spyect
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 99}
-    m_SelectedIDs: dc600000
-    m_LastClickedID: 24796
-    m_ExpandedIDs: 00000000c2600000c4600000d8600000e0600000066100000a61000000ca9a3b
+    scrollPos: {x: 0, y: 67}
+    m_SelectedIDs: e2650000
+    m_LastClickedID: 26082
+    m_ExpandedIDs: 00000000c8600000ca600000e4600000ec600000b6650000e4650000e865000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -567,7 +567,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c2600000c4600000
+    m_ExpandedIDs: 00000000c8600000ca600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -611,7 +611,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 8}
+      m_ClientGUIView: {fileID: 7}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -865,14 +865,14 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.6627808, y: -8.899995, z: 2.439559}
+    m_Target: {x: 95.29735, y: 324.68243, z: -0.18757829}
     speed: 2
-    m_Value: {x: -1.6627808, y: -8.899995, z: 2.439559}
+    m_Value: {x: 95.29735, y: 324.68243, z: -0.18757829}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -919,17 +919,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 24.911465
+    m_Target: 151.63493
     speed: 2
-    m_Value: 26.085304
+    m_Value: 151.63493
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -943,7 +943,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.7217859, y: -0.0041525876, z: 0.0043307645, w: 0.69209033}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -1395,7 +1395,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 56800
+  m_LastSelectedObjectID: 25156
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Inspector
+    m_Text: Debug
     m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
-  m_InspectorMode: 0
+  m_InspectorMode: 1
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
