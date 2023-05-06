@@ -159,6 +159,7 @@ MonoBehaviour:
   agent: {fileID: 24440114}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -174,6 +175,7 @@ MonoBehaviour:
   - {fileID: 1657222387}
   - {fileID: 1541170005}
   directions: []
+  RandomRadius: 5
 --- !u!195 &24440114
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -319,7 +321,7 @@ BoxCollider:
   m_GameObject: {fileID: 155838113}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -409,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &238832180
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +434,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238832179}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb712ca790d5464e823952b2cc9644d, type: 3}
   m_Name: 
@@ -464,7 +466,7 @@ BoxCollider:
   m_GameObject: {fileID: 238832179}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -538,7 +540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &246175109
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +563,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246175108}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb712ca790d5464e823952b2cc9644d, type: 3}
   m_Name: 
@@ -593,7 +595,7 @@ BoxCollider:
   m_GameObject: {fileID: 246175108}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -873,6 +875,7 @@ MonoBehaviour:
   agent: {fileID: 389054651}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -896,6 +899,7 @@ MonoBehaviour:
   - {fileID: 1720283858}
   - {fileID: 350252634}
   - {fileID: 1486324536}
+  RandomRadius: 5
 --- !u!195 &389054651
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -927,7 +931,7 @@ BoxCollider:
   m_GameObject: {fileID: 389054649}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1109,7 +1113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &435539577
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,7 +1136,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435539576}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb712ca790d5464e823952b2cc9644d, type: 3}
   m_Name: 
@@ -1164,7 +1168,7 @@ BoxCollider:
   m_GameObject: {fileID: 435539576}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1357,7 +1361,7 @@ BoxCollider:
   m_GameObject: {fileID: 564770296}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1575,7 +1579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &700840662
 Transform:
   m_ObjectHideFlags: 0
@@ -1598,7 +1602,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700840661}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb712ca790d5464e823952b2cc9644d, type: 3}
   m_Name: 
@@ -1630,7 +1634,7 @@ BoxCollider:
   m_GameObject: {fileID: 700840661}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1720,6 +1724,7 @@ MonoBehaviour:
   agent: {fileID: 865067360}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -1735,6 +1740,7 @@ MonoBehaviour:
   - {fileID: 1657222387}
   - {fileID: 1541170005}
   directions: []
+  RandomRadius: 5
 --- !u!195 &865067360
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1871,6 +1877,7 @@ MonoBehaviour:
   agent: {fileID: 882606973}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -1886,6 +1893,7 @@ MonoBehaviour:
   - {fileID: 1657222387}
   - {fileID: 1541170005}
   directions: []
+  RandomRadius: 5
 --- !u!195 &882606973
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2093,7 +2101,7 @@ BoxCollider:
   m_GameObject: {fileID: 1036601082}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2155,7 +2163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036601082}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -28, y: 0.31, z: 2.7}
+  m_LocalPosition: {x: -34, y: 0.31, z: 2.7}
   m_LocalScale: {x: 27.86, y: 3, z: 7.41}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2313,6 +2321,7 @@ MonoBehaviour:
   agent: {fileID: 1092379693}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -2328,6 +2337,7 @@ MonoBehaviour:
   - {fileID: 1657222387}
   - {fileID: 1541170005}
   directions: []
+  RandomRadius: 5
 --- !u!195 &1092379693
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2464,6 +2474,7 @@ MonoBehaviour:
   agent: {fileID: 1304258899}
   Camera: {fileID: 430358947}
   pathPoints: []
+  randomizedPath: []
   currentIndex: 0
   pathpointPfb: {fileID: 5372122130638354434, guid: 7100060fdc5c33547a3dfb1b4af32f04, type: 3}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -2479,6 +2490,7 @@ MonoBehaviour:
   - {fileID: 1657222387}
   - {fileID: 1541170005}
   directions: []
+  RandomRadius: 5
 --- !u!195 &1304258899
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2624,7 +2636,7 @@ BoxCollider:
   m_GameObject: {fileID: 1335391770}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2894,7 +2906,7 @@ BoxCollider:
   m_GameObject: {fileID: 1711922973}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3077,7 +3089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1762086905
 Transform:
   m_ObjectHideFlags: 0
@@ -3100,7 +3112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762086904}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb712ca790d5464e823952b2cc9644d, type: 3}
   m_Name: 
@@ -3132,7 +3144,7 @@ BoxCollider:
   m_GameObject: {fileID: 1762086904}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

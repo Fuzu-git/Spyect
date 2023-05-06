@@ -8,6 +8,7 @@ public class MoveCube : MonoBehaviour
     public NavMeshAgent agent;
     public Camera Camera;
     public List<GameObject> pathPoints;
+    public List<GameObject> randomizedPath;
     public int currentIndex = 0;
     public GameObject pathpointPfb;
 
@@ -18,6 +19,8 @@ public class MoveCube : MonoBehaviour
 
     public List<Transform> targets;
     public List<Transform> directions;
+
+    public float RandomRadius = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,14 @@ public class MoveCube : MonoBehaviour
         {
             if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hitinfo))
             {
-                CalculateAndShowPath(hitinfo.point);
+                if (NavMesh.SamplePosition(hitinfo.point, out NavMeshHit hit, 5, NavMesh.AllAreas))
+                {
+                    CalculateAndShowPath(hit.position);
+                }
+                else
+                {
+                    Debug.Log("INVALID POSITION");
+                }
                 //StartCoroutine(SetDestination());
             }
         }
@@ -44,18 +54,20 @@ public class MoveCube : MonoBehaviour
             StartCoroutine(SetDestination());
         }*/
 
-        if (pathPoints.Count > 0 && currentIndex < pathPoints.Count)
+        if (randomizedPath.Count > 0 && currentIndex < randomizedPath.Count)
         {
             if (Mathf.Abs(transform.position.x - currentTarget.x) < 1f && Mathf.Abs(transform.position.z - currentTarget.z) < 1f)
             {
-                if (isMainPoint)
+                if (currentIndex < randomizedPath.Count - 1)
                 {
                     currentIndex++;
-                    isMainPoint = false;
+                    GoToCurrentTarget();
+                    //SelectViableDestinations();
                 }
-                if (currentIndex < pathPoints.Count)
+                else
                 {
-                    SelectViableDestinations();
+                    currentIndex = 0;
+                    ClearPaths();
                 }
             }
         }
@@ -69,32 +81,75 @@ public class MoveCube : MonoBehaviour
         currentTarget = pos;
     }
 
-    public void CalculateAndShowPath(Vector3 destination)
+    void ClearPaths()
     {
-        finalPath = new NavMeshPath();
-        agent.CalculatePath(destination, finalPath);
-
         foreach (GameObject go in pathPoints)
         {
             Destroy(go);
         }
+        foreach (GameObject go in randomizedPath)
+        {
+            Destroy(go);
+        }
+        randomizedPath.Clear();
         pathPoints.Clear();
+
+    }
+
+    public void CalculateAndShowPath(Vector3 destination)
+    {
+        ClearPaths();
+        finalPath = new NavMeshPath();
+        agent.CalculatePath(destination, finalPath);
+        Debug.Log($"path length {finalPath.corners.Length}");
 
         for (int i = 1; i < finalPath.corners.Length; i++)
         {
             GameObject go = Instantiate(pathpointPfb, finalPath.corners[i], Quaternion.identity, Camera.transform);
             pathPoints.Add(go);
             go.name = $"Point {i}";
+
+            if (i < finalPath.corners.Length - 1)
+            {
+                bool validPos = false;
+                Vector3 randomizedDestination = Vector3.zero;
+                while (!validPos)
+                {
+                    randomizedDestination = finalPath.corners[i] + Random.insideUnitSphere * RandomRadius;
+                    randomizedDestination.y = finalPath.corners[i].y;
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(randomizedDestination, out hit, 1.0f, NavMesh.AllAreas))
+                    {
+                        randomizedDestination = hit.position;
+                        validPos = true;
+                    }
+                }
+                GameObject point = Instantiate(pathpointPfb, randomizedDestination, Quaternion.identity, Camera.transform);
+                point.GetComponent<Renderer>().material.color = Color.red;
+                randomizedPath.Add(point);
+            }
+            else
+            {
+                randomizedPath.Add(go);
+            }
         }
 
-        SelectViableDestinations();
+        GoToCurrentTarget();
+
+        //SelectViableDestinations();
+    }
+
+    void GoToCurrentTarget()
+    {
+        agent.SetDestination(randomizedPath[currentIndex].transform.position);
+        currentTarget = randomizedPath[currentIndex].transform.position;
     }
 
     public void SelectViableDestinations()
     {
         Vector3 mainTarget = pathPoints[currentIndex].transform.position;
         Vector3 currentTargetDirection = pathPoints[currentIndex].transform.position - transform.position;
-        //si la cible est sur une destination qui ne demande pas de tourner
+        //si la cible est sur une destination accessible horizontalement, verticalement ou en diagonale
         if (Mathf.Approximately(currentTargetDirection.x, 0f) || Mathf.Approximately(currentTargetDirection.z, 0f) || Mathf.Approximately(Mathf.Abs(currentTargetDirection.x), Mathf.Abs(currentTargetDirection.z)))
         {
             //go to current target
