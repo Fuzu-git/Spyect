@@ -1,70 +1,52 @@
+using System;
+using Cinemachine;
 using Member.Player.DataPlayer;
 using Mirror;
 using UnityEngine;
 
 namespace Member.Player.ControlPlayer
 {
-    public class PlayerMovementController :  NetworkBehaviour
+    public class PlayerMovementController : NetworkBehaviour
     {
-        [SerializeField] private CharacterController controller;
         [SerializeField] private PlayerBehaviour playerBehaviour;
-        [SerializeField] public float movementSpeed = 5f;
-        //[SerializeField] private Animator _animator;
-        
-        private Vector2 _previousInput; 
+        [SerializeField] private NavMeshMovement navMeshMovement;
 
-        private Controls _controls;
-        private Controls Controls
+        private Quaternion constantRotation;
+
+        public Camera mainCamera;
+
+        private void Awake()
         {
-            get
-            {
-                if (_controls != null)
-                {
-                    return _controls; 
-                }
-                return _controls = new Controls();
-            }
+            //mainCamera.transform.localEulerAngles = Vector3.zero;
+            constantRotation = mainCamera.transform.rotation;
         }
 
         public override void OnStartAuthority()
         {
             enabled = true;
-
-            Controls.Player.Move.performed += ctx => SetMovement(ctx.ReadValue<Vector2>());
-            Controls.Player.Move.canceled += ctx => ResetMovement();
         }
 
-        [ClientCallback]
-        private void OnEnable() => Controls.Enable();
-        [ClientCallback]
-        private void OnDisable() => Controls.Disable();
-
-        //better on PlayerBehaviour ? 
-        [ClientCallback]
+        //[ClientCallback]
         private void Update()
         {
-            if (playerBehaviour.canMove)
+            if (PlayerBehaviour.local == playerBehaviour)
             {
-                Move(); 
+                Debug.Log("COUCOU ");
+                mainCamera.gameObject.SetActive(true);
+                Debug.Log("OUI ");
+                //mainCamera.transform.rotation = constantRotation;
+
+                if (playerBehaviour.canMove)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
+                        {
+                            navMeshMovement.GoToDestination(hitInfo.point);
+                        }
+                    }
+                }
             }
-            
-            //_animator.SetBool("IsMoving", Mathf.Approximately(_movementInput.magnitude,0));
-        }
-        
-        
-        [Client]
-        private void SetMovement(Vector2 movement) => _previousInput = movement;
-
-        [Client]
-        private void ResetMovement() => _previousInput = Vector2.zero;
-
-        
-        [Client]
-        private void Move()
-        {
-            Vector3 movement = transform.right.normalized * _previousInput.x + transform.up.normalized * _previousInput.y;
-
-            controller.Move(movement * (movementSpeed * Time.deltaTime));
         }
     }
 }

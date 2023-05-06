@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 266112640535017972}
   - component: {fileID: 266112640535017971}
   - component: {fileID: 266112640535017970}
+  - component: {fileID: 3045724121375852986}
   - component: {fileID: -3797467250425759931}
   m_Layer: 0
   m_Name: ArtificialIntelligence
@@ -282,8 +283,28 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3147572375345808259}
   animator: {fileID: 277800700629637450}
   aiIndex: -1
+  navMeshMovement: {fileID: 3045724121375852986}
   _isWaiting: 0
   _meshAgent: {fileID: -3797467250425759931}
+--- !u!114 &3045724121375852986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266112640535017968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7990c98f4d62b2a47bb72671b5baecaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: -3797467250425759931}
+  pathPoints: []
+  randomizedPath: []
+  currentIndex: 0
+  currentTarget: {x: 0, y: 0, z: 0}
+  randomRadius: 5
+  validClickRange: 10
 --- !u!195 &-3797467250425759931
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -298,7 +319,7 @@ NavMeshAgent:
   m_Acceleration: 50000
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 2.1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

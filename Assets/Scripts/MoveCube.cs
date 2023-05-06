@@ -93,7 +93,6 @@ public class MoveCube : MonoBehaviour
         }
         randomizedPath.Clear();
         pathPoints.Clear();
-
     }
 
     public void CalculateAndShowPath(Vector3 destination)
@@ -161,7 +160,7 @@ public class MoveCube : MonoBehaviour
         {
             List<Vector3> diagResult = new List<Vector3>() { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
 
-            //je calcule deux points intermédaires pour dessiner mes deux droites de support
+            //je calcule deux points intermï¿½daires pour dessiner mes deux droites de support
             Vector3 tempTarget1 = new Vector3(pathPoints[currentIndex].transform.position.x, transform.position.y, transform.position.z);
             Vector3 tempTarget2 = new Vector3(transform.position.x, transform.position.y, pathPoints[currentIndex].transform.position.z);
 
@@ -209,7 +208,7 @@ public class MoveCube : MonoBehaviour
                 }
             }
 
-            //res est le point en diagonal selectionné
+            //res est le point en diagonal selectionnï¿½
             if (TestAndGo(currentTempTarget)) return;
             if (TestAndGo(tempTarget1)) return;
             if (TestAndGo(tempTarget2)) return;
@@ -220,7 +219,7 @@ public class MoveCube : MonoBehaviour
     {
         NavMeshPath testPath = new NavMeshPath();
         agent.CalculatePath(target, testPath);
-        if (testPath.corners.Length > 2) //y'a un obstacle il faut calculer de nouveaux point intermédiaire
+        if (testPath.corners.Length > 2) //y'a un obstacle il faut calculer de nouveaux point intermï¿½diaire
         {
             return false;
         }

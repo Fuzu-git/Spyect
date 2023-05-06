@@ -22,6 +22,9 @@ namespace Member.AI
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
         
+        [SerializeField]
+        private NavMeshMovement navMeshMovement; 
+        
         [SerializeField] private bool _isWaiting = false;
         [SerializeField] private NavMeshAgent _meshAgent;
 
@@ -42,9 +45,8 @@ namespace Member.AI
                 if (!isWalkingTowardTarget) 
                 {
                     isWalkingTowardTarget = true;
-                    _meshAgent.SetDestination(_designatedPoint.position);
+                    navMeshMovement.GoToDestination(_designatedPoint.position);
                 }
-                //_transform.position = Vector3.MoveTowards(_transform.position, _designatedPoint.position, movementSpeed * Time.deltaTime);
                 Flip(_transform.position.x - _lastPosition.x);
                 if (Vector3.Distance(_transform.position,_designatedPoint.position) <= _meshAgent.stoppingDistance+0.1f)
                 {

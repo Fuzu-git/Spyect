@@ -4,12 +4,12 @@ using System.Linq;
 using Mirror;
 using UI.VoteUI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Member.Player.DataPlayer
 {
     public class PlayerBehaviour : AvatarBehaviour
     {
-        public CharacterController cc; 
         public static PlayerBehaviour local;
         [SyncVar (hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
@@ -19,6 +19,19 @@ namespace Member.Player.DataPlayer
 
         [SyncVar (hook = nameof(UpdateRealPlayerName))]
         public string realPlayerName; 
+        
+        private Vector3 _lastPosition;
+        private Transform _transform;
+        
+        
+        [SerializeField] private NavMeshMovement navMeshMovement;
+        
+        private void Awake()
+        {
+            
+            _transform = transform;
+            _lastPosition = _transform.position;
+        }
         
         protected override IEnumerator Start()
         {
@@ -31,10 +44,15 @@ namespace Member.Player.DataPlayer
 
         private void Update()
         {
-            Flip(cc.velocity.x);
-            float characterVelocityX = Mathf.Abs(cc.velocity.x);
-            float characterVelocityY = Mathf.Abs(cc.velocity.z);
-            animator.SetFloat("speedX", characterVelocityX + characterVelocityY);
+            Vector3 velocity = _transform.position - _lastPosition; 
+            
+            if ((velocity.x != 0 || velocity.z != 0) && canMove)
+            {
+                Flip(velocity.x);
+                animator.SetFloat("speedX",  velocity.x);
+            }
+            
+            _lastPosition = _transform.position;
         }
 
         void UpdatePlayerIndex(int oldValue, int newValue)
