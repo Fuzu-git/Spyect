@@ -1,5 +1,3 @@
-using System;
-using Cinemachine;
 using Member.Player.DataPlayer;
 using Mirror;
 using UnityEngine;
@@ -30,7 +28,6 @@ namespace Member.Player.ControlPlayer
                     {
                         if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
                         {
-                            Debug.Log(hitInfo.collider.gameObject.name);
                             navMeshMovement.GoToDestination(hitInfo.point);
                         }
                     }

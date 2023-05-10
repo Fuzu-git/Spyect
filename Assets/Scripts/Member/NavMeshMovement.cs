@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,6 +19,7 @@ namespace Member
         public float randomRadius = 5f;
         public float randomRadiusEnd = 1f;
         public float validClickRange = 10f;
+        public bool arrived = false;
 
         private void Awake()
         {
@@ -30,8 +30,10 @@ namespace Member
         {
             if (randomizedPath.Count > 0 && currentIndex < randomizedPath.Count)
             {
-                if (Mathf.Abs(transform.position.x - currentTarget.x) < 1f &&
-                    Mathf.Abs(transform.position.z - currentTarget.z) < 1f)
+                Vector3 flatAgentPos = new Vector3(transform.position.x, 0, transform.position.z);
+                Vector3 flatTargetPos = new Vector3(currentTarget.x, 0, currentTarget.z);
+
+                if (Vector3.Distance(flatAgentPos, flatTargetPos) <= agent.stoppingDistance * 1.1f)
                 {
                     if (currentIndex < randomizedPath.Count - 1)
                     {
@@ -40,6 +42,7 @@ namespace Member
                     }
                     else
                     {
+                        arrived = true;
                         currentIndex = 0;
                         ResetPaths();
                     }
@@ -51,6 +54,7 @@ namespace Member
         {
             if (NavMesh.SamplePosition(destination, out NavMeshHit hit, validClickRange, NavMesh.AllAreas))
             {
+                arrived = false;
                 CalculatePath(hit.position);
             }
             else
@@ -65,7 +69,6 @@ namespace Member
             ResetPaths();
             NavMeshPath = new NavMeshPath();
             agent.CalculatePath(destination, NavMeshPath);
-            Debug.Log($"path length {NavMeshPath.corners.Length}");
 
             for (int i = 1; i < NavMeshPath.corners.Length; i++)
             {
@@ -86,7 +89,6 @@ namespace Member
                             validPos = true;
                         }
                     }
-
                     randomizedPath.Add(randomizedDestination);
                 }
                 else
@@ -104,7 +106,6 @@ namespace Member
                             validPos = true;
                         }
                     }
-
                     randomizedPath.Add(randomizedDestination);
                 }
             }

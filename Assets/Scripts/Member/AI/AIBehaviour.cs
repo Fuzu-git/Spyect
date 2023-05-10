@@ -1,12 +1,9 @@
-using System;
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
-using Member.Player.ControlPlayer;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using Member.Player.DataPlayer;
-using Mirror;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Member.AI
 {
@@ -21,10 +18,10 @@ namespace Member.AI
 
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
-        
+
         [SerializeField]
-        private NavMeshMovement navMeshMovement; 
-        
+        private NavMeshMovement navMeshMovement;
+
         [SerializeField] private bool _isWaiting = false;
         [SerializeField] private NavMeshAgent _meshAgent;
 
@@ -42,19 +39,19 @@ namespace Member.AI
 
             if (canMove && !_isWaiting && isServer)
             {
-                if (!isWalkingTowardTarget) 
+                if (!isWalkingTowardTarget)
                 {
                     isWalkingTowardTarget = true;
                     navMeshMovement.GoToDestination(_designatedPoint.position);
                 }
                 Flip(_transform.position.x - _lastPosition.x);
-                if (Vector3.Distance(_transform.position,_designatedPoint.position) <= _meshAgent.stoppingDistance+0.1f)
+                if (navMeshMovement.arrived)
                 {
                     StartCoroutine(Idle());
                 }
             }
-            _lastPosition = _transform.position; 
-        }   
+            _lastPosition = _transform.position;
+        }
 
         public override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
         {
@@ -93,7 +90,7 @@ namespace Member.AI
 
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);
         public static void RemoveMovePoint(Transform transform) => _movePoints.Remove(transform);
-        
+
         private void SetDesignatedPoint()
         {
             int randIndex = Random.Range(0, _movePoints.Count);
