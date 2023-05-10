@@ -303,8 +303,9 @@ MonoBehaviour:
   randomizedPath: []
   currentIndex: 0
   currentTarget: {x: 0, y: 0, z: 0}
-  randomRadius: 5
-  validClickRange: 10
+  randomRadius: 0
+  randomRadiusEnd: 0
+  validClickRange: 1
 --- !u!195 &-3797467250425759931
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -319,7 +320,7 @@ NavMeshAgent:
   m_Acceleration: 50000
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

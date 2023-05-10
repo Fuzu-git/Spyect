@@ -11,30 +11,18 @@ namespace Member.Player.ControlPlayer
         [SerializeField] private PlayerBehaviour playerBehaviour;
         [SerializeField] private NavMeshMovement navMeshMovement;
 
-        private Quaternion constantRotation;
-
         public Camera mainCamera;
-
-        private void Awake()
-        {
-            //mainCamera.transform.localEulerAngles = Vector3.zero;
-            constantRotation = mainCamera.transform.rotation;
-        }
 
         public override void OnStartAuthority()
         {
             enabled = true;
         }
 
-        //[ClientCallback]
         private void Update()
         {
             if (PlayerBehaviour.local == playerBehaviour)
             {
-                Debug.Log("COUCOU ");
                 mainCamera.gameObject.SetActive(true);
-                Debug.Log("OUI ");
-                //mainCamera.transform.rotation = constantRotation;
 
                 if (playerBehaviour.canMove)
                 {
@@ -42,6 +30,7 @@ namespace Member.Player.ControlPlayer
                     {
                         if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
                         {
+                            Debug.Log(hitInfo.collider.gameObject.name);
                             navMeshMovement.GoToDestination(hitInfo.point);
                         }
                     }

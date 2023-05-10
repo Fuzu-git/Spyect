@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Member
 {
@@ -16,7 +18,13 @@ namespace Member
         public Vector3 currentTarget;
 
         public float randomRadius = 5f;
+        public float randomRadiusEnd = 1f;
         public float validClickRange = 10f;
+
+        private void Awake()
+        {
+            agent.updateRotation = false;
+        }
 
         void Update()
         {
@@ -33,7 +41,7 @@ namespace Member
                     else
                     {
                         currentIndex = 0;
-                        ClearPaths();
+                        ResetPaths();
                     }
                 }
             }
@@ -47,13 +55,14 @@ namespace Member
             }
             else
             {
+                ResetPaths();
                 Debug.Log("INVALID POSITION");
             }
         }
-        
+
         public void CalculatePath(Vector3 destination)
         {
-            ClearPaths();
+            ResetPaths();
             NavMeshPath = new NavMeshPath();
             agent.CalculatePath(destination, NavMeshPath);
             Debug.Log($"path length {NavMeshPath.corners.Length}");
@@ -82,16 +91,32 @@ namespace Member
                 }
                 else
                 {
-                    randomizedPath.Add(NavMeshPath.corners[i]);
+                    bool validPos = false;
+                    Vector3 randomizedDestination = Vector3.zero;
+                    while (!validPos)
+                    {
+                        randomizedDestination = NavMeshPath.corners[i] + Random.insideUnitSphere * randomRadiusEnd;
+                        randomizedDestination.y = NavMeshPath.corners[i].y;
+                        NavMeshHit hit;
+                        if (NavMesh.SamplePosition(randomizedDestination, out hit, 1.0f, NavMesh.AllAreas))
+                        {
+                            randomizedDestination = hit.position;
+                            validPos = true;
+                        }
+                    }
+
+                    randomizedPath.Add(randomizedDestination);
                 }
             }
+
             GoToCurrentTarget();
         }
 
-        void ClearPaths()
+        void ResetPaths()
         {
             randomizedPath.Clear();
             pathPoints.Clear();
+            currentIndex = 0;
         }
 
         void GoToCurrentTarget()

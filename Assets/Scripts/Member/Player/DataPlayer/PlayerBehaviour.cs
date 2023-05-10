@@ -45,13 +45,16 @@ namespace Member.Player.DataPlayer
         private void Update()
         {
             Vector3 velocity = _transform.position - _lastPosition; 
-            
             if ((velocity.x != 0 || velocity.z != 0) && canMove)
             {
                 Flip(velocity.x);
-                animator.SetFloat("speedX",  velocity.x);
+                //animator.SetFloat("speedX",  velocity.x);
+                animator.SetBool("isWaiting", false); 
             }
-            
+            else
+            {
+                animator.SetBool("isWaiting", true); 
+            }
             _lastPosition = _transform.position;
         }
 
