@@ -19,36 +19,43 @@ namespace UI
 
         private void OnDestroy()
         {
-            gameManager.onGameStarted -= OnGameStart; 
+            gameManager.onGameStarted -= OnGameStart;
         }
 
         private void OnGameStart()
         {
-            PlayerBehaviour player = PlayerBehaviour.local;
-            
-            foreach (GameObject element in gameManager.playerList)
-            {
-                    roleText.text = "There is your new identity... " + player.playerNameText.text + ".";
-            }
-            StartCoroutine(DoFade());
+            StartCoroutine(WaitingFade());
         }
 
+
+        private IEnumerator WaitingFade()
+        {
+            yield return new WaitUntil(() => PlayerBehaviour.local != null);
+            yield return new WaitUntil(() => !string.IsNullOrEmpty(PlayerBehaviour.local.playerInGameName));
+
+            yield return null; 
+
+            roleText.text = "There is your new identity... " + PlayerBehaviour.local.playerInGameName + ".";
+            StartCoroutine(DoFade());
+        }
+        
         private IEnumerator DoFade()
         {
             yield return new WaitForSeconds(2);
 
             float time = 0;
             float duration = 2;
- 
+
             while (time < duration)
             {
                 group.alpha = Mathf.Lerp(1, 0, time / duration);
                 time += Time.deltaTime;
                 yield return null;
             }
+
             group.alpha = 0;
             group.blocksRaycasts = false;
-            group.interactable = false; 
+            group.interactable = false;
         }
     }
 }

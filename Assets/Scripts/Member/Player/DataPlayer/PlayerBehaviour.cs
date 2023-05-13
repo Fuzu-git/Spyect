@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Mirror;
 using UI.VoteUI;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,50 +12,54 @@ namespace Member.Player.DataPlayer
     public class PlayerBehaviour : AvatarBehaviour
     {
         public static PlayerBehaviour local;
-        [SyncVar (hook = nameof(UpdatePlayerIndex))]
+
+        [SyncVar(hook = nameof(UpdatePlayerIndex))]
         public int playerIndex = -1;
 
-        [SyncVar (hook =  nameof(UpdatePlayerRank))]
+        [SyncVar(hook = nameof(UpdatePlayerRank))]
         public int playerRank = -1;
 
-        [SyncVar (hook = nameof(UpdateRealPlayerName))]
-        public string realPlayerName; 
-        
+        [SyncVar(hook = nameof(UpdateRealPlayerName))]
+        public string realPlayerName;
+
         private Vector3 _lastPosition;
         private Transform _transform;
-        
-        
+
         [SerializeField] private NavMeshMovement navMeshMovement;
-        
+
+        public int playerSuspected = 0;
+
+
         private void Awake()
         {
-            
             _transform = transform;
             _lastPosition = _transform.position;
         }
-        
+
         protected override IEnumerator Start()
         {
             if (isLocalPlayer)
             {
                 local = this;
             }
+
             yield return StartCoroutine(base.Start());
         }
 
         private void Update()
         {
-            Vector3 velocity = _transform.position - _lastPosition; 
+            Vector3 velocity = _transform.position - _lastPosition;
             if ((velocity.x != 0 || velocity.z != 0) && canMove)
             {
                 Flip(velocity.x);
                 //animator.SetFloat("speedX",  velocity.x);
-                animator.SetBool("isWaiting", false); 
+                animator.SetBool("isWaiting", false);
             }
             else
             {
-                animator.SetBool("isWaiting", true); 
+                animator.SetBool("isWaiting", true);
             }
+
             _lastPosition = _transform.position;
         }
 
@@ -71,7 +76,7 @@ namespace Member.Player.DataPlayer
 
         void UpdateRealPlayerName(string oldValue, string newValue)
         {
-            realPlayerName = newValue; 
+            realPlayerName = newValue;
         }
 
         protected override void SelectRandomProfile()
@@ -80,7 +85,7 @@ namespace Member.Player.DataPlayer
             profileIndex = ProfileFillerComponent.GetIndex(playerIndex);
             SendProfilToClient(profileIndex);
         }
-        
+
         public void SetPlayerIndex(int playerIndex)
         {
             this.playerIndex = playerIndex;
@@ -91,13 +96,13 @@ namespace Member.Player.DataPlayer
         public void CmdAssignNetworkAuthority(NetworkIdentity uiAuthorityId)
         {
             //If -> cube has a owner && owner isn't the actual owner
-            
+
             // Remove authority
             uiAuthorityId.RemoveClientAuthority();
             // Add client as owner
             uiAuthorityId.AssignClientAuthority(netIdentity.connectionToClient);
         }
-        
+
         public override void OnPlayerStateChanged(PlayerState oldState, PlayerState newState)
         {
             switch (newState)
@@ -113,43 +118,55 @@ namespace Member.Player.DataPlayer
                         rColor.a = 0.39f;
                         r.color = rColor;
                     }
+
                     foreach (var mr in meshRenderers)
                     {
                         mr.gameObject.layer = 8;
                     }
+
                     GameManager.CheckVictory();
-                    
+
                     if (isLocalPlayer)
                     {
                         Camera.main.cullingMask = -1;
                     }
+
                     //Change mainCamera to render DeadPlayers. (can't access culling mask. 
                     //joueur désigné mort. (lien vers UI)
-                    break; 
-                
+                    break;
+
                 case PlayerState.Spectate:
-                    break; 
+                    break;
             }
         }
-        
+
         [Command]
         public void CmdVote(int targetedAvatarIndex, EVoteResult voteResult)
         {
-            AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex].GetComponent<AvatarBehaviour>();
+            AvatarBehaviour target = GameManager.instance.memberList[targetedAvatarIndex]
+                .GetComponent<AvatarBehaviour>();
 
             if (GameManager.instance.Vote(this, target, voteResult))
             {
                 GameManager.instance.CheckAllVotes(targetedAvatarIndex);
-                
+
                 if (voteResult == EVoteResult.Yes)
                 {
                     GameManager.instance.ReceiveVoteUI.RpcColorFirstColorlessShape(Color.green, targetedAvatarIndex);
-
-                } else if (voteResult == EVoteResult.No)
+                }
+                else if (voteResult == EVoteResult.No)
                 {
                     GameManager.instance.ReceiveVoteUI.RpcColorFirstColorlessShape(Color.red, targetedAvatarIndex);
                 }
-                
+            }
+        }
+
+        [ClientRpc]
+        public void RpcDeathMessage()
+        {
+            if (PlayerBehaviour.local == this)
+            {
+                Debug.Log("T MORT");
             }
         }
 

@@ -27,7 +27,7 @@ namespace Member
         protected ProfileFiller ProfileFillerComponent;
         
         public TMP_Text playerNameText;
-        protected string PlayerInGameName;
+        public string playerInGameName = null; 
         public SpriteRenderer spriteRenderer;
         
         public Animator animator;
@@ -117,8 +117,8 @@ namespace Member
         protected void SendProfilToClient(int profileIndex)
         {
             PlayerData currentSo = ProfileFillerComponent.profiles[profileIndex];
-            PlayerInGameName = currentSo.playerInGameName;
-            playerNameText.text = PlayerInGameName;
+            playerInGameName = currentSo.playerInGameName;
+            playerNameText.text = playerInGameName;
             animator.runtimeAnimatorController = currentSo.avatarAnimator;
         }
 

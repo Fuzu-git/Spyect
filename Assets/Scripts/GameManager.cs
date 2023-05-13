@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Lobby;
 using Member;
+using Member.AI;
 using Member.Player;
 using Member.Player.DataPlayer;
 using Mirror;
@@ -58,8 +59,10 @@ public class GameManager : MonoBehaviour
     private PlayerNumberCounter _playerNumberCounter;
     private List<NetworkGamePlayer> _lobbyGamePlayerList = new List<NetworkGamePlayer>();
 
-    [SerializeField] private RankingUIManager rankingUIManager; 
+    [SerializeField] private RankingUIManager rankingUIManager;
 
+    const int suspectedLimit = 1; 
+    
     public void Awake()
     {
         instance = this;
@@ -190,6 +193,21 @@ public class GameManager : MonoBehaviour
                 if (vote.Value > 0)
                 {
                     vote.Key.State = PlayerState.Dead;
+                    if (vote.Key is AIBehaviour)
+                    {
+                        foreach (var v in voteAgainstTarget)
+                        {
+                            if (v.voteResult == EVoteResult.Yes)
+                            {
+                                v.origin.playerSuspected++;
+                                if (v.origin.playerSuspected >= suspectedLimit)
+                                {
+                                    v.origin.State = PlayerState.Dead;
+                                    v.origin.RpcDeathMessage();
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
