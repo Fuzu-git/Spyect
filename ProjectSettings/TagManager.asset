@@ -13,6 +13,7 @@ TagManager:
   - AI
   - Task
   - GamePlayerPrefab
+  - MASTER
   layers:
   - Default
   - TransparentFX

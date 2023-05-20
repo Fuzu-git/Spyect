@@ -702,16 +702,32 @@ PrefabInstance:
       value: Spyect
       objectReference: {fileID: 0}
     - target: {fileID: 1563327559624482645, guid: 5d446b5c141b0e341915896b78466175, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563327559624482645, guid: 5d446b5c141b0e341915896b78466175, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 650.564
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563327559624482645, guid: 5d446b5c141b0e341915896b78466175, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563327559624482645, guid: 5d446b5c141b0e341915896b78466175, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 196
       objectReference: {fileID: 0}
     - target: {fileID: 1563327559724681592, guid: 5d446b5c141b0e341915896b78466175, type: 3}
       propertyPath: m_MatchWidthOrHeight
-      value: 0
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563327559724681592, guid: 5d446b5c141b0e341915896b78466175, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 1563327559724681592, guid: 5d446b5c141b0e341915896b78466175, type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 720
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 1563327559724681595, guid: 5d446b5c141b0e341915896b78466175, type: 3}
       propertyPath: m_Camera

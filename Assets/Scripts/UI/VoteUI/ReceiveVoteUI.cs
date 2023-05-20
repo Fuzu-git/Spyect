@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using TMPro;
@@ -25,6 +26,12 @@ namespace UI.VoteUI
         [Command]
         public void CmdUpdateContentData(int avatarIndex)
         {
+            StartCoroutine(RandomDelay(avatarIndex));
+        }
+
+        private IEnumerator RandomDelay(int avatarIndex)
+        {
+            yield return new WaitForSeconds(Random.Range(3, 5));
             RpcUpdateContentData(avatarIndex);
         }
 

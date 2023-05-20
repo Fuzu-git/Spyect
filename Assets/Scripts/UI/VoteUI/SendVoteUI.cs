@@ -26,14 +26,6 @@ namespace UI.VoteUI
         {
             if (once == false)
             {
-                /*int totalPlayerNumber = GameObject.FindGameObjectWithTag("PlayerCounter")
-                    .GetComponent<PlayerNumberCounter>().PlayerNumber;
-
-                while (GameManager.playerList.Count != totalPlayerNumber)
-                {
-                    yield return new WaitForSeconds(1f);
-                }*/
-
                 while (mainCanvasUI == null)
                 {
                     GameObject temp = GameObject.FindGameObjectWithTag("CanvasUI");
@@ -52,13 +44,6 @@ namespace UI.VoteUI
                 gameObject.SetActive(false);
                 once = true;
             }
-
-
-            /*foreach (var player in GameManager.playerList)
-            {
-                playerEntryPrefab._playerInGameName = player.GetComponent<PlayerBehaviour>().playerNameText;
-                gridVoteContentList.Add(playerEntryPrefab);
-            }*/
         }
 
         /// <summary>
