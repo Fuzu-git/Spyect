@@ -19,15 +19,16 @@ namespace Member.AI
         [SyncVar(hook = nameof(AiIndexChanged))]
         public int aiIndex;
 
-        [SerializeField]
-        private NavMeshMovement navMeshMovement;
+        [SerializeField] private NavMeshMovement navMeshMovement;
 
         [SerializeField] private bool _isWaiting = false;
         [SerializeField] private NavMeshAgent _meshAgent;
 
+        private bool isIdle = false; 
+
         private void Awake()
         {
-            SetDesignatedPoint();
+            SetDesignatedPoint(false);
 
             _transform = transform;
             _lastPosition = _transform.position;
@@ -35,19 +36,30 @@ namespace Member.AI
 
         private void Update()
         {
-            animator.SetBool("isWaiting", _isWaiting || !canMove);
-
-            if (canMove && !_isWaiting && isServer)
+            Vector3 velocity = _transform.position - _lastPosition;
+            if (canMove)
             {
                 if (!isWalkingTowardTarget)
                 {
-                    isWalkingTowardTarget = true;
+                    isIdle = false; 
                     navMeshMovement.GoToDestination(_designatedPoint.position);
+                    isWalkingTowardTarget = true;
                 }
-                Flip(_transform.position.x - _lastPosition.x);
-                if (navMeshMovement.arrived)
+
+                if (navMeshMovement.arrived && !isIdle)
                 {
                     StartCoroutine(Idle());
+                }
+                if (velocity.x != 0 || velocity.z != 0)
+                {
+                    Flip(velocity.x);
+
+                    animator.SetBool("isWaiting", false);
+                    
+                }
+                else
+                {
+                    animator.SetBool("isWaiting", true);
                 }
             }
             _lastPosition = _transform.position;
@@ -91,7 +103,7 @@ namespace Member.AI
         public static void AddMovePoint(Transform transform) => _movePoints.Add(transform);
         public static void RemoveMovePoint(Transform transform) => _movePoints.Remove(transform);
 
-        private void SetDesignatedPoint()
+        private void SetDesignatedPoint(bool change)
         {
             int randIndex = Random.Range(0, _movePoints.Count);
             while (_designatedPoint == _movePoints[randIndex])
@@ -100,18 +112,23 @@ namespace Member.AI
             }
 
             _designatedPoint = _movePoints[randIndex];
+            if (change)
+            {
+                isWalkingTowardTarget = false;
+            }
         }
 
         private IEnumerator Idle()
         {
-            _isWaiting = true;
-            UpdateisWatingState(true);
+            isIdle = true; 
+            //_isWaiting = true;
+            //UpdateisWatingState(true);
             float randStop = Random.Range(4f, 10f);
             yield return new WaitForSeconds(randStop);
-            SetDesignatedPoint();
-            _isWaiting = false;
-            isWalkingTowardTarget = false;
-            UpdateisWatingState(false);
+            SetDesignatedPoint(true);
+            //_isWaiting = false;
+            //isWalkingTowardTarget = false;
+            //UpdateisWatingState(false);
         }
 
         [ClientRpc]

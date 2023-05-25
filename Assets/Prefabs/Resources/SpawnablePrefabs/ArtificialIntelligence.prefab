@@ -78,7 +78,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1250944906613186934
 MonoBehaviour:
@@ -280,6 +280,7 @@ MonoBehaviour:
   movementSpeed: 5
   canMove: 0
   playerNameText: {fileID: 1250944906613186934}
+  playerInGameName: 
   spriteRenderer: {fileID: 3147572375345808259}
   animator: {fileID: 277800700629637450}
   aiIndex: -1

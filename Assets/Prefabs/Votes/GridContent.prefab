@@ -28,16 +28,16 @@ RectTransform:
   m_GameObject: {fileID: 5022048523004698225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2993, y: 2.2993, z: 2.2993}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5022048523250997066}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -84.8, y: 26}
-  m_SizeDelta: {x: 72.6037, y: 41.396}
+  m_AnchorMin: {x: 0.7225, y: 0}
+  m_AnchorMax: {x: 0.96750003, y: 0.7266667}
+  m_AnchoredPosition: {x: -0.5999756, y: 0.5}
+  m_SizeDelta: {x: -55.701904, y: -61.604004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5022048523004698237
 CanvasRenderer:
@@ -67,15 +67,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1357143831, guid: a31fc539a87237a40b56846961c61963, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5022048523004698227
 MonoBehaviour:
@@ -98,7 +98,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 1, b: 0.075618744, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.11703687, g: 0.6226415, b: 0.09104663, a: 1}
     m_PressedColor: {r: 0.13950695, g: 0.40392157, b: 0.17523748, a: 1}
     m_SelectedColor: {r: 0.14117648, g: 0.40392157, b: 0.1764706, a: 1}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
+  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0.85882354}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -246,16 +246,16 @@ RectTransform:
   m_GameObject: {fileID: 5022048523572024644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8575, y: 1.8575, z: 1.8575}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5022048523250997066}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 37.1, y: 0}
-  m_SizeDelta: {x: 45.4628, y: 70.965}
+  m_AnchorMin: {x: 0.035, y: 0.060000002}
+  m_AnchorMax: {x: 0.25, y: 0.94000006}
+  m_AnchoredPosition: {x: 0.29992676, y: 0}
+  m_SizeDelta: {x: -40.5372, y: -61.035004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5022048523572024641
 CanvasRenderer:
@@ -328,10 +328,10 @@ RectTransform:
   m_Father: {fileID: 5022048523250997066}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 31.5, y: -16.650948}
-  m_SizeDelta: {x: 130.6518, y: 33.301895}
+  m_AnchorMin: {x: 0.2975, y: 0.70000005}
+  m_AnchorMax: {x: 0.70500004, y: 0.92}
+  m_AnchoredPosition: {x: -0.5, y: 0}
+  m_SizeDelta: {x: 0.9674072, y: -0.69810104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5022048523804239178
 CanvasRenderer:
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <GamePlayerName>
+  m_text: Elisabeth
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -370,8 +370,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -388,8 +388,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

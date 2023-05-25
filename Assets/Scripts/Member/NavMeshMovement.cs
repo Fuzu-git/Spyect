@@ -1,8 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using Random = UnityEngine.Random;
 
 namespace Member
 {
@@ -36,19 +36,48 @@ namespace Member
 
                 if (Vector3.Distance(flatAgentPos, flatTargetPos) <= agent.stoppingDistance * 1.1f)
                 {
-                    if (currentIndex < randomizedPath.Count - 1)
-                    {
-                        currentIndex++;
-                        GoToCurrentTarget();
-                    }
-                    else
-                    {
-                        arrived = true;
-                        currentIndex = 0;
-                        ResetPaths();
-                    }
+                    StartCoroutine(RandomPause());
                 }
             }
+        }
+
+        private IEnumerator RandomPause()
+        {
+            if (GameManager.instance.aiList.Contains(gameObject))
+            {
+                int rnd = Random.Range(0, 2);
+                if (rnd > 0)
+                {
+                    yield return new WaitForSeconds(Random.Range(0, 4));
+                }
+                if (currentIndex < randomizedPath.Count - 1)
+                {
+                    currentIndex++;
+                    GoToCurrentTarget();
+                }
+                else
+                {
+                    arrived = true;
+                    currentIndex = 0;
+                    ResetPaths();
+                }
+            }
+            else
+            {
+                if (currentIndex < pathPoints.Count - 1)
+                {
+                    currentIndex++;
+                    agent.SetDestination(pathPoints[currentIndex]);
+                    currentTarget = pathPoints[currentIndex];
+                }
+                else
+                {
+                    arrived = true;
+                    currentIndex = 0;
+                    ResetPaths();
+                }
+            }
+
         }
 
         public void GoToDestination(Vector3 destination)
@@ -91,6 +120,7 @@ namespace Member
                             validPos = true;
                         }
                     }
+
                     randomizedPath.Add(randomizedDestination);
                 }
                 else
@@ -112,6 +142,7 @@ namespace Member
                     randomizedPath.Add(randomizedDestination);
                 }
             }
+
             GoToCurrentTarget();
         }
 
